@@ -32,7 +32,7 @@ interface Zend_Controller_Router_Interface
      * Processes a request and sets its controller and action.  If
      * no route was possible, an exception is thrown.
      *
-     * @param  Zend_Controller_Request_Abstract
+     * @param  Zend_Controller_Request_Abstract $dispatcher
      * @throws Zend_Controller_Router_Exception
      * @return Zend_Controller_Request_Abstract|boolean
      */
@@ -116,7 +116,7 @@ interface Zend_Controller_Router_Interface
      * only that parameter; if an array of parameter names is provided, clears
      * each.
      *
-     * @param null|string|array single key or array of keys for params to clear
+     * @param null|string|array $name single key or array of keys for params to clear
      * @return Zend_Controller_Router_Interface
      */
     public function clearParams($name = null);
