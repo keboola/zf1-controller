@@ -39,6 +39,7 @@
  * @package    Zend_Controller
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ * @method Zend_Cache_Core getCache(string $name)
  */
 class Zend_Controller_Action_Helper_Cache
     extends Zend_Controller_Action_Helper_Abstract
