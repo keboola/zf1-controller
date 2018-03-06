@@ -136,13 +136,13 @@ class Zend_Controller_Action_Helper_ViewRenderer extends Zend_Controller_Action_
 
     /**
      * Which named segment of the response to utilize
-     * @var string
+     * @var string|null
      */
     protected $_responseSegment = null;
 
     /**
      * Which action view script to render
-     * @var string
+     * @var string|null
      */
     protected $_scriptAction    = null;
 
@@ -626,7 +626,7 @@ class Zend_Controller_Action_Helper_ViewRenderer extends Zend_Controller_Action_
         } elseif (null !== $action) {
             $vars['action'] = $action;
         }
-        
+
         $replacePattern = array('/[^a-z0-9]+$/i', '/^[^a-z0-9]+/i');
         $vars['action'] = preg_replace($replacePattern, '', $vars['action']);
 

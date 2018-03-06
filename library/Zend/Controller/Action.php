@@ -204,7 +204,7 @@ abstract class Zend_Controller_Action implements Zend_Controller_Action_Interfac
      * @param  string|null $action Defaults to action registered in request object
      * @param  string|null $name Response object named path segment to use; defaults to null
      * @param  bool $noController  Defaults to false; i.e. use controller name as subdir in which to search for view script
-     * @return void
+     * @return mixed
      */
     public function render($action = null, $name = null, $noController = false)
     {
@@ -235,7 +235,7 @@ abstract class Zend_Controller_Action implements Zend_Controller_Action_Interfac
      *
      * @param  string $script
      * @param  string $name
-     * @return void
+     * @return mixed
      */
     public function renderScript($script, $name = null)
     {

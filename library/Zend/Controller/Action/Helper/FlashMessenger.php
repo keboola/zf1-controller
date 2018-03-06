@@ -52,7 +52,7 @@ class Zend_Controller_Action_Helper_FlashMessenger extends Zend_Controller_Actio
     /**
      * $_session - Zend_Session storage object
      *
-     * @var Zend_Session
+     * @var Zend_Session_Namespace
      */
     static protected $_session = null;
 
@@ -125,7 +125,7 @@ class Zend_Controller_Action_Helper_FlashMessenger extends Zend_Controller_Actio
     /**
      * resetNamespace() - reset the namespace to the default
      *
-     * @return Zend_Controller_Action_Helper_FlashMessenger Provides a fluent interface
+     * @return $this Provides a fluent interface
      */
     public function resetNamespace()
     {
@@ -137,7 +137,7 @@ class Zend_Controller_Action_Helper_FlashMessenger extends Zend_Controller_Actio
      * addMessage() - Add a message to flash message
      *
      * @param  string $message
-     * @return Zend_Controller_Action_Helper_FlashMessenger Provides a fluent interface
+     * @return $this Provides a fluent interface
      */
     public function addMessage($message, $namespace = null)
     {
@@ -303,7 +303,7 @@ class Zend_Controller_Action_Helper_FlashMessenger extends Zend_Controller_Actio
      * Strategy pattern: proxy to addMessage()
      *
      * @param  string $message
-     * @return void
+     * @return $this
      */
     public function direct($message, $namespace=NULL)
     {
