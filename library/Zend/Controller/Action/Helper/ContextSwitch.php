@@ -430,7 +430,7 @@ class Zend_Controller_Action_Helper_ContextSwitch extends Zend_Controller_Action
      * suffix change.
      *
      * @param  string  $context                   Context type for which to set suffix
-     * @param  string  $suffix                    Suffix to use
+     * @param  string|array  $suffix                    Suffix to use
      * @param  boolean $prependViewRendererSuffix Whether or not to prepend the new suffix to the viewrenderer suffix
      * @throws Zend_Controller_Action_Exception
      * @return Zend_Controller_Action_Helper_ContextSwitch Provides a fluent interface
@@ -1131,7 +1131,7 @@ class Zend_Controller_Action_Helper_ContextSwitch extends Zend_Controller_Action
      * Add one or more contexts to an action
      *
      * @param  string       $action
-     * @param  string|array $context
+     * @param  string|array|bool $context
      * @return $this|null Provides a fluent interface
      */
     public function addActionContext($action, $context)
@@ -1171,7 +1171,7 @@ class Zend_Controller_Action_Helper_ContextSwitch extends Zend_Controller_Action
      * Set a context as available for a given controller action
      *
      * @param  string       $action
-     * @param  string|array $context
+     * @param  string|array|bool $context
      * @return $this|null Provides a fluent interface
      */
     public function setActionContext($action, $context)
