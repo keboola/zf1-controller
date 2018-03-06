@@ -79,7 +79,7 @@ class Zend_Controller_Action_Helper_ActionStack extends Zend_Controller_Action_H
     /**
      * Push a new action onto the stack
      *
-     * @param  string $action
+     * @param  string|Zend_Controller_Request_Abstract $action
      * @param  string $controller
      * @param  string $module
      * @param  array  $params
