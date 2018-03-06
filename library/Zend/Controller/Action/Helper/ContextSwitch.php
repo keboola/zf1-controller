@@ -69,7 +69,7 @@ class Zend_Controller_Action_Helper_ContextSwitch extends Zend_Controller_Action
 
     /**
      * Current context
-     * @var string
+     * @var string|null
      */
     protected $_currentContext;
 
@@ -227,7 +227,7 @@ class Zend_Controller_Action_Helper_ContextSwitch extends Zend_Controller_Action
      *
      * @param  mixed $format
      * @throws Zend_Controller_Action_Exception
-     * @return void
+     * @return null
      */
     public function initContext($format = null)
     {
@@ -241,13 +241,13 @@ class Zend_Controller_Action_Helper_ContextSwitch extends Zend_Controller_Action
         // enabled for this action
         $contexts = $this->getActionContexts($action);
         if (empty($contexts)) {
-            return;
+            return null;
         }
 
         // Return if no context parameter provided
         if (!$context = $request->getParam($this->getContextParam())) {
             if ($format === null) {
-                return;
+                return null;
             }
             $context = $format;
             $format  = null;
@@ -255,7 +255,7 @@ class Zend_Controller_Action_Helper_ContextSwitch extends Zend_Controller_Action
 
         // Check if context allowed by action controller
         if (!$this->hasActionContext($action, $context)) {
-            return;
+            return null;
         }
 
         // Return if invalid context parameter provided and no format or invalid
@@ -263,7 +263,7 @@ class Zend_Controller_Action_Helper_ContextSwitch extends Zend_Controller_Action
         if (!$this->hasContext($context)) {
             if (empty($format) || !$this->hasContext($format)) {
 
-                return;
+                return null;
             }
         }
 
@@ -1132,14 +1132,14 @@ class Zend_Controller_Action_Helper_ContextSwitch extends Zend_Controller_Action
      *
      * @param  string       $action
      * @param  string|array $context
-     * @return Zend_Controller_Action_Helper_ContextSwitch|void Provides a fluent interface
+     * @return $this|null Provides a fluent interface
      */
     public function addActionContext($action, $context)
     {
         $this->hasContext($context, true);
         $controller = $this->getActionController();
         if (null === $controller) {
-            return;
+            return null;
         }
         $action     = (string) $action;
         $contextKey = $this->_contextKey;
@@ -1172,14 +1172,14 @@ class Zend_Controller_Action_Helper_ContextSwitch extends Zend_Controller_Action
      *
      * @param  string       $action
      * @param  string|array $context
-     * @return Zend_Controller_Action_Helper_ContextSwitch|void Provides a fluent interface
+     * @return $this|null Provides a fluent interface
      */
     public function setActionContext($action, $context)
     {
         $this->hasContext($context, true);
         $controller = $this->getActionController();
         if (null === $controller) {
-            return;
+            return null;
         }
         $action     = (string) $action;
         $contextKey = $this->_contextKey;
@@ -1380,7 +1380,7 @@ class Zend_Controller_Action_Helper_ContextSwitch extends Zend_Controller_Action
     /**
      * Retrieve ViewRenderer
      *
-     * @return Zend_Controller_Action_Helper_ViewRenderer Provides a fluent interface
+     * @return Zend_Controller_Action_Helper_ViewRenderer
      */
     protected function _getViewRenderer()
     {

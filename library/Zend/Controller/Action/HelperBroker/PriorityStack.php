@@ -38,7 +38,7 @@ class Zend_Controller_Action_HelperBroker_PriorityStack implements IteratorAggre
      * Magic property overloading for returning helper by name
      *
      * @param string $helperName    The helper name
-     * @return Zend_Controller_Action_Helper_Abstract
+     * @return Zend_Controller_Action_Helper_Abstract|false
      */
     public function __get($helperName)
     {
@@ -64,7 +64,7 @@ class Zend_Controller_Action_HelperBroker_PriorityStack implements IteratorAggre
      * Magic property overloading for unsetting if helper is exists by name
      *
      * @param string $helperName    The helper name
-     * @return Zend_Controller_Action_Helper_Abstract
+     * @return $this
      */
     public function __unset($helperName)
     {
@@ -75,7 +75,7 @@ class Zend_Controller_Action_HelperBroker_PriorityStack implements IteratorAggre
      * push helper onto the stack
      *
      * @param Zend_Controller_Action_Helper_Abstract $helper
-     * @return Zend_Controller_Action_HelperBroker_PriorityStack
+     * @return $this
      */
     public function push(Zend_Controller_Action_Helper_Abstract $helper)
     {
@@ -86,7 +86,7 @@ class Zend_Controller_Action_HelperBroker_PriorityStack implements IteratorAggre
     /**
      * Return something iterable
      *
-     * @return array
+     * @return ArrayObject
      */
     public function getIterator()
     {
@@ -170,7 +170,7 @@ class Zend_Controller_Action_HelperBroker_PriorityStack implements IteratorAggre
      * offsetUnset()
      *
      * @param int|string $priorityOrHelperName Priority integer or the helper name
-     * @return Zend_Controller_Action_HelperBroker_PriorityStack
+     * @return $this
      */
     public function offsetUnset($priorityOrHelperName)
     {
