@@ -73,7 +73,7 @@ class Zend_Controller_Action_Helper_AjaxContextTest extends PHPUnit\Framework\Te
         $this->response = new Zend_Controller_Response_Cli();
 
         $this->front->setRequest($this->request)->setResponse($this->response);
-        $this->view = new Zend_VIew();
+        $this->view = new Zend_View();
         $this->view->addHelperPath(dirname(__FILE__) . '/../../../../../library/Zend/View/Helper/');
         $this->viewRenderer = Zend_Controller_Action_HelperBroker::getStaticHelper('viewRenderer');
         $this->viewRenderer->setView($this->view);
@@ -216,7 +216,7 @@ class ZendTest_Controller_Request_SimpleMock_AjaxTest
 {
          public function __call($method, $args) {
              if($method == 'isXmlHttpRequest') {
-                 throw new exception('test testAjaxContextIsRequestDependent failed');
+                 throw new Exception('test testAjaxContextIsRequestDependent failed');
              }
 
              return parent::__call($method, $args);
