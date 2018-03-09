@@ -20,9 +20,6 @@
  * @version    $Id$
  */
 
-/** Zend_Controller_Dispatcher_Interface */
-// require_once 'Zend/Controller/Dispatcher/Interface.php';
-
 /**
  * @category   Zend
  * @package    Zend_Controller
@@ -144,14 +141,12 @@ abstract class Zend_Controller_Dispatcher_Abstract implements Zend_Controller_Di
             }
 
             if (!$allStrings) {
-                // require_once 'Zend/Controller/Dispatcher/Exception.php';
                 throw new Zend_Controller_Dispatcher_Exception('Word delimiter array must contain only strings');
             }
 
             return $spec;
         }
 
-        // require_once 'Zend/Controller/Dispatcher/Exception.php';
         throw new Zend_Controller_Dispatcher_Exception('Invalid word delimiter');
     }
 
@@ -206,7 +201,6 @@ abstract class Zend_Controller_Dispatcher_Abstract implements Zend_Controller_Di
     public function setPathDelimiter($spec)
     {
         if (!is_string($spec)) {
-            // require_once 'Zend/Controller/Dispatcher/Exception.php';
             throw new Zend_Controller_Dispatcher_Exception('Invalid path delimiter');
         }
         $this->_pathDelimiter = $spec;
@@ -253,7 +247,6 @@ abstract class Zend_Controller_Dispatcher_Abstract implements Zend_Controller_Di
     public function getFrontController()
     {
         if (null === $this->_frontController) {
-            // require_once 'Zend/Controller/Front.php';
             $this->_frontController = Zend_Controller_Front::getInstance();
         }
 
