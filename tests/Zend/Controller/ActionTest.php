@@ -466,7 +466,7 @@ class Zend_Controller_ActionTest extends PHPUnit\Framework\TestCase
             $this->_controller->bogusAction();
             $this->fail('Invalid action should throw exception');
         } catch (Zend_Controller_Exception $e) {
-            $this->assertRegexp('/^Action.*?(does not exist and was not trapped in __call\(\))$/', $e->getMessage());
+            $this->assertRegExp('/^Action.*?(does not exist and was not trapped in __call\(\))$/', $e->getMessage());
             $this->assertContains('bogus', $e->getMessage());
             $this->assertNotContains('bogusAction', $e->getMessage());
             $this->assertEquals(404, $e->getCode());
@@ -476,7 +476,7 @@ class Zend_Controller_ActionTest extends PHPUnit\Framework\TestCase
             $this->_controller->bogus();
             $this->fail('Invalid method should throw exception');
         } catch (Zend_Controller_Exception $e) {
-            $this->assertRegexp('/^Method.*?(does not exist and was not trapped in __call\(\))$/', $e->getMessage());
+            $this->assertRegExp('/^Method.*?(does not exist and was not trapped in __call\(\))$/', $e->getMessage());
             $this->assertContains('bogus', $e->getMessage());
             $this->assertEquals(500, $e->getCode());
         }
