@@ -29,9 +29,6 @@ require_once 'Zend/Controller/Router/Route.php';
 /** @see Zend_Translate */
 require_once 'Zend/Translate.php';
 
-/** @see Zend_Registry */
-require_once 'Zend/Registry.php';
-
 /**
  * @category   Zend
  * @package    Zend_Controller
@@ -482,8 +479,6 @@ class Zend_Controller_Router_RouteTest extends PHPUnit\Framework\TestCase
 
     public function testGetInstance()
     {
-        require_once 'Zend/Config.php';
-
         $routeConf = array(
             'route' => 'users/all',
             'defaults' => array(

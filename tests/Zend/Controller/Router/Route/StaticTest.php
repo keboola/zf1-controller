@@ -109,8 +109,6 @@ class Zend_Controller_Router_Route_StaticTest extends PHPUnit\Framework\TestCase
 
     public function testGetInstance()
     {
-        require_once 'Zend/Config.php';
-
         $routeConf = array(
             'route' => 'users/all',
             'defaults' => array(
