@@ -22,7 +22,6 @@
 
 require_once 'Zend/Controller/Plugin/ActionStack.php';
 require_once 'Zend/Controller/Request/Simple.php';
-require_once 'Zend/Registry.php';
 
 /**
  * Test class for Zend_Controller_Plugin_ActionStack.

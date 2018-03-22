@@ -26,7 +26,6 @@ require_once 'Zend/Controller/Action/HelperBroker.php';
 require_once 'Zend/Controller/Action/Helper/ViewRenderer.php';
 require_once 'Zend/Controller/Front.php';
 require_once 'Zend/Controller/Response/Http.php';
-require_once 'Zend/Json.php';
 require_once 'Zend/Layout.php';
 
 /**

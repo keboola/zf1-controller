@@ -20,9 +20,6 @@
  * @version    $Id$
  */
 
-/** Zend_Config */
-require_once 'Zend/Config.php';
-
 /** Zend_Controller_Router_Rewrite */
 require_once 'Zend/Controller/Router/Rewrite.php';
 
@@ -52,9 +49,6 @@ require_once 'Zend/Controller/Request/Http.php';
 
 /** Zend_Uri_Http */
 require_once 'Zend/Uri/Http.php';
-
-/** Zend_Config */
-require_once 'Zend/Config.php';
 
 /**
  * @category   Zend

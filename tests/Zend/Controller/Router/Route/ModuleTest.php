@@ -393,8 +393,6 @@ class Zend_Controller_Router_Route_ModuleTest extends PHPUnit\Framework\TestCase
 
     public function testGetInstance()
     {
-        require_once 'Zend/Config.php';
-
         $routeConf = array(
             'defaults' => array(
                 'controller' => 'ctrl'
