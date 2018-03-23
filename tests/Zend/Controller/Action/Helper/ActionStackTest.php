@@ -20,9 +20,6 @@
  * @version    $Id$
  */
 
-require_once 'Zend/Controller/Action/Helper/ActionStack.php';
-require_once 'Zend/Controller/Front.php';
-require_once 'Zend/Controller/Request/Simple.php';
 
 /**
  * Test class for Zend_Controller_Action_Helper_ActionStack.

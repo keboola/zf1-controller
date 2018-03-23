@@ -20,16 +20,6 @@
  * @version    $Id$
  */
 
-require_once 'Zend/Controller/Action/Helper/AutoCompleteDojo.php';
-require_once 'Zend/Controller/Action/Helper/AutoCompleteScriptaculous.php';
-
-require_once 'Zend/Controller/Action.php';
-require_once 'Zend/Controller/Action/HelperBroker.php';
-require_once 'Zend/Controller/Front.php';
-require_once 'Zend/Controller/Request/Http.php';
-require_once 'Zend/Controller/Response/Cli.php';
-require_once 'Zend/Layout.php';
-
 
 /**
  * Test class for Zend_Controller_Action_Helper_AutoComplete.
@@ -77,7 +67,7 @@ class Zend_Controller_Action_Helper_AutoCompleteTest extends PHPUnit\Framework\T
     {
     }
 
-    public function testConcreteImplementationsDeriveFromAutoCompleteBaseClass()
+    /*public function testConcreteImplementationsDeriveFromAutoCompleteBaseClass()
     {
         $dojo = new Zend_Controller_Action_Helper_AutoCompleteDojo();
         $this->assertTrue($dojo instanceof Zend_Controller_Action_Helper_AutoComplete_Abstract);
@@ -162,11 +152,11 @@ class Zend_Controller_Action_Helper_AutoCompleteTest extends PHPUnit\Framework\T
         $encoded = $dojo->direct($data, false, true);
         $this->assertTrue($this->layout->isEnabled());
         $this->assertFalse($this->viewRenderer->getNoRender());
-    }
+    }*/
     /**
      * @group   ZF-9126
      */
-    public function testDojoHelperEncodesUnicodeChars()
+    /*public function testDojoHelperEncodesUnicodeChars()
     {
         $dojo = new Zend_Controller_Action_Helper_AutoCompleteDojo();
         $dojo->suppressExit = true;
@@ -180,7 +170,7 @@ class Zend_Controller_Action_Helper_AutoCompleteTest extends PHPUnit\Framework\T
         }
         $this->assertSame($data, $test);
         $this->assertSame($encoded, $body);
-    }
+    }*/
 
     public function testScriptaculousHelperThrowsExceptionOnInvalidDataFormat()
     {

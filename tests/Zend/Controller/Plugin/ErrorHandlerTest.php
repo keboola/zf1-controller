@@ -20,14 +20,6 @@
  * @version    $Id$
  */
 
-require_once 'Zend/Controller/Plugin/ErrorHandler.php';
-require_once 'Zend/Controller/Request/Http.php';
-require_once 'Zend/Controller/Response/Http.php';
-
-require_once 'Zend/Controller/Dispatcher/Exception.php';
-require_once 'Zend/Controller/Action/Exception.php';
-
-require_once 'Zend/Controller/Front.php';
 
 /**
  * Test class for Zend_Controller_Plugin_ErrorHandler.
@@ -202,6 +194,7 @@ class Zend_Controller_Plugin_ErrorHandlerTest extends PHPUnit\Framework\TestCase
 
         try {
             $this->plugin->postDispatch($this->request);
+            $this->assertTrue(true);
         } catch (Exception $e) {
             $this->fail('Repeated calls with no new exceptions should not throw exceptions');
         }

@@ -20,7 +20,6 @@
  * @version    $Id$
  */
 
-require_once 'Zend/Controller/Request/Apache404.php';
 
 /**
  * Test class for Zend_Controller_Request_Apache404.

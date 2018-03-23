@@ -20,8 +20,6 @@
  * @version    $Id$
  */
 
-require_once 'Zend/Controller/Response/Http.php';
-require_once 'Zend/Controller/Response/Exception.php';
 
 /**
  * @category   Zend
@@ -287,23 +285,14 @@ class Zend_Controller_Response_HttpTest extends PHPUnit\Framework\TestCase
 
     public function testSetResponseCodeThrowsExceptionWithBadCode()
     {
-        try {
-            $this->_response->setHttpResponseCode(99);
-            $this->fail('Should not accept response codes < 100');
-        } catch (Exception $e) {
-        }
+        $this->expectException(Zend_Controller_Exception::class);
+        $this->_response->setHttpResponseCode(99);
 
-        try {
-            $this->_response->setHttpResponseCode(600);
-            $this->fail('Should not accept response codes > 599');
-        } catch (Exception $e) {
-        }
+        $this->expectException(Zend_Controller_Exception::class);
+        $this->_response->setHttpResponseCode(600);
 
-        try {
-            $this->_response->setHttpResponseCode('bogus');
-            $this->fail('Should not accept non-integer response codes');
-        } catch (Exception $e) {
-        }
+        $this->expectException(Zend_Controller_Exception::class);
+        $this->_response->setHttpResponseCode('bogus');
     }
 
     /**
@@ -626,6 +615,5 @@ class Zend_Controller_Response_HttpTest extends PHPUnit\Framework\TestCase
     }
 }
 
-require_once 'Zend/Controller/Action.php';
 class Zend_Controller_Response_HttpTest_Action extends Zend_Controller_Action
 {}

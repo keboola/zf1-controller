@@ -20,8 +20,6 @@
  * @version    $Id$
  */
 
-/** Zend_Controller_Router_Route */
-require_once 'Zend/Controller/Router/Route/Static.php';
 
 /**
  * @category   Zend

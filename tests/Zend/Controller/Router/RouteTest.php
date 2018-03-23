@@ -20,14 +20,6 @@
  * @version    $Id$
  */
 
-/** @see Zend_Controller_Request_Http */
-require_once 'Zend/Controller/Request/Http.php';
-
-/** @see Zend_Controller_Router_Route */
-require_once 'Zend/Controller/Router/Route.php';
-
-/** @see Zend_Translate */
-require_once 'Zend/Translate.php';
 
 /**
  * @category   Zend
@@ -325,13 +317,9 @@ class Zend_Controller_Router_RouteTest extends PHPUnit\Framework\TestCase
     public function testAssembleWithoutValue()
     {
         $route = new Zend_Controller_Router_Route('authors/:name');
-        try {
-            $url = $route->assemble();
-        } catch (Exception $e) {
-            return true;
-        }
 
-        $this->fail();
+        $this->expectException(Zend_Controller_Router_Exception::class);
+        $url = $route->assemble();
     }
 
     public function testAssembleWithDefault()

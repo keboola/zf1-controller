@@ -20,9 +20,6 @@
  * @version    $Id$
  */
 
-require_once 'Zend/Controller/Plugin/PutHandler.php';
-require_once 'Zend/Controller/Request/HttpTestCase.php';
-require_once 'Zend/Controller/Front.php';
 
 /**
  * Test class for Zend_Controller_Plugin_PutHandler.

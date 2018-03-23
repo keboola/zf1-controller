@@ -385,7 +385,7 @@ abstract class Zend_Controller_Action implements Zend_Controller_Action_Interfac
      * Set the front controller instance
      *
      * @param Zend_Controller_Front $front
-     * @return Zend_Controller_Action
+     * @return $this
      */
     public function setFrontController(Zend_Controller_Front $front)
     {
