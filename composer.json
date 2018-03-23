@@ -51,5 +51,8 @@
         "test": "phpunit ./tests",
         "test-with-coverage": "phpunit --coverage-clover=clover.xml ./tests",
         "phpstan": "phpstan analyze -l1 -c phpstan.neon --no-progress ./src --ansi"
+    },
+    "suggest": {
+        "ext-session": "Used in the Redirector Action Helper"
     }
 }
