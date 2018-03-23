@@ -20,7 +20,6 @@
  * @version    $Id$
  */
 
-require_once 'Zend/Controller/Request/Http.php';
 
 /**
  * @category   Zend
@@ -131,12 +130,8 @@ class Zend_Controller_Request_HttpTest extends PHPUnit\Framework\TestCase
 
     public function testSetIsAlias()
     {
-        try {
-            $this->_request->set('foo', 'bar');
-            $this->fail('set() should alias to __set(), and throw an exception');
-        } catch (Exception $e) {
-            // success
-        }
+        $this->expectException(Zend_Controller_Exception::class);
+        $this->_request->set('foo', 'bar');
     }
 
     public function test__Isset()
@@ -171,12 +166,8 @@ class Zend_Controller_Request_HttpTest extends PHPUnit\Framework\TestCase
 
     public function test__SetThrowsException()
     {
-        try {
-            $this->_request->foo = 'bar';
-            $this->fail('__set() should throw an exception');
-        } catch (Exception $e) {
-            // success
-        }
+        $this->expectException(Zend_Controller_Exception::class);
+        $this->_request->foo = 'bar';
     }
 
     public function testClearParams()
@@ -331,7 +322,6 @@ class Zend_Controller_Request_HttpTest extends PHPUnit\Framework\TestCase
 
     public function testGetRawBodyReturnsFalseWithNoPost()
     {
-        require_once 'Zend/AllTests/StreamWrapper/PhpInput.php';
         Zend_AllTests_StreamWrapper_PhpInput::mockInput('');
         $this->assertFalse($this->_request->getRawBody());
         stream_wrapper_restore('php');
@@ -661,15 +651,8 @@ class Zend_Controller_Request_HttpTest extends PHPUnit\Framework\TestCase
 
     public function testGetHeaderThrowsExceptionWithNoInput()
     {
-        try {
-            // Suppressing warning
-            $header = @$this->_request->getHeader();
-            $this->fail('getHeader() should fail with no arguments)');
-        } catch (Exception $e) {
-            // success
-        } catch (Error $e) {
-            // also success on newer versions of PHP
-        }
+        $this->expectException(ArgumentCountError::class);
+        $header = @$this->_request->getHeader();
     }
 
     public function testIsXmlHttpRequest()
@@ -860,7 +843,6 @@ class Zend_Controller_Request_HttpTest extends PHPUnit\Framework\TestCase
      */
     public function testCallingGetRawBodyMultipleTimesShouldReturnSameValue()
     {
-        require_once 'Zend/AllTests/StreamWrapper/PhpInput.php';
         Zend_AllTests_StreamWrapper_PhpInput::mockInput('foobar');
         $request = new Zend_Controller_Request_Http();
         $first = $request->getRawBody();

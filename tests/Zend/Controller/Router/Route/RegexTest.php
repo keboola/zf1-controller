@@ -20,8 +20,6 @@
  * @version    $Id$
  */
 
-/** Zend_Controller_Router_Route_Regex */
-require_once 'Zend/Controller/Router/Route/Regex.php';
 
 /**
  * @category   Zend
@@ -320,10 +318,8 @@ class Zend_Controller_Router_Route_RegexTest extends PHPUnit\Framework\TestCase
     {
         $route = new Zend_Controller_Router_Route_Regex('users/(.+)', null, null, 'users/%s');
 
-        try {
-            $url = $route->assemble();
-            $this->fail();
-        } catch (Exception $e) {}
+        $this->expectException(Zend_Controller_Router_Exception::class);
+        $url = $route->assemble();
     }
 
     public function testAssembleWithDefaultWithoutMatch()

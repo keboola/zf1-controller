@@ -20,11 +20,6 @@
  * @version    $Id$
  */
 
-require_once 'Zend/Controller/Front.php';
-require_once 'Zend/Controller/Action/HelperBroker.php';
-require_once 'Zend/Controller/Request/Http.php';
-require_once 'Zend/Controller/Request/Simple.php';
-require_once 'Zend/Controller/Response/Cli.php';
 
 /**
  * @category   Zend
@@ -201,11 +196,9 @@ class Zend_Controller_Plugin_BrokerTest extends PHPUnit\Framework\TestCase
         $plugin1  = new Zend_Controller_Plugin_BrokerTest_TestPlugin();
         $plugin2  = new Zend_Controller_Plugin_BrokerTest_ExceptionTestPlugin();
         $broker->registerPlugin($plugin1, 5);
-        try {
-            $broker->registerPlugin($plugin2, 5);
-            $this->fail('Registering plugins with same stack index should raise exception');
-        } catch (Exception $e) {
-        }
+
+        $this->expectException(Zend_Controller_Exception::class);
+        $broker->registerPlugin($plugin2, 5);
     }
 
     public function testRegisterPluginStackOrderWithAutmaticNumbersIncrementsCorrectly()

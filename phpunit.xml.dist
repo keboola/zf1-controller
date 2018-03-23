@@ -6,6 +6,9 @@
     backupGlobals="true"
     stderr="true"
     colors="true">
+    <php>
+        <const name="TESTS_ZEND_CONTROLLER_DISPATCHER_OB" value="false" />
+    </php>
     <filter>
         <whitelist addUncoveredFilesFromWhitelist="true">
             <directory suffix=".php">./src</directory>

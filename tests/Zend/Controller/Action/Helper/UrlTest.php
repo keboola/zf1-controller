@@ -20,10 +20,6 @@
  * @version    $Id$
  */
 
-require_once 'Zend/Controller/Action/Helper/Url.php';
-
-require_once 'Zend/Controller/Front.php';
-require_once 'Zend/Controller/Request/Http.php';
 
 /**
  * Test class for Zend_Controller_Action_Helper_Url.

@@ -20,14 +20,6 @@
  * @version    $Id$
  */
 
-require_once 'Zend/Controller/Front.php';
-require_once 'Zend/Controller/Request/Http.php';
-require_once 'Zend/Controller/Response/Cli.php';
-require_once 'Zend/Controller/Dispatcher/Standard.php';
-require_once 'Zend/Controller/Router/Rewrite.php';
-require_once 'Zend/Controller/Action/HelperBroker.php';
-require_once 'Zend/Controller/Action/Helper/Url.php';
-require_once 'Zend/Controller/Action/Helper/ViewRenderer.php';
 
 /**
  * @category   Zend
@@ -101,12 +93,9 @@ class Zend_Controller_FrontTest extends PHPUnit\Framework\TestCase
 
     public function testSetRequestThrowsExceptionWithBadRequest()
     {
-        try {
-            $this->_controller->setRequest('Zend_Controller_Response_Cli');
-            $this->fail('Should not be able to set invalid request class');
-        } catch (Exception $e) {
-            // success
-        }
+        $this->expectException(Zend_Controller_Exception::class);
+        $this->_controller->setRequest('Zend_Controller_Response_Cli');
+
     }
 
     public function testSetGetResponse()
@@ -123,12 +112,8 @@ class Zend_Controller_FrontTest extends PHPUnit\Framework\TestCase
 
     public function testSetResponseThrowsExceptionWithBadResponse()
     {
-        try {
-            $this->_controller->setResponse('Zend_Controller_Request_Http');
-            $this->fail('Should not be able to set invalid response class');
-        } catch (Exception $e) {
-            // success
-        }
+        $this->expectException(Zend_Controller_Exception::class);
+        $this->_controller->setResponse('Zend_Controller_Request_Http');
     }
 
     public function testSetGetRouter()
@@ -145,12 +130,8 @@ class Zend_Controller_FrontTest extends PHPUnit\Framework\TestCase
 
     public function testSetRouterThrowsExceptionWithBadRouter()
     {
-        try {
-            $this->_controller->setRouter('Zend_Controller_Request_Http');
-            $this->fail('Should not be able to set invalid router class');
-        } catch (Exception $e) {
-            // success
-        }
+        $this->expectException(Zend_Controller_Exception::class);
+        $this->_controller->setRouter('Zend_Controller_Request_Http');
     }
 
     public function testSetGetDispatcher()
@@ -394,12 +375,8 @@ class Zend_Controller_FrontTest extends PHPUnit\Framework\TestCase
 
     public function testSetBaseUrlThrowsExceptionOnNonString()
     {
-        try {
-            $this->_controller->setBaseUrl(array());
-            $this->fail('Should not be able to set non-string base URL');
-        } catch (Exception $e) {
-            // success
-        }
+        $this->expectException(Zend_Controller_Exception::class);
+        $this->_controller->setBaseUrl(array());
     }
 
     /**
@@ -444,12 +421,8 @@ class Zend_Controller_FrontTest extends PHPUnit\Framework\TestCase
         $this->_controller->setResponse(new Zend_Controller_Response_Cli());
         $this->_controller->setRouter(new Zend_Controller_Router_Rewrite());
 
-        try {
-            $response = $this->_controller->dispatch($request);
-            $this->fail('Invalid controller should throw exception');
-        } catch (Exception $e) {
-            // success
-        }
+        $this->expectException(Zend_Controller_Exception::class);
+        $response = $this->_controller->dispatch($request);
     }
 
     /**
@@ -492,6 +465,8 @@ class Zend_Controller_FrontTest extends PHPUnit\Framework\TestCase
         $request = new Zend_Controller_Request_Http('http://example.com/index/index');
         $this->_controller->setRequest($request);
         Zend_Controller_Front::run(dirname(__FILE__) . DIRECTORY_SEPARATOR . '_files');
+
+        $this->assertTrue(true);
     }
 
     public function testRunDynamically()
@@ -499,6 +474,8 @@ class Zend_Controller_FrontTest extends PHPUnit\Framework\TestCase
         $request = new Zend_Controller_Request_Http('http://example.com/index/index');
         $this->_controller->setRequest($request);
         $this->_controller->run(dirname(__FILE__) . DIRECTORY_SEPARATOR . '_files');
+
+        $this->assertTrue(true);
     }
 
     public function testModulePathDispatched()

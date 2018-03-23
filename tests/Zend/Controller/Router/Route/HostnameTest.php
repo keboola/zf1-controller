@@ -20,11 +20,6 @@
  * @version    $Id$
  */
 
-/** Zend_Controller_Router_Route_Hostname */
-require_once 'Zend/Controller/Router/Route/Hostname.php';
-
-/** Zend_Controller_Request_Http */
-require_once 'Zend/Controller/Request/Http.php';
 
 /**
  * @category   Zend

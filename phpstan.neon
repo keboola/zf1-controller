@@ -1,2 +1,12 @@
 parameters:
     ignoreErrors:
+        - '#Method Zend_Controller_Plugin_ActionStack::popStack\(\) invoked with 1 parameter, 0 required\.#'
+        - '#Class Zend_Controller_Router_Route_Chain does not have a constructor and must be instantiated without any parameters\.#'
+        - '#Access to an undefined property Zend_Controller_Router_Route_Chain::\$_request\.#'
+        - '#Variable \$origSuffix might not be defined\.#'
+        - '#Variable \$origModuleDir might not be defined\.#'
+        - '#Variable \$index might not be defined\.#'
+        - '#Variable \$matchedPath might not be defined\.#'
+        - '#Variable \$translateMessages might not be defined\.#'
+        - '#Variable \$translator might not be defined\.#'
+        - '#Variable \$locale might not be defined\.#'

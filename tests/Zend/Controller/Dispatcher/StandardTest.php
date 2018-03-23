@@ -20,12 +20,6 @@
  * @version    $Id$
  */
 
-require_once 'Zend/Controller/Dispatcher/Standard.php';
-require_once 'Zend/Controller/Action/HelperBroker.php';
-require_once 'Zend/Controller/Front.php';
-require_once 'Zend/Controller/Request/Http.php';
-require_once 'Zend/Controller/Request/Simple.php';
-require_once 'Zend/Controller/Response/Cli.php';
 
 /**
  * @category   Zend
@@ -201,12 +195,10 @@ class Zend_Controller_Dispatcher_StandardTest extends PHPUnit\Framework\TestCase
         $request->setActionName('foo');
         $response = new Zend_Controller_Response_Cli();
 
-        try {
-            $this->_dispatcher->dispatch($request, $response);
-            $this->fail('Exception should be raised by __call');
-        } catch (Exception $e) {
-            // success
-        }
+        $this->expectException(Zend_Controller_Action_Exception::class);
+        $this->expectExceptionMessage('Action "foo" does not exist and was not trapped in __call()');
+
+        $this->_dispatcher->dispatch($request, $response);
     }
 
     public function testDispatchInvalidController()
@@ -215,12 +207,10 @@ class Zend_Controller_Dispatcher_StandardTest extends PHPUnit\Framework\TestCase
         $request->setControllerName('bogus');
         $response = new Zend_Controller_Response_Cli();
 
-        try {
-            $this->_dispatcher->dispatch($request, $response);
-            $this->fail('Exception should be raised; no such controller');
-        } catch (Exception $e) {
-            // success
-        }
+        $this->expectException(Zend_Controller_Dispatcher_Exception::class);
+        $this->expectExceptionMessage('Invalid controller specified (bogus)');
+
+        $this->_dispatcher->dispatch($request, $response);
     }
 
     public function testDispatchInvalidControllerUsingDefaults()

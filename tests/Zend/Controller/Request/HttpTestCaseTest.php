@@ -20,8 +20,6 @@
  * @version    $Id$
  */
 
-/** Zend_Controller_Request_HttpTestCase */
-require_once 'Zend/Controller/Request/HttpTestCase.php';
 
 /**
  * Test class for Zend_Controller_Request_HttpTestCase.

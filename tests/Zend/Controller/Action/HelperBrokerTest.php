@@ -20,13 +20,6 @@
  * @version    $Id$
  */
 
-require_once 'Zend/Controller/Front.php';
-require_once 'Zend/Controller/Request/Http.php';
-require_once 'Zend/Controller/Response/Cli.php';
-
-require_once 'Zend/Controller/Action/HelperBroker.php';
-require_once 'Zend/Controller/Action/Helper/ViewRenderer.php';
-require_once 'Zend/Controller/Action/Helper/Redirector.php';
 
 /**
  * @category   Zend
@@ -79,12 +72,9 @@ class Zend_Controller_Action_HelperBrokerTest extends PHPUnit\Framework\TestCase
 
     public function testGetExistingHelperThrowsExceptionWithUnregisteredHelper()
     {
-        try {
-            $received = Zend_Controller_Action_HelperBroker::getExistingHelper('testHelper');
-            $this->fail('Retrieving unregistered helpers should throw an exception');
-        } catch (Exception $e) {
-            // success
-        }
+        $this->expectException(Zend_Controller_Action_Exception::class);
+        $this->expectExceptionMessage('Action helper "TestHelper" has not been registered with the helper broker');
+        $received = Zend_Controller_Action_HelperBroker::getExistingHelper('testHelper');
     }
 
     public function testLoadingHelperOnlyInitializesOnce()
@@ -332,6 +322,9 @@ class Zend_Controller_Action_HelperBrokerTest extends PHPUnit\Framework\TestCase
         $test   = Zend_Controller_Action_HelperBroker::getPluginLoader();
         $this->assertNotSame($loader, $test);
         $this->assertSame($custom, $test);
+
+        // Reset back to normal
+        Zend_Controller_Action_HelperBroker::setPluginLoader($loader);
     }
 }
 

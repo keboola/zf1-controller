@@ -20,11 +20,6 @@
  * @version    $Id$
  */
 
-require_once 'Zend/Controller/Action.php';
-require_once 'Zend/Controller/Action/Helper/Redirector.php';
-require_once 'Zend/Controller/Action/Helper/ViewRenderer.php';
-require_once 'Zend/Controller/Request/Http.php';
-require_once 'Zend/Controller/Response/Cli.php';
 
 /**
  * @category   Zend
@@ -42,7 +37,8 @@ class Zend_Controller_ActionTest extends PHPUnit\Framework\TestCase
         Zend_Controller_Action_HelperBroker::resetHelpers();
         $front = Zend_Controller_Front::getInstance();
         $front->resetInstance();
-        $front->setControllerDirectory('.', 'default');
+        //$front->setControllerDirectory('.', 'default');
+        $front->setControllerDirectory(__DIR__, 'default');
 
         $this->_controller = new Zend_Controller_ActionTest_TestController(
             new Zend_Controller_Request_Http(),
@@ -175,12 +171,10 @@ class Zend_Controller_ActionTest extends PHPUnit\Framework\TestCase
     public function testRun2()
     {
         $this->_controller->getRequest()->setActionName('bar');
-        try {
-            $response = $this->_controller->run();
-            $this->fail('Should not be able to call bar as action');
-        } catch (Exception $e) {
-            //success!
-        }
+
+        $this->expectException(\Zend_Controller_Action_Exception::class);
+        $this->expectExceptionMessage('Action "bar" does not exist and was not trapped in __call()');
+        $response = $this->_controller->run();
     }
 
     public function testRun3()

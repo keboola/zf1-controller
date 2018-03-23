@@ -20,16 +20,6 @@
  * @version    $Id$
  */
 
-require_once 'Zend/Controller/Action/Helper/ContextSwitch.php';
-
-require_once 'Zend/Controller/Action.php';
-require_once 'Zend/Controller/Action/HelperBroker.php';
-require_once 'Zend/Controller/Front.php';
-require_once 'Zend/Controller/Request/Http.php';
-require_once 'Zend/Controller/Response/Cli.php';
-require_once 'Zend/Layout.php';
-require_once 'Zend/View.php';
-require_once 'Zend/View/Interface.php';
 
 /**
  * Test class for Zend_Controller_Action_Helper_ContextSwitch.
@@ -823,6 +813,7 @@ class Zend_Controller_Action_Helper_ContextSwitchTest extends PHPUnit\Framework\
         try {
             $this->helper->setAutoJsonSerialization(true);
             $this->helper->postJsonContext();
+            $this->assertTrue(true);
         } catch(Zend_Controller_Action_Exception $zcae) {
             $this->fail('Exception should be throw when view does not implement getVars() method');
         }
@@ -836,12 +827,9 @@ class Zend_Controller_Action_Helper_ContextSwitchTest extends PHPUnit\Framework\
         $view = new Zend_Controller_Action_Helper_ContextSwitchText_CustomView();
         $this->viewRenderer->setView($view);
 
-        try {
-            $this->helper->setAutoJsonSerialization(true);
-            $this->helper->postJsonContext();
-            $this->fail('Exception should be throw when view does not implement getVars() method');
-        } catch(Zend_Controller_Action_Exception $zcae) {
-        }
+        $this->expectException(Zend_Controller_Action_Exception::class);
+        $this->helper->setAutoJsonSerialization(true);
+        $this->helper->postJsonContext();
     }
 
     /**

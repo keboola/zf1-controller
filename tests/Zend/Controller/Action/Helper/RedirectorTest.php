@@ -20,12 +20,6 @@
  * @version    $Id$
  */
 
-require_once 'Zend/Controller/Front.php';
-require_once 'Zend/Controller/Action.php';
-require_once 'Zend/Controller/Action/HelperBroker.php';
-require_once 'Zend/Controller/Action/Helper/Redirector.php';
-require_once 'Zend/Controller/Request/Http.php';
-require_once 'Zend/Controller/Response/Http.php';
 
 /**
  * Test class for Zend_Controller_Action_Helper_Redirector.
@@ -147,16 +141,11 @@ class Zend_Controller_Action_Helper_RedirectorTest extends PHPUnit\Framework\Tes
 
     public function testRedirectorShouldOnlyAllowValidHttpRedirectCodes()
     {
-        try {
-            $this->redirector->setCode('306');
-            $this->fail('Invalid redirect code should throw exception');
-        } catch (Zend_Controller_Action_Exception $e) {
-        }
-        try {
-            $this->redirector->setCode('304');
-            $this->fail('Invalid redirect code should throw exception');
-        } catch (Zend_Controller_Action_Exception $e) {
-        }
+        $this->expectException(Zend_Controller_Action_Exception::class);
+        $this->redirector->setCode('306');
+
+        $this->expectException(Zend_Controller_Action_Exception::class);
+        $this->redirector->setCode('304');
     }
 
     public function testExit()
