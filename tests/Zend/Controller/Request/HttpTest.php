@@ -651,8 +651,9 @@ class Zend_Controller_Request_HttpTest extends PHPUnit\Framework\TestCase
 
     public function testGetHeaderThrowsExceptionWithNoInput()
     {
-        $this->expectException(ArgumentCountError::class);
-        $header = @$this->_request->getHeader();
+        $this->expectException(Zend_Controller_Request_Exception::class);
+        $this->expectExceptionMessage('An HTTP header name is required');
+        $header = @$this->_request->getHeader(null);
     }
 
     public function testIsXmlHttpRequest()
