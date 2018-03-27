@@ -16,15 +16,13 @@
         "diablomedia/zendframework1-config": "^1.0.0",
         "diablomedia/zendframework1-loader": "^1.0.0",
         "diablomedia/zendframework1-registry": "^1.0.0",
-        "diablomedia/zendframework1-json": "^1.0.0",
-        "diablomedia/zendframework1-cache": "*",
-        "diablomedia/zendframework1-filter": "*",
-        "diablomedia/zendframework1-layout": "*",
-        "diablomedia/zendframework1-locale": "*",
-        "diablomedia/zendframework1-session": "*",
-        "diablomedia/zendframework1-translate": "*",
-        "diablomedia/zendframework1-uri": "*",
-        "diablomedia/zendframework1-view": "*"
+        "diablomedia/zendframework1-cache": "^1.0.0",
+        "diablomedia/zendframework1-filter": "^1.0.0",
+        "diablomedia/zendframework1-locale": "^1.0.0",
+        "diablomedia/zendframework1-session": "^1.0.0",
+        "diablomedia/zendframework1-translate": "^1.0.0",
+        "diablomedia/zendframework1-uri": "^1.0.0",
+        "diablomedia/zendframework1-view": "^1.0.0"
     },
     "autoload": {
         "psr-0": {
@@ -53,6 +51,10 @@
         "phpstan": "phpstan analyze -l1 -c phpstan.neon --no-progress ./src --ansi"
     },
     "suggest": {
-        "ext-session": "Used in the Redirector Action Helper"
+        "ext-session": "Used in the Redirector Action Helper",
+        "diablomedia/zendframework1-controller-action-helper-autocomplete": "AutoComplete Controller Action Helpers",
+        "diablomedia/zendframework1-controller-action-helper-json": "JSON Controller Action Helper",
+        "diablomedia/zendframework1-controller-action-helper-ajaxcontext": "AjaxContext Controller Action Helpers",
+        "diablomedia/zendframework1-controller-action-helper-contextswitch": "ContextSwitch Controller Action Helpers"
     }
 }
