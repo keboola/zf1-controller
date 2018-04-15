@@ -95,7 +95,6 @@ class Zend_Controller_FrontTest extends PHPUnit\Framework\TestCase
     {
         $this->expectException(Zend_Controller_Exception::class);
         $this->_controller->setRequest('Zend_Controller_Response_Cli');
-
     }
 
     public function testSetGetResponse()
@@ -144,7 +143,7 @@ class Zend_Controller_FrontTest extends PHPUnit\Framework\TestCase
 
     public function testSetGetControllerDirectory()
     {
-        $test = $this->_controller->getControllerDirectory();
+        $test     = $this->_controller->getControllerDirectory();
         $expected = array('default' => dirname(__FILE__) . DIRECTORY_SEPARATOR . '_files');
         $this->assertSame($expected, $test);
     }
@@ -563,7 +562,8 @@ class Zend_Controller_FrontTest extends PHPUnit\Framework\TestCase
         } catch (Exception $e) {
             $this->assertTrue($e instanceof Zend_Exception);
             $this->assertRegExp(
-                '/Directory \w+ not readable/', $e->getMessage()
+                '/Directory \w+ not readable/',
+                $e->getMessage()
             );
         }
     }
@@ -620,10 +620,10 @@ class Zend_Controller_FrontTest extends PHPUnit\Framework\TestCase
     {
         $request = new Zend_Controller_Request_Http('http://example.com/index/replace');
         $this->_controller->setResponse(new Zend_Controller_Response_Cli());
-        $response = new Zend_Controller_Response_Http();
+        $response     = new Zend_Controller_Response_Http();
         $responsePost = $this->_controller->dispatch($request, $response);
 
-        $requestPost  = $this->_controller->getRequest();
+        $requestPost = $this->_controller->getRequest();
 
         $this->assertNotSame($request, $requestPost);
         $this->assertNotSame($response, $responsePost);

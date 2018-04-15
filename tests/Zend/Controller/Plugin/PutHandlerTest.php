@@ -56,8 +56,8 @@ class Zend_Controller_Plugin_PutHandlerTest extends PHPUnit\Framework\TestCase
     protected function setUp()
     {
         Zend_Controller_Front::getInstance()->resetInstance();
-        $this->request  = new Zend_Controller_Request_HttpTestCase();
-        $this->plugin   = new Zend_Controller_Plugin_PutHandler();
+        $this->request = new Zend_Controller_Request_HttpTestCase();
+        $this->plugin  = new Zend_Controller_Plugin_PutHandler();
 
         $this->plugin->setRequest($this->request);
     }

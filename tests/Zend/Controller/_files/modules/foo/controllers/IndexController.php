@@ -42,5 +42,4 @@ class Foo_IndexController extends Zend_Controller_Action
     {
         $this->_response->appendBody("Foo_IndexController::indexAction() called\n");
     }
-
 }

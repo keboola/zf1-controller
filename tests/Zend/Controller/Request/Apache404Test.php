@@ -56,7 +56,7 @@ class Zend_Controller_Request_Apache404Test extends PHPUnit\Framework\TestCase
         $_SERVER['REDIRECT_URL'] = '/foo/bar';
         $_SERVER['REQUEST_URI']  = '/baz/bat';
 
-        $request = new Zend_Controller_Request_Apache404();
+        $request    = new Zend_Controller_Request_Apache404();
         $requestUri = $request->getRequestUri();
         $this->assertEquals('/foo/bar', $requestUri);
     }
@@ -67,11 +67,11 @@ class Zend_Controller_Request_Apache404Test extends PHPUnit\Framework\TestCase
      */
     public function testRedirectQueryStringShouldBeParsedIntoGetVars()
     {
-        $_SERVER['REDIRECT_URL']         = '/foo/bar';
+        $_SERVER['REDIRECT_URL']          = '/foo/bar';
         $_SERVER['REDIRECT_QUERY_STRING'] = 'baz=bat&bat=delta';
-        $_SERVER['REQUEST_URI']          = '/baz/bat';
+        $_SERVER['REQUEST_URI']           = '/baz/bat';
 
-        $request = new Zend_Controller_Request_Apache404();
+        $request    = new Zend_Controller_Request_Apache404();
         $requestUri = $request->getRequestUri();
         $this->assertEquals('/foo/bar', $requestUri);
         $this->assertSame(array('baz' => 'bat', 'bat' => 'delta'), $request->getQuery());

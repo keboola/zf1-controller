@@ -87,12 +87,12 @@ class Zend_Controller_Action_Helper_ActionStack extends Zend_Controller_Action_H
 
         $request = $this->getRequest();
 
-        if ($request instanceof Zend_Controller_Request_Abstract === false){
+        if ($request instanceof Zend_Controller_Request_Abstract === false) {
             throw new Zend_Controller_Action_Exception('Request object not set yet');
         }
 
         $controller = (null === $controller) ? $request->getControllerName() : $controller;
-        $module = (null === $module) ? $request->getModuleName() : $module;
+        $module     = (null === $module) ? $request->getModuleName() : $module;
 
         $newRequest = new Zend_Controller_Request_Simple($action, $controller, $module, $params);
 

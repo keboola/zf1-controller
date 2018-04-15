@@ -1,4 +1,7 @@
 parameters:
+    excludes_analyse:
+        - %rootDir%/../../../tests/*
+        - %rootDir%/../../../vendor/*
     ignoreErrors:
         - '#Method Zend_Controller_Plugin_ActionStack::popStack\(\) invoked with 1 parameter, 0 required\.#'
         - '#Class Zend_Controller_Router_Route_Chain does not have a constructor and must be instantiated without any parameters\.#'

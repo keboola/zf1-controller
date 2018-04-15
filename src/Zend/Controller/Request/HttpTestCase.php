@@ -190,7 +190,7 @@ class Zend_Controller_Request_HttpTestCase extends Zend_Controller_Request_Http
      */
     public function setHeader($key, $value)
     {
-        $key = $this->_normalizeHeaderName($key);
+        $key                  = $this->_normalizeHeaderName($key);
         $this->_headers[$key] = (string) $value;
         return $this;
     }

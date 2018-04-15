@@ -104,5 +104,4 @@ class Zend_Controller_Action_HelperBroker_PriorityStackTest extends PHPUnit\Fram
         $this->assertEquals('Zend_Controller_Action_Helper_Redirector', get_class($this->stack->offsetGet('Redirector')));
         $this->assertEquals('Zend_Controller_Action_Helper_Redirector', get_class($this->stack->offsetGet(2)));
     }
-
 }

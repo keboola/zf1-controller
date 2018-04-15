@@ -42,5 +42,4 @@ class FooBarController extends Zend_Controller_Action
     {
         $this->render();
     }
-
 }

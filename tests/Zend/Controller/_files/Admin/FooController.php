@@ -53,5 +53,4 @@ class Admin_FooController extends FooController
     {
         $this->_response->appendBody("Admin_Foo::bar action called\n");
     }
-
 }

@@ -80,7 +80,7 @@ class Zend_Controller_Response_HttpTestCaseTest extends PHPUnit\Framework\TestCa
                        ->prepend('baz', "Baz Content\n");
         ob_start();
         $content = $this->response->outputBody();
-        $test = ob_get_clean();
+        $test    = ob_get_clean();
         $this->assertEmpty($test);
         $this->assertNotEmpty($content);
         $this->assertContains("Baz Content\nFoo Content\nBar Content\n", $content, $content);

@@ -47,18 +47,18 @@ class Zend_Controller_Router_Route_ChainTest extends PHPUnit\Framework\TestCase
     public function testChainingMatch()
     {
         $chain = new Zend_Controller_Router_Route_Chain();
-        $foo = new Zend_Controller_Router_Route_Hostname('www.zend.com', array('foo' => 1));
-        $bar = new Zend_Controller_Router_Route_Static('bar', array('bar' => 2));
+        $foo   = new Zend_Controller_Router_Route_Hostname('www.zend.com', array('foo' => 1));
+        $bar   = new Zend_Controller_Router_Route_Static('bar', array('bar' => 2));
 
         $chain->chain($foo)->chain($bar);
 
         $request = new Zend_Controller_Router_ChainTest_Request('http://www.zend.com/bla');
-        $res = $chain->match($request);
+        $res     = $chain->match($request);
 
         $this->assertFalse($res);
 
         $request = new Zend_Controller_Router_ChainTest_Request('http://www.zend.com/bar');
-        $res = $chain->match($request);
+        $res     = $chain->match($request);
 
         $this->assertEquals(1, $res['foo']);
         $this->assertEquals(2, $res['bar']);
@@ -76,15 +76,15 @@ class Zend_Controller_Router_Route_ChainTest extends PHPUnit\Framework\TestCase
         );
 
         $bar = new Zend_Controller_Router_Route_Module(array(
-            'module' => 0,
+            'module'     => 0,
             'controller' => 1,
-            'action' => 2
+            'action'     => 2
         ));
 
         $chain = $foo->chain($bar);
 
         $request = new Zend_Controller_Router_ChainTest_Request('http://www.zend.com/');
-        $res = $chain->match($request);
+        $res     = $chain->match($request);
 
         $this->assertInternalType('array', $res, 'Route did not match to default values.');
     }
@@ -97,7 +97,7 @@ class Zend_Controller_Router_Route_ChainTest extends PHPUnit\Framework\TestCase
         $chain = $foo->chain($bar);
 
         $request = new Zend_Controller_Router_ChainTest_Request('http://www.zend.com/bar');
-        $res = $chain->match($request);
+        $res     = $chain->match($request);
 
         $this->assertEquals(1, $res['foo']);
         $this->assertEquals(2, $res['bar']);
@@ -111,7 +111,7 @@ class Zend_Controller_Router_Route_ChainTest extends PHPUnit\Framework\TestCase
         $chain = $foo->chain($bar);
 
         $request = new Zend_Controller_Router_ChainTest_Request('http://nope.zend.com/bar');
-        $res = $chain->match($request);
+        $res     = $chain->match($request);
 
         $this->assertFalse($res);
     }
@@ -124,7 +124,7 @@ class Zend_Controller_Router_Route_ChainTest extends PHPUnit\Framework\TestCase
         $chain = $foo->chain($bar);
 
         $request = new Zend_Controller_Router_ChainTest_Request('http://www.zend.com/bar');
-        $res = $chain->match($request);
+        $res     = $chain->match($request);
 
         $this->assertEquals('foo', $res['module']);
         $this->assertEquals('bar', $res['controller']);
@@ -139,7 +139,7 @@ class Zend_Controller_Router_Route_ChainTest extends PHPUnit\Framework\TestCase
         $chain = $foo->chain($bar);
 
         $request = new Zend_Controller_Router_ChainTest_Request('http://www.zend.com/foo/bar/baz');
-        $res = $chain->match($request);
+        $res     = $chain->match($request);
 
         $this->assertFalse($res);
     }
@@ -152,7 +152,7 @@ class Zend_Controller_Router_Route_ChainTest extends PHPUnit\Framework\TestCase
         $chain = $foo->chain($bar);
 
         $request = new Zend_Controller_Router_ChainTest_Request('http://www.zend.com/foo/bar');
-        $res = $chain->match($request);
+        $res     = $chain->match($request);
 
         $this->assertEquals(1, $res['foo']);
         $this->assertEquals(2, $res['bar']);
@@ -166,7 +166,7 @@ class Zend_Controller_Router_Route_ChainTest extends PHPUnit\Framework\TestCase
         $chain = $foo->chain($bar);
 
         $request = new Zend_Controller_Router_ChainTest_Request('http://www.zend.com/foo/bar/baz/var/val');
-        $res = $chain->match($request);
+        $res     = $chain->match($request);
 
         $this->assertEquals('bar', $res['foo']);
         $this->assertEquals('bar', $res['controller']);
@@ -233,7 +233,7 @@ class Zend_Controller_Router_Route_ChainTest extends PHPUnit\Framework\TestCase
 
     public function testI18nChaining()
     {
-        $lang = new Zend_Controller_Router_Route(':lang', array('lang' => 'en'));
+        $lang    = new Zend_Controller_Router_Route(':lang', array('lang' => 'en'));
         $profile = new Zend_Controller_Router_Route('user/:id', array('controller' => 'foo', 'action' => 'bar'));
 
         $chain = $lang->chain($profile);
@@ -254,7 +254,7 @@ class Zend_Controller_Router_Route_ChainTest extends PHPUnit\Framework\TestCase
         $chain->chain($foo)->chain($bar);
 
         $request = new Zend_Controller_Router_ChainTest_Request('http://foobar.zend.com/bar');
-        $res = $chain->match($request);
+        $res     = $chain->match($request);
 
         $this->assertInternalType('array', $res);
         $this->assertRegExp('#[^a-z0-9]?foobar\.zend\.com/bar/foo/bar#i', $chain->assemble(array('account' => 'foobar', 'foo' => 'bar')));
@@ -270,7 +270,7 @@ class Zend_Controller_Router_Route_ChainTest extends PHPUnit\Framework\TestCase
         $chain->chain($foo)->chain($bar);
 
         $request = new Zend_Controller_Router_ChainTest_Request('http://www.zend.com/bar');
-        $res = $chain->match($request);
+        $res     = $chain->match($request);
 
         $this->assertInternalType('array', $res);
         $this->assertRegExp('#[^a-z0-9]?www\.zend\.com/bar$#i', $chain->assemble());
@@ -286,7 +286,7 @@ class Zend_Controller_Router_Route_ChainTest extends PHPUnit\Framework\TestCase
         $chain->chain($foo)->chain($bar);
 
         $request = new Zend_Controller_Router_ChainTest_Request('http://www.zend.com/bar');
-        $res = $chain->match($request);
+        $res     = $chain->match($request);
 
         $this->assertInternalType('array', $res);
         $this->assertRegExp('#[^a-z0-9]?www\.zend\.com/bar$#i', $chain->assemble());
@@ -294,7 +294,7 @@ class Zend_Controller_Router_Route_ChainTest extends PHPUnit\Framework\TestCase
 
     public function testChainingReuse()
     {
-        $foo = new Zend_Controller_Router_Route_Hostname('www.zend.com', array('foo' => 'foo'));
+        $foo     = new Zend_Controller_Router_Route_Hostname('www.zend.com', array('foo' => 'foo'));
         $profile = new Zend_Controller_Router_Route('user/:id', array('controller' => 'prof'));
         $article = new Zend_Controller_Router_Route('article/:id', array('controller' => 'art', 'action' => 'art'));
 
@@ -302,13 +302,13 @@ class Zend_Controller_Router_Route_ChainTest extends PHPUnit\Framework\TestCase
         $articleChain = $foo->chain($article);
 
         $request = new Zend_Controller_Router_ChainTest_Request('http://www.zend.com/user/1');
-        $res = $profileChain->match($request);
+        $res     = $profileChain->match($request);
 
         $this->assertInternalType('array', $res);
         $this->assertEquals('prof', $res['controller']);
 
         $request = new Zend_Controller_Router_ChainTest_Request('http://www.zend.com/article/1');
-        $res = $articleChain->match($request);
+        $res     = $articleChain->match($request);
 
         $this->assertInternalType('array', $res);
         $this->assertEquals('art', $res['controller']);
@@ -322,18 +322,18 @@ class Zend_Controller_Router_Route_ChainTest extends PHPUnit\Framework\TestCase
             /** Abstract routes */
 
             'www' => array(
-                'type'  => 'Zend_Controller_Router_Route_Hostname',
-                'route' => 'www.example.com',
+                'type'     => 'Zend_Controller_Router_Route_Hostname',
+                'route'    => 'www.example.com',
                 'abstract' => true
             ),
             'user' => array(
-                'type'  => 'Zend_Controller_Router_Route_Hostname',
-                'route' => 'user.example.com',
+                'type'     => 'Zend_Controller_Router_Route_Hostname',
+                'route'    => 'user.example.com',
                 'abstract' => true
             ),
             'index' => array(
-                'type'  => 'Zend_Controller_Router_Route_Static',
-                'route' => '',
+                'type'     => 'Zend_Controller_Router_Route_Static',
+                'route'    => '',
                 'abstract' => true,
                 'defaults' => array(
                     'module'     => 'default',
@@ -342,8 +342,8 @@ class Zend_Controller_Router_Route_ChainTest extends PHPUnit\Framework\TestCase
                 )
             ),
             'imprint' => array(
-                'type'  => 'Zend_Controller_Router_Route_Static',
-                'route' => 'imprint',
+                'type'     => 'Zend_Controller_Router_Route_Static',
+                'route'    => 'imprint',
                 'abstract' => true,
                 'defaults' => array(
                     'module'     => 'default',
@@ -352,8 +352,8 @@ class Zend_Controller_Router_Route_ChainTest extends PHPUnit\Framework\TestCase
                 )
             ),
             'profile' => array(
-                'type'  => 'Zend_Controller_Router_Route_Static',
-                'route' => 'profile',
+                'type'     => 'Zend_Controller_Router_Route_Static',
+                'route'    => 'profile',
                 'abstract' => true,
                 'defaults' => array(
                     'module'     => 'user',
@@ -362,8 +362,8 @@ class Zend_Controller_Router_Route_ChainTest extends PHPUnit\Framework\TestCase
                 )
             ),
             'profile-edit' => array(
-                'type'  => 'Zend_Controller_Router_Route_Static',
-                'route' => 'profile/edit',
+                'type'     => 'Zend_Controller_Router_Route_Static',
+                'route'    => 'profile/edit',
                 'abstract' => true,
                 'defaults' => array(
                     'module'     => 'user',
@@ -397,7 +397,7 @@ class Zend_Controller_Router_Route_ChainTest extends PHPUnit\Framework\TestCase
         );
 
         $router = new Zend_Controller_Router_Rewrite();
-        $front = Zend_Controller_Front::getInstance();
+        $front  = Zend_Controller_Front::getInstance();
         $front->resetInstance();
         $front->setDispatcher(new Zend_Controller_Router_ChainTest_Dispatcher());
         $front->setRequest(new Zend_Controller_Router_ChainTest_Request());
@@ -408,28 +408,28 @@ class Zend_Controller_Router_Route_ChainTest extends PHPUnit\Framework\TestCase
         $request = new Zend_Controller_Router_ChainTest_Request('http://user.example.com/profile');
         $token   = $router->route($request);
 
-        $this->assertEquals('user',    $token->getModuleName());
+        $this->assertEquals('user', $token->getModuleName());
         $this->assertEquals('profile', $token->getControllerName());
-        $this->assertEquals('index',   $token->getActionName());
+        $this->assertEquals('index', $token->getActionName());
 
         $request = new Zend_Controller_Router_ChainTest_Request('http://foo.example.com/imprint');
         $token   = $router->route($request);
 
         $this->assertEquals('default', $token->getModuleName());
         $this->assertEquals('imprint', $token->getControllerName());
-        $this->assertEquals('defact',  $token->getActionName());
+        $this->assertEquals('defact', $token->getActionName());
     }
 
     public function testConfigChainingAlternative()
     {
         $routes = array(
             'www' => array(
-                'type'  => 'Zend_Controller_Router_Route_Hostname',
-                'route' => 'www.example.com',
+                'type'   => 'Zend_Controller_Router_Route_Hostname',
+                'route'  => 'www.example.com',
                 'chains' => array(
                     'index' => array(
-                        'type'  => 'Zend_Controller_Router_Route_Static',
-                        'route' => '',
+                        'type'     => 'Zend_Controller_Router_Route_Static',
+                        'route'    => '',
                         'defaults' => array(
                             'module'     => 'default',
                             'controller' => 'index',
@@ -437,8 +437,8 @@ class Zend_Controller_Router_Route_ChainTest extends PHPUnit\Framework\TestCase
                         )
                     ),
                     'imprint' => array(
-                        'type'  => 'Zend_Controller_Router_Route_Static',
-                        'route' => 'imprint',
+                        'type'     => 'Zend_Controller_Router_Route_Static',
+                        'route'    => 'imprint',
                         'defaults' => array(
                             'module'     => 'default',
                             'controller' => 'index',
@@ -448,12 +448,12 @@ class Zend_Controller_Router_Route_ChainTest extends PHPUnit\Framework\TestCase
                 )
             ),
             'user' => array(
-                'type'  => 'Zend_Controller_Router_Route_Hostname',
-                'route' => 'user.example.com',
+                'type'   => 'Zend_Controller_Router_Route_Hostname',
+                'route'  => 'user.example.com',
                 'chains' => array(
                     'profile' => array(
-                        'type'  => 'Zend_Controller_Router_Route_Static',
-                        'route' => 'profile',
+                        'type'     => 'Zend_Controller_Router_Route_Static',
+                        'route'    => 'profile',
                         'defaults' => array(
                             'module'     => 'user',
                             'controller' => 'profile',
@@ -461,15 +461,15 @@ class Zend_Controller_Router_Route_ChainTest extends PHPUnit\Framework\TestCase
                         ),
                         'chains' => array(
                             'standard' => array(
-                                'type'  => 'Zend_Controller_Router_Route_Static',
-                                'route' => 'standard2',
+                                'type'     => 'Zend_Controller_Router_Route_Static',
+                                'route'    => 'standard2',
                                 'defaults' => array(
                                     'mode' => 'standard'
                                 )
                             ),
                             'detail' => array(
-                                'type'  => 'Zend_Controller_Router_Route_Static',
-                                'route' => 'detail',
+                                'type'     => 'Zend_Controller_Router_Route_Static',
+                                'route'    => 'detail',
                                 'defaults' => array(
                                     'mode' => 'detail'
                                 )
@@ -477,8 +477,8 @@ class Zend_Controller_Router_Route_ChainTest extends PHPUnit\Framework\TestCase
                         )
                     ),
                     'profile-edit' => array(
-                        'type'  => 'Zend_Controller_Router_Route_Static',
-                        'route' => 'profile/edit',
+                        'type'     => 'Zend_Controller_Router_Route_Static',
+                        'route'    => 'profile/edit',
                         'defaults' => array(
                             'module'     => 'user',
                             'controller' => 'profile',
@@ -495,17 +495,17 @@ class Zend_Controller_Router_Route_ChainTest extends PHPUnit\Framework\TestCase
         $request = new Zend_Controller_Router_ChainTest_Request('http://user.example.com/profile/edit');
         $token   = $router->route($request);
 
-        $this->assertEquals('user',    $token->getModuleName());
+        $this->assertEquals('user', $token->getModuleName());
         $this->assertEquals('profile', $token->getControllerName());
-        $this->assertEquals('edit',    $token->getActionName());
+        $this->assertEquals('edit', $token->getActionName());
 
         $request = new Zend_Controller_Router_ChainTest_Request('http://user.example.com/profile/detail');
         $token   = $router->route($request);
 
-        $this->assertEquals('user',    $token->getModuleName());
+        $this->assertEquals('user', $token->getModuleName());
         $this->assertEquals('profile', $token->getControllerName());
-        $this->assertEquals('index',   $token->getActionName());
-        $this->assertEquals('detail',  $token->getParam('mode'));
+        $this->assertEquals('index', $token->getActionName());
+        $this->assertEquals('detail', $token->getParam('mode'));
 
         $request = new Zend_Controller_Router_ChainTest_Request('http://user.example.com/profile');
         $token   = $router->route($request);
@@ -516,8 +516,8 @@ class Zend_Controller_Router_Route_ChainTest extends PHPUnit\Framework\TestCase
     {
         $routes = array(
             'index' => array(
-                'type'  => 'Zend_Controller_Router_Route_Static',
-                'route' => '',
+                'type'     => 'Zend_Controller_Router_Route_Static',
+                'route'    => '',
                 'defaults' => array(
                     'module'     => 'default',
                     'controller' => 'index',
@@ -525,13 +525,13 @@ class Zend_Controller_Router_Route_ChainTest extends PHPUnit\Framework\TestCase
                 )
             ),
             'www' => array(
-                'type'  => 'Zend_Controller_Router_Route_Hostname',
-                'route' => 'www.example.com',
+                'type'   => 'Zend_Controller_Router_Route_Hostname',
+                'route'  => 'www.example.com',
                 'chains' => array(
                     'index',
                     'imprint' => array(
-                        'type'  => 'Zend_Controller_Router_Route_Static',
-                        'route' => 'imprint',
+                        'type'     => 'Zend_Controller_Router_Route_Static',
+                        'route'    => 'imprint',
                         'defaults' => array(
                             'module'     => 'default',
                             'controller' => 'index',
@@ -541,13 +541,13 @@ class Zend_Controller_Router_Route_ChainTest extends PHPUnit\Framework\TestCase
                 )
             ),
             'user' => array(
-                'type'  => 'Zend_Controller_Router_Route_Hostname',
-                'route' => 'user.example.com',
+                'type'   => 'Zend_Controller_Router_Route_Hostname',
+                'route'  => 'user.example.com',
                 'chains' => array(
                     'index',
                     'profile' => array(
-                        'type'  => 'Zend_Controller_Router_Route_Static',
-                        'route' => 'profile',
+                        'type'     => 'Zend_Controller_Router_Route_Static',
+                        'route'    => 'profile',
                         'defaults' => array(
                             'module'     => 'user',
                             'controller' => 'profile',
@@ -555,8 +555,8 @@ class Zend_Controller_Router_Route_ChainTest extends PHPUnit\Framework\TestCase
                         )
                     ),
                     'profile-edit' => array(
-                        'type'  => 'Zend_Controller_Router_Route_Static',
-                        'route' => 'profile/edit',
+                        'type'     => 'Zend_Controller_Router_Route_Static',
+                        'route'    => 'profile/edit',
                         'defaults' => array(
                             'module'     => 'user',
                             'controller' => 'profile',
@@ -574,9 +574,9 @@ class Zend_Controller_Router_Route_ChainTest extends PHPUnit\Framework\TestCase
         $request = new Zend_Controller_Router_ChainTest_Request('http://user.example.com');
         $token   = $router->route($request);
 
-        $this->assertEquals('default',    $token->getModuleName());
+        $this->assertEquals('default', $token->getModuleName());
         $this->assertEquals('index', $token->getControllerName());
-        $this->assertEquals('index',   $token->getActionName());
+        $this->assertEquals('index', $token->getActionName());
 
         $this->assertTrue($router->getRoute('user-profile') instanceof Zend_Controller_Router_Route_Chain);
         $this->assertTrue($router->getRoute('www-imprint') instanceof Zend_Controller_Router_Route_Chain);
@@ -592,7 +592,7 @@ class Zend_Controller_Router_Route_ChainTest extends PHPUnit\Framework\TestCase
         $chain = $foo->chain($bar);
 
         $request = new Zend_Controller_Router_ChainTest_Request('http://www.zend.com/foo/bar/');
-        $res = $chain->match($request);
+        $res     = $chain->match($request);
 
         $this->assertEquals('simple', $res['module']);
         $this->assertEquals('foo', $res['controller']);
@@ -607,7 +607,7 @@ class Zend_Controller_Router_Route_ChainTest extends PHPUnit\Framework\TestCase
         $chain = $foo->chain($bar);
 
         $request = new Zend_Controller_Router_ChainTest_Request('http://www.zend.com/foo/bar/id/12');
-        $res = $chain->match($request);
+        $res     = $chain->match($request);
 
         $this->assertEquals('simple', $res['module']);
         $this->assertEquals('foo', $res['controller']);
@@ -670,7 +670,7 @@ class Zend_Controller_Router_Route_ChainTest extends PHPUnit\Framework\TestCase
     {
         $routes = array(
             'admin' => array(
-                'route' => 'admin',
+                'route'    => 'admin',
                 'defaults' => array(
                     'module'     => 'admin',
                     'controller' => 'index',
@@ -678,8 +678,8 @@ class Zend_Controller_Router_Route_ChainTest extends PHPUnit\Framework\TestCase
                 ),
                 'chains' => array(
                     'index' => array(
-                        'type'  => 'Zend_Controller_Router_Route_Static',
-                        'route' => '',
+                        'type'     => 'Zend_Controller_Router_Route_Static',
+                        'route'    => '',
                         'defaults' => array(
                             'module'     => 'admin',
                             'controller' => 'index',
@@ -687,7 +687,7 @@ class Zend_Controller_Router_Route_ChainTest extends PHPUnit\Framework\TestCase
                         ),
                     ),
                     'login' => array(
-                        'route' => 'login',
+                        'route'    => 'login',
                         'defaults' => array(
                             'module'     => 'admin',
                             'controller' => 'login',
@@ -698,10 +698,10 @@ class Zend_Controller_Router_Route_ChainTest extends PHPUnit\Framework\TestCase
                 ),
             ),
         );
-        $config = new Zend_Config($routes);
+        $config  = new Zend_Config($routes);
         $rewrite = new Zend_Controller_Router_Rewrite();
         $rewrite->addConfig($config);
-        $routes = $rewrite->getRoutes();
+        $routes     = $rewrite->getRoutes();
         $indexRoute = $rewrite->getRoute('admin-index');
         $loginRoute = $rewrite->getRoute('admin-login');
 
@@ -736,12 +736,12 @@ class Zend_Controller_Router_Route_ChainTest extends PHPUnit\Framework\TestCase
      */
     public function testChainingStaticDynamicMatchToDefaults()
     {
-        $foo = new Zend_Controller_Router_Route_Static('foo');
-        $bar = new Zend_Controller_Router_Route(':bar', array('bar' => 0));
+        $foo   = new Zend_Controller_Router_Route_Static('foo');
+        $bar   = new Zend_Controller_Router_Route(':bar', array('bar' => 0));
         $chain = $foo->chain($bar);
 
         $request = new Zend_Controller_Router_ChainTest_Request('http://www.zend.com/foo');
-        $res = $chain->match($request);
+        $res     = $chain->match($request);
 
         $this->assertInternalType('array', $res, 'Route did not match');
         $this->assertEquals(0, $res['bar']);
@@ -752,12 +752,12 @@ class Zend_Controller_Router_Route_ChainTest extends PHPUnit\Framework\TestCase
      */
     public function testChainingStaticDynamicMatchToParams()
     {
-        $foo = new Zend_Controller_Router_Route_Static('foo');
-        $bar = new Zend_Controller_Router_Route(':bar', array('bar' => 1));
+        $foo   = new Zend_Controller_Router_Route_Static('foo');
+        $bar   = new Zend_Controller_Router_Route(':bar', array('bar' => 1));
         $chain = $foo->chain($bar);
 
         $request = new Zend_Controller_Router_ChainTest_Request('http://www.zend.com/foo/2');
-        $res = $chain->match($request);
+        $res     = $chain->match($request);
 
         $this->assertInternalType('array', $res, 'Route did not match');
         $this->assertEquals(2, $res['bar']);
@@ -765,7 +765,6 @@ class Zend_Controller_Router_Route_ChainTest extends PHPUnit\Framework\TestCase
 
     public function testMultipleChainsWithVersion2Routes()
     {
-
         $foo = new Zend_Controller_Router_Route_SubclassTest('foo');
         $bar = new Zend_Controller_Router_Route_SubclassTest('bar', array('baz' => 'no'));
 
@@ -773,7 +772,7 @@ class Zend_Controller_Router_Route_ChainTest extends PHPUnit\Framework\TestCase
         $chain = $foo->chain($bar);
 
         $foo2 = new Zend_Controller_Router_Route_SubclassTest('foo');
-        $baz = new Zend_Controller_Router_Route_SubclassTest('baz', array('baz' => 'baz'));
+        $baz  = new Zend_Controller_Router_Route_SubclassTest('baz', array('baz' => 'baz'));
 
         $chain2 = $foo2->chain($baz);
 
@@ -808,7 +807,6 @@ class Zend_Controller_Router_Route_ChainTest extends PHPUnit\Framework\TestCase
         $res = $rewrite->route($request);
         $this->assertEquals('foo', $res->getParam('foo'), 'Route did not match');
         $this->assertEquals('static', $rewrite->getCurrentRouteName(), 'Routing did not match expected route');
-
     }
 
     /**
@@ -820,13 +818,18 @@ class Zend_Controller_Router_Route_ChainTest extends PHPUnit\Framework\TestCase
         $chain = new Zend_Controller_Router_Route_Chain();
 
         $foo = new Zend_Controller_Router_Route_Hostname(
-            'www.example.com', array('foo' => 'foo')
+            'www.example.com',
+            array('foo' => 'foo')
         );
         $bar = new Zend_Controller_Router_Route_Regex(
-            'bar', array('bar' => 'bar'), array(), 'bar'
+            'bar',
+            array('bar' => 'bar'),
+            array(),
+            'bar'
         );
         $baz = new Zend_Controller_Router_Route_Static(
-            'baz', array('baz' => 'baz')
+            'baz',
+            array('baz' => 'baz')
         );
 
         $chain->chain($foo)->chain($bar)->chain($baz);
@@ -846,13 +849,18 @@ class Zend_Controller_Router_Route_ChainTest extends PHPUnit\Framework\TestCase
         $chain = new Zend_Controller_Router_Route_Chain();
 
         $foo = new Zend_Controller_Router_Route_Hostname(
-            'www.example.com', array('priority' => 1)
+            'www.example.com',
+            array('priority' => 1)
         );
         $bar = new Zend_Controller_Router_Route_Regex(
-            'bar', array('priority' => 2), array(), 'bar'
+            'bar',
+            array('priority' => 2),
+            array(),
+            'bar'
         );
         $baz = new Zend_Controller_Router_Route_Static(
-            'baz', array('priority' => 3)
+            'baz',
+            array('priority' => 3)
         );
 
         $chain->chain($foo)->chain($bar)->chain($baz);
@@ -870,13 +878,18 @@ class Zend_Controller_Router_Route_ChainTest extends PHPUnit\Framework\TestCase
         $chain = new Zend_Controller_Router_Route_Chain();
 
         $foo = new Zend_Controller_Router_Route_Hostname(
-            'www.example.com', array('foo' => 'foo')
+            'www.example.com',
+            array('foo' => 'foo')
         );
         $bar = new Zend_Controller_Router_Route_Regex(
-            'bar', array('bar' => 'bar'), array(), 'bar'
+            'bar',
+            array('bar' => 'bar'),
+            array(),
+            'bar'
         );
         $baz = new Zend_Controller_Router_Route_Static(
-            'baz', array('baz' => 'baz')
+            'baz',
+            array('baz' => 'baz')
         );
 
         $chain->chain($foo)->chain($bar)->chain($baz);
@@ -900,13 +913,18 @@ class Zend_Controller_Router_Route_ChainTest extends PHPUnit\Framework\TestCase
         $chain = new Zend_Controller_Router_Route_Chain();
 
         $foo = new Zend_Controller_Router_Route_Hostname(
-            'www.zend.com', array('priority' => 1)
+            'www.zend.com',
+            array('priority' => 1)
         );
         $bar = new Zend_Controller_Router_Route_Regex(
-            'bar', array('priority' => 2), array(), 'bar'
+            'bar',
+            array('priority' => 2),
+            array(),
+            'bar'
         );
         $baz = new Zend_Controller_Router_Route_Static(
-            'baz', array('priority' => 3)
+            'baz',
+            array('priority' => 3)
         );
 
         $chain->chain($foo)->chain($bar)->chain($baz);
@@ -921,7 +939,7 @@ class Zend_Controller_Router_Route_ChainTest extends PHPUnit\Framework\TestCase
     protected function _getRouter()
     {
         $router = new Zend_Controller_Router_Rewrite();
-        $front = Zend_Controller_Front::getInstance();
+        $front  = Zend_Controller_Front::getInstance();
         $front->resetInstance();
         $front->setRequest(new Zend_Controller_Router_ChainTest_Request());
         $router->setFrontController($front);
@@ -944,7 +962,7 @@ class Zend_Controller_Router_Route_SimpleSubclassTest extends Zend_Controller_Ro
 
     public function __construct($path, $params)
     {
-        $this->path = $path;
+        $this->path   = $path;
         $this->params = $params;
     }
 
@@ -964,18 +982,19 @@ class Zend_Controller_Router_Route_SimpleSubclassTest extends Zend_Controller_Ro
     }
 
     public function assemble($data = array(), $reset = false, $encode = false, $partial = false)
-    {}
+    {
+    }
 
     public static function getInstance(Zend_Config $config)
-    {}
-
+    {
+    }
 }
 
 class Zend_Controller_Router_Route_SubclassTest extends Zend_Controller_Router_Route_Static
 {
     public function match($path, $partial = false)
     {
-        $path = $path->getPathInfo();
+        $path  = $path->getPathInfo();
         $match = parent::match($path, $partial);
         if (is_array($match)) {
             $this->setMatchedPath($this->_route);
@@ -989,11 +1008,12 @@ class Zend_Controller_Router_Route_SubclassTest extends Zend_Controller_Router_R
     }
 
     public function assemble($data = array(), $reset = false, $encode = false, $partial = false)
-    {}
+    {
+    }
 
     public static function getInstance(Zend_Config $config)
-    {}
-
+    {
+    }
 }
 
 /**
@@ -1012,16 +1032,19 @@ class Zend_Controller_Router_ChainTest_Request extends Zend_Controller_Request_H
             $uri = 'http://localhost/foo/bar/baz/2';
         }
 
-        $uri = Zend_Uri_Http::fromString($uri);
+        $uri         = Zend_Uri_Http::fromString($uri);
         $this->_host = $uri->getHost();
         $this->_port = $uri->getPort();
 
         parent::__construct($uri);
     }
 
-    public function getHttpHost() {
+    public function getHttpHost()
+    {
         $return = $this->_host;
-        if ($this->_port)  $return .= ':' . $this->_port;
+        if ($this->_port) {
+            $return .= ':' . $this->_port;
+        }
         return $return;
     }
 }

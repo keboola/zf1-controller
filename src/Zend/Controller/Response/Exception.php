@@ -28,5 +28,5 @@
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 class Zend_Controller_Response_Exception extends Zend_Controller_Exception
-{}
-
+{
+}

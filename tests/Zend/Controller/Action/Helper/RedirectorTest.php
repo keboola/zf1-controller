@@ -236,10 +236,10 @@ class Zend_Controller_Action_Helper_RedirectorTest extends PHPUnit\Framework\Tes
     public function testSetGotoRoute()
     {
         $router = Zend_Controller_Front::getInstance()->getRouter();
-        $route = new Zend_Controller_Router_Route(
+        $route  = new Zend_Controller_Router_Route(
             'blog/archive/:id',
             array('controller' => 'blog', 'action' => 'view', 'id' => false),
-            array('id' => '\d+')
+            array('id'         => '\d+')
         );
         $router->addRoute('blogArchive', $route);
 
@@ -304,7 +304,7 @@ class Zend_Controller_Action_Helper_RedirectorTest extends PHPUnit\Framework\Tes
     public function testGotoAndExit()
     {
         $this->markTestSkipped(
-          "Testing Zend_Controller_Action_Helper_Redirector::gotoAndExit() would break the test suite"
+          'Testing Zend_Controller_Action_Helper_Redirector::gotoAndExit() would break the test suite'
         );
     }
 
@@ -314,10 +314,10 @@ class Zend_Controller_Action_Helper_RedirectorTest extends PHPUnit\Framework\Tes
     public function testGotoRoute()
     {
         $router = Zend_Controller_Front::getInstance()->getRouter();
-        $route = new Zend_Controller_Router_Route(
+        $route  = new Zend_Controller_Router_Route(
             'blog/archive/:id',
             array('controller' => 'blog', 'action' => 'view', 'id' => false),
-            array('id' => '\d+')
+            array('id'         => '\d+')
         );
         $router->addRoute('blogArchive', $route);
 
@@ -332,7 +332,7 @@ class Zend_Controller_Action_Helper_RedirectorTest extends PHPUnit\Framework\Tes
     public function testGotoRouteAndExit()
     {
         $this->markTestSkipped(
-          "Testing Zend_Controller_Action_Helper_Redirector::gotoRouteAndExit() would break the test suite"
+          'Testing Zend_Controller_Action_Helper_Redirector::gotoRouteAndExit() would break the test suite'
         );
     }
 
@@ -348,14 +348,14 @@ class Zend_Controller_Action_Helper_RedirectorTest extends PHPUnit\Framework\Tes
     public function testGotoUrlAndExit()
     {
         $this->markTestSkipped(
-          "Testing Zend_Controller_Action_Helper_Redirector::gotoUrlAndExit() would break the test suite"
+          'Testing Zend_Controller_Action_Helper_Redirector::gotoUrlAndExit() would break the test suite'
         );
     }
 
     public function testRedirectAndExit()
     {
         $this->markTestSkipped(
-          "Testing Zend_Controller_Action_Helper_Redirector::redirectAndExit() would break the test suite"
+          'Testing Zend_Controller_Action_Helper_Redirector::redirectAndExit() would break the test suite'
         );
     }
 
@@ -461,8 +461,8 @@ class Zend_Controller_Action_Helper_RedirectorTest extends PHPUnit\Framework\Tes
     public function testServerVariableHttpsToOffDoesNotBuildHttpsUrl()
     {
         // Set Preconditions from Issue:
-        $_SERVER['HTTPS'] = "off";
-        $_SERVER['HTTP_HOST'] = 'localhost';
+        $_SERVER['HTTPS']       = 'off';
+        $_SERVER['HTTP_HOST']   = 'localhost';
         $_SERVER['SERVER_PORT'] = 80;
         $this->redirector->setUseAbsoluteUri(true);
 
@@ -481,8 +481,8 @@ class Zend_Controller_Action_Helper_RedirectorTest extends PHPUnit\Framework\Tes
      */
     public function testGotoUrlAndSetGotoUrlBehaveTheSame()
     {
-        $url = 'http://www.example.com';
-        $gotoUrl = $this->redirector->gotoUrl($url);
+        $url        = 'http://www.example.com';
+        $gotoUrl    = $this->redirector->gotoUrl($url);
         $setGotoUrl = $this->redirector->setGotoUrl($url);
         $this->assertSame($gotoUrl, $setGotoUrl);
     }
@@ -497,12 +497,12 @@ class Zend_Controller_Action_Helper_RedirectorTest extends PHPUnit\Framework\Tes
                                                ->setDefaultAction('test');
 
         $this->redirector->gotoSimple('test', 'test', 'test');
-        $result = $this->redirector->getRedirectUrl();
+        $result   = $this->redirector->getRedirectUrl();
         $expected = '/';
         $this->assertEquals($expected, $result);
 
         $this->redirector->gotoSimple('index', 'index', 'default');
-        $result = $this->redirector->getRedirectUrl();
+        $result   = $this->redirector->getRedirectUrl();
         $expected = '/default/index/index';
         $this->assertEquals($expected, $result);
     }
@@ -516,7 +516,8 @@ class Zend_Controller_Action_Helper_RedirectorTest extends PHPUnit\Framework\Tes
 
         $this->router->removeRoute('default');
         $this->router->addRoute('default', new Zend_Controller_Router_Route(
-            ':baz/:foo/:bar/*', array(
+            ':baz/:foo/:bar/*',
+            array(
                 'baz' => 'default',
                 'foo' => 'index',
                 'bar' => 'index'
@@ -524,7 +525,7 @@ class Zend_Controller_Action_Helper_RedirectorTest extends PHPUnit\Framework\Tes
         ));
 
         $this->redirector->gotoSimple('babar', 'barbapapa', 'barbazoo', array('asd' => 1));
-        $result = $this->redirector->getRedirectUrl();
+        $result   = $this->redirector->getRedirectUrl();
         $expected = '/barbazoo/barbapapa/babar/asd/1';
         $this->assertEquals($expected, $result);
     }

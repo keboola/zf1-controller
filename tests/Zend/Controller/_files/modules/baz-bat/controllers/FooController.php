@@ -42,5 +42,4 @@ class BazBat_FooController extends Zend_Controller_Action
     {
         $this->_response->appendBody("BazBat_FooController::indexAction() called\n");
     }
-
 }

@@ -122,7 +122,7 @@ class Zend_Controller_Router_Route_Chain extends Zend_Controller_Router_Route_Ab
             $matchedPath = $route->getMatchedPath();
 
             if ($matchedPath !== null) {
-                $subPath   = substr($subPath, strlen($matchedPath));
+                $subPath = substr($subPath, strlen($matchedPath));
             }
 
             $values = $res + $values;

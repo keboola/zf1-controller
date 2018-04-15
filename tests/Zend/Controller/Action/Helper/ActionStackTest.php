@@ -159,7 +159,7 @@ class Zend_Controller_Action_Helper_ActionStackTest extends PHPUnit\Framework\Te
         }
     }
 
-     public function testCannotStackActionIfNoRequestAvailable()
+    public function testCannotStackActionIfNoRequestAvailable()
     {
         $helper = new Zend_Controller_Action_Helper_ActionStack();
         $plugin = $this->front->getPlugin('Zend_Controller_Plugin_ActionStack');

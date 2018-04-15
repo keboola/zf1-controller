@@ -217,14 +217,14 @@ class Zend_Controller_ActionTest extends PHPUnit\Framework\TestCase
         $this->assertEquals(-1, $this->_controller->getParam('baz', -1));
     }
 
-	/**
+    /**
      * @group ZF-9179
      */
-	public function testGetParamForEmptyString()
-	{
-		$this->_controller->setParam('lang', '');
-		$this->assertEquals('en', $this->_controller->getParam('lang', 'en'));
-	}
+    public function testGetParamForEmptyString()
+    {
+        $this->_controller->setParam('lang', '');
+        $this->assertEquals('en', $this->_controller->getParam('lang', 'en'));
+    }
 
     public function testGetParams()
     {
@@ -240,7 +240,7 @@ class Zend_Controller_ActionTest extends PHPUnit\Framework\TestCase
 
     public function testRedirect()
     {
-        $response = $this->_controller->getResponse();
+        $response                             = $this->_controller->getResponse();
         $response->headersSentThrowsException = false;
         $this->_controller->redirect('/baz/foo');
         $this->_controller->redirect('/foo/bar');
@@ -366,7 +366,7 @@ class Zend_Controller_ActionTest extends PHPUnit\Framework\TestCase
         Zend_Controller_Front::getInstance()->setControllerDirectory(dirname(__FILE__) . DIRECTORY_SEPARATOR . '_files');
         $viewRenderer = Zend_Controller_Action_HelperBroker::getStaticHelper('viewRenderer');
 
-        $request    = new Zend_Controller_Request_Http();
+        $request = new Zend_Controller_Request_Http();
         $request->setControllerName('view')
                 ->setActionName('test');
         $response   = new Zend_Controller_Response_Cli();

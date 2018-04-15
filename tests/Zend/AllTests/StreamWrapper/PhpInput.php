@@ -70,7 +70,7 @@ class Zend_AllTests_StreamWrapper_PhpInput
     {
         // Reset static values
         self::$_returnValues = array();
-        self::$_arguments = array();
+        self::$_arguments    = array();
 
         // Restore original stream wrapper
         stream_wrapper_restore('php');
@@ -78,7 +78,7 @@ class Zend_AllTests_StreamWrapper_PhpInput
 
     public static function methodWillReturn($methodName, $returnValue)
     {
-        $methodName = strtolower($methodName);
+        $methodName                       = strtolower($methodName);
         self::$_returnValues[$methodName] = $returnValue;
     }
 
@@ -125,10 +125,10 @@ class Zend_AllTests_StreamWrapper_PhpInput
         // To match the behavior of php://input, we need to clear out the data
         // as it is read
         if ($count > strlen(self::$_data)) {
-            $data = self::$_data;
+            $data        = self::$_data;
             self::$_data = '';
         } else {
-            $data = substr(self::$_data, 0, $count);
+            $data        = substr(self::$_data, 0, $count);
             self::$_data = substr(self::$_data, $count);
         }
         return $data;

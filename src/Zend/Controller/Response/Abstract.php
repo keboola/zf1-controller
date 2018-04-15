@@ -513,7 +513,7 @@ abstract class Zend_Controller_Response_Abstract
             unset($this->_body[$name]);
         }
 
-        $new = array($name => (string) $content);
+        $new         = array($name => (string) $content);
         $this->_body = $new + $this->_body;
 
         return $this;
@@ -563,8 +563,8 @@ abstract class Zend_Controller_Response_Abstract
             $this->_body = $this->_body + $ins;
         } else {
             // Otherwise, insert at location specified
-            $pre  = array_slice($this->_body, 0, $loc);
-            $post = array_slice($this->_body, $loc);
+            $pre         = array_slice($this->_body, 0, $loc);
+            $post        = array_slice($this->_body, $loc);
             $this->_body = $pre + $ins + $post;
         }
 

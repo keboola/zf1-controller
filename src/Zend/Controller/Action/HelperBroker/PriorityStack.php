@@ -29,9 +29,8 @@
  */
 class Zend_Controller_Action_HelperBroker_PriorityStack implements IteratorAggregate, ArrayAccess, Countable
 {
-
-    protected $_helpersByPriority = array();
-    protected $_helpersByNameRef  = array();
+    protected $_helpersByPriority   = array();
+    protected $_helpersByNameRef    = array();
     protected $_nextDefaultPriority = 1;
 
     /**
@@ -153,7 +152,7 @@ class Zend_Controller_Action_HelperBroker_PriorityStack implements IteratorAggre
             trigger_error("A helper with the same priority already exists, reassigning to $priority", E_USER_WARNING);
         }
 
-        $this->_helpersByPriority[$priority] = $helper;
+        $this->_helpersByPriority[$priority]         = $helper;
         $this->_helpersByNameRef[$helper->getName()] = $helper;
 
         if ($priority == ($nextFreeDefault = $this->getNextFreeHigherPriority($this->_nextDefaultPriority))) {
@@ -178,10 +177,10 @@ class Zend_Controller_Action_HelperBroker_PriorityStack implements IteratorAggre
 
         if (is_string($priorityOrHelperName)) {
             $helperName = $priorityOrHelperName;
-            $helper = $this->_helpersByNameRef[$helperName];
-            $priority = array_search($helper, $this->_helpersByPriority, true);
+            $helper     = $this->_helpersByNameRef[$helperName];
+            $priority   = array_search($helper, $this->_helpersByPriority, true);
         } else {
-            $priority = $priorityOrHelperName;
+            $priority   = $priorityOrHelperName;
             $helperName = $this->_helpersByPriority[$priorityOrHelperName]->getName();
         }
 
@@ -273,5 +272,4 @@ class Zend_Controller_Action_HelperBroker_PriorityStack implements IteratorAggre
     {
         return $this->_helpersByNameRef;
     }
-
 }

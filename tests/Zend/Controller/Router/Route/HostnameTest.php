@@ -164,7 +164,7 @@ class Zend_Controller_Router_Route_HostnameTest extends PHPUnit\Framework\TestCa
 
     public function testAutomaticSchemeAssembling()
     {
-        $route   = new Zend_Controller_Router_Route_Hostname('www.zend.com', array('controller' => 'host-foo', 'action' => 'host-bar'), array());
+        $route = new Zend_Controller_Router_Route_Hostname('www.zend.com', array('controller' => 'host-foo', 'action' => 'host-bar'), array());
 
         $url = $route->assemble();
 
@@ -184,38 +184,44 @@ class Zend_Controller_Router_Route_HostnameTest extends PHPUnit\Framework\TestCa
 
     protected function _getStaticHostRoute()
     {
-        $route = new Zend_Controller_Router_Route_Hostname('www.zend.com',
+        $route = new Zend_Controller_Router_Route_Hostname(
+            'www.zend.com',
                                                             array('controller' => 'ctrl',
-                                                                  'action' => 'act'));
+                                                                  'action'     => 'act')
+        );
 
         return $route;
     }
 
     protected function _getHostRoute()
     {
-        $route = new Zend_Controller_Router_Route_Hostname(':subdomain.zend.com',
+        $route = new Zend_Controller_Router_Route_Hostname(
+            ':subdomain.zend.com',
                                                             array('controller' => 'ctrl',
-                                                                  'action' => 'act'),
-                                                            array('subdomain' => '(foo|bar)'));
+                                                                  'action'     => 'act'),
+                                                            array('subdomain' => '(foo|bar)')
+        );
 
         return $route;
     }
 
     protected function _getHostRouteWithDefault()
     {
-        $route = new Zend_Controller_Router_Route_Hostname(':subdomain.zend.com',
+        $route = new Zend_Controller_Router_Route_Hostname(
+            ':subdomain.zend.com',
                                                             array('controller' => 'ctrl',
-                                                                  'action' => 'act',
-                                                                  'subdomain' => 'bar'),
-                                                            array('subdomain' => '(foo|bar)'));
+                                                                  'action'     => 'act',
+                                                                  'subdomain'  => 'bar'),
+                                                            array('subdomain' => '(foo|bar)')
+        );
 
         return $route;
     }
 
-    protected function _getRequest($host) {
+    protected function _getRequest($host)
+    {
         return new Zend_Controller_Router_RewriteTest_Request_Stub($host);
     }
-
 }
 
 /**
@@ -227,16 +233,19 @@ class Zend_Controller_Router_RewriteTest_Request_Stub extends Zend_Controller_Re
 
     protected $_scheme;
 
-    public function __construct($host, $scheme = 'http') {
+    public function __construct($host, $scheme = 'http')
+    {
         $this->_host   = $host;
         $this->_scheme = $scheme;
     }
 
-    public function getHttpHost() {
+    public function getHttpHost()
+    {
         return $this->_host;
     }
 
-    public function getScheme() {
+    public function getScheme()
+    {
         return $this->_scheme;
     }
 }

@@ -177,24 +177,24 @@ class Zend_Controller_Plugin_BrokerTest extends PHPUnit\Framework\TestCase
 
     public function testRegisterPluginStackOrderIsSane()
     {
-        $broker   = new Zend_Controller_Plugin_Broker();
-        $plugin1  = new Zend_Controller_Plugin_BrokerTest_TestPlugin();
-        $plugin2  = new Zend_Controller_Plugin_BrokerTest_ExceptionTestPlugin();
-        $plugin3  = new Zend_Controller_Plugin_BrokerTest_TestPlugin2();
+        $broker  = new Zend_Controller_Plugin_Broker();
+        $plugin1 = new Zend_Controller_Plugin_BrokerTest_TestPlugin();
+        $plugin2 = new Zend_Controller_Plugin_BrokerTest_ExceptionTestPlugin();
+        $plugin3 = new Zend_Controller_Plugin_BrokerTest_TestPlugin2();
         $broker->registerPlugin($plugin1, 5);
         $broker->registerPlugin($plugin2, -5);
         $broker->registerPlugin($plugin3, 2);
 
-        $plugins = $broker->getPlugins();
+        $plugins  = $broker->getPlugins();
         $expected = array(-5 => $plugin2, 2 => $plugin3, 5 => $plugin1);
         $this->assertSame($expected, $plugins);
     }
 
     public function testRegisterPluginThrowsExceptionOnDuplicateStackIndex()
     {
-        $broker   = new Zend_Controller_Plugin_Broker();
-        $plugin1  = new Zend_Controller_Plugin_BrokerTest_TestPlugin();
-        $plugin2  = new Zend_Controller_Plugin_BrokerTest_ExceptionTestPlugin();
+        $broker  = new Zend_Controller_Plugin_Broker();
+        $plugin1 = new Zend_Controller_Plugin_BrokerTest_TestPlugin();
+        $plugin2 = new Zend_Controller_Plugin_BrokerTest_ExceptionTestPlugin();
         $broker->registerPlugin($plugin1, 5);
 
         $this->expectException(Zend_Controller_Exception::class);
@@ -203,15 +203,15 @@ class Zend_Controller_Plugin_BrokerTest extends PHPUnit\Framework\TestCase
 
     public function testRegisterPluginStackOrderWithAutmaticNumbersIncrementsCorrectly()
     {
-        $broker   = new Zend_Controller_Plugin_Broker();
-        $plugin1  = new Zend_Controller_Plugin_BrokerTest_TestPlugin();
-        $plugin2  = new Zend_Controller_Plugin_BrokerTest_ExceptionTestPlugin();
-        $plugin3  = new Zend_Controller_Plugin_BrokerTest_TestPlugin2();
+        $broker  = new Zend_Controller_Plugin_Broker();
+        $plugin1 = new Zend_Controller_Plugin_BrokerTest_TestPlugin();
+        $plugin2 = new Zend_Controller_Plugin_BrokerTest_ExceptionTestPlugin();
+        $plugin3 = new Zend_Controller_Plugin_BrokerTest_TestPlugin2();
         $broker->registerPlugin($plugin1, 2);
         $broker->registerPlugin($plugin2, 3);
         $broker->registerPlugin($plugin3);
 
-        $plugins = $broker->getPlugins();
+        $plugins  = $broker->getPlugins();
         $expected = array(2 => $plugin1, 3 => $plugin2, 4 => $plugin3);
         $this->assertSame($expected, $plugins);
     }
@@ -228,7 +228,7 @@ class Zend_Controller_Plugin_BrokerTest extends PHPUnit\Framework\TestCase
         $broker->setRequest($request);
         $broker->setResponse($response);
 
-        $plugin   = new Zend_Controller_Plugin_BrokerTest_TestPlugin();
+        $plugin = new Zend_Controller_Plugin_BrokerTest_TestPlugin();
         $broker->registerPlugin($plugin);
 
         $this->assertSame($request, $plugin->getRequest());
