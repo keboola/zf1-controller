@@ -260,9 +260,9 @@ abstract class Zend_Controller_Action implements Zend_Controller_Action_Interfac
         }
 
         if (null === $this->_delimiters) {
-            $dispatcher = Zend_Controller_Front::getInstance()->getDispatcher();
-            $wordDelimiters = $dispatcher->getWordDelimiter();
-            $pathDelimiters = $dispatcher->getPathDelimiter();
+            $dispatcher        = Zend_Controller_Front::getInstance()->getDispatcher();
+            $wordDelimiters    = $dispatcher->getWordDelimiter();
+            $pathDelimiters    = $dispatcher->getPathDelimiter();
             $this->_delimiters = array_unique(array_merge($wordDelimiters, (array) $pathDelimiters));
         }
 
@@ -272,7 +272,7 @@ abstract class Zend_Controller_Action implements Zend_Controller_Action_Interfac
         if (!$noController) {
             $controller = $request->getControllerName();
             $controller = str_replace($this->_delimiters, '-', $controller);
-            $script = $controller . DIRECTORY_SEPARATOR . $script;
+            $script     = $controller . DIRECTORY_SEPARATOR . $script;
         }
 
         return $script;
@@ -579,7 +579,7 @@ abstract class Zend_Controller_Action implements Zend_Controller_Action_Interfac
     public function getParam($paramName, $default = null)
     {
         $value = $this->getRequest()->getParam($paramName);
-         if ((null === $value || '' === $value) && (null !== $default)) {
+        if ((null === $value || '' === $value) && (null !== $default)) {
             $value = $default;
         }
 

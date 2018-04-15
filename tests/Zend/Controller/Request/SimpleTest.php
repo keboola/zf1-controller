@@ -61,5 +61,4 @@ class Zend_Controller_Request_SimpleTest extends PHPUnit\Framework\TestCase
         ));
         $this->assertNull($request->getParam('key'));
     }
-
 }

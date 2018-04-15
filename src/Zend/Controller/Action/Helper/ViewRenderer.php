@@ -103,20 +103,20 @@ class Zend_Controller_Action_Helper_ViewRenderer extends Zend_Controller_Action_
      * next invocation)
      * @var boolean
      */
-    protected $_neverRender     = false;
+    protected $_neverRender = false;
 
     /**
      * Whether or not to use a controller name as a subdirectory when rendering
      * @var boolean
      */
-    protected $_noController    = false;
+    protected $_noController = false;
 
     /**
      * Whether or not to autorender postDispatch; per controller/action setting (reset
      * at next invocation)
      * @var boolean
      */
-    protected $_noRender        = false;
+    protected $_noRender = false;
 
     /**
      * Characters representing path delimiters in the controller
@@ -134,7 +134,7 @@ class Zend_Controller_Action_Helper_ViewRenderer extends Zend_Controller_Action_
      * Which action view script to render
      * @var string|null
      */
-    protected $_scriptAction    = null;
+    protected $_scriptAction = null;
 
     /**
      * View object basePath
@@ -158,7 +158,7 @@ class Zend_Controller_Action_Helper_ViewRenderer extends Zend_Controller_Action_
      * View script suffix
      * @var string
      */
-    protected $_viewSuffix      = 'phtml';
+    protected $_viewSuffix = 'phtml';
 
     /**
      * Constructor
@@ -189,7 +189,6 @@ class Zend_Controller_Action_Helper_ViewRenderer extends Zend_Controller_Action_
     {
         if (isset($this->view) && $this->view instanceof Zend_View_Interface) {
             $this->view = clone $this->view;
-
         }
     }
 
@@ -356,7 +355,7 @@ class Zend_Controller_Action_Helper_ViewRenderer extends Zend_Controller_Action_
         $this->_setInflectorTarget($this->getViewBasePathSpec());
 
         $dispatcher = $this->getFrontController()->getDispatcher();
-        $request = $this->getRequest();
+        $request    = $this->getRequest();
 
         $parts = array(
             'module'     => (($moduleName = $request->getModuleName()) != '') ? $dispatcher->formatModuleName($moduleName) : $moduleName,
@@ -376,14 +375,13 @@ class Zend_Controller_Action_Helper_ViewRenderer extends Zend_Controller_Action_
      */
     protected function _setOptions(array $options)
     {
-        foreach ($options as $key => $value)
-        {
+        foreach ($options as $key => $value) {
             switch ($key) {
                 case 'neverRender':
                 case 'neverController':
                 case 'noController':
                 case 'noRender':
-                    $property = '_' . $key;
+                    $property          = '_' . $key;
                     $this->{$property} = ($value) ? true : false;
                     break;
                 case 'responseSegment':
@@ -392,7 +390,7 @@ class Zend_Controller_Action_Helper_ViewRenderer extends Zend_Controller_Action_
                 case 'viewScriptPathSpec':
                 case 'viewScriptPathNoControllerSpec':
                 case 'viewSuffix':
-                    $property = '_' . $key;
+                    $property          = '_' . $key;
                     $this->{$property} = (string) $value;
                     break;
                 default:
@@ -826,7 +824,7 @@ class Zend_Controller_Action_Helper_ViewRenderer extends Zend_Controller_Action_
         // Format action name
         $action = $dispatcher->formatActionName($request->getActionName());
 
-        $params     = compact('module', 'controller', 'action');
+        $params = compact('module', 'controller', 'action');
         foreach ($vars as $key => $value) {
             switch ($key) {
                 case 'module':

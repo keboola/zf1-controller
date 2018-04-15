@@ -43,9 +43,9 @@ class Zend_Controller_Request_HttpTestCaseTest extends PHPUnit\Framework\TestCas
     public function setUp()
     {
         $this->request = new Zend_Controller_Request_HttpTestCase();
-        $_GET    = array();
-        $_POST   = array();
-        $_COOKIE = array();
+        $_GET          = array();
+        $_POST         = array();
+        $_COOKIE       = array();
     }
 
     /**

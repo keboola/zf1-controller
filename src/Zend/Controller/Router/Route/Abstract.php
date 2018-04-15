@@ -106,7 +106,6 @@ abstract class Zend_Controller_Router_Route_Abstract implements Zend_Controller_
      */
     public function chain(Zend_Controller_Router_Route_Abstract $route, $separator = '/')
     {
-
         $chain = new Zend_Controller_Router_Route_Chain();
         $chain->chain($this)->chain($route, $separator);
 

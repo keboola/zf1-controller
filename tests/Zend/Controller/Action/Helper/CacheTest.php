@@ -6,7 +6,6 @@
  */
 class Zend_Controller_Action_Helper_CacheTest extends PHPUnit\Framework\TestCase
 {
-
     protected $_requestUriOld;
 
     public function setUp()
@@ -14,7 +13,7 @@ class Zend_Controller_Action_Helper_CacheTest extends PHPUnit\Framework\TestCase
         $this->_requestUriOld =
             isset($_SERVER['REQUEST_URI']) ? $_SERVER['REQUEST_URI'] : null;
         $_SERVER['REQUEST_URI'] = '/foo';
-        $this->front = Zend_Controller_Front::getInstance();
+        $this->front            = Zend_Controller_Front::getInstance();
         $this->front->resetInstance();
         $this->request = new Zend_Controller_Request_Http();
         $this->request->setModuleName('foo')
@@ -75,15 +74,15 @@ class Zend_Controller_Action_Helper_CacheTest extends PHPUnit\Framework\TestCase
     public function testRemovePageCallsPageCacheRemoveMethodCorrectly()
     {
         $helper = new Zend_Controller_Action_Helper_Cache;
-        $cache = new Mock_Zend_Cache_Page_1;
+        $cache  = new Mock_Zend_Cache_Page_1;
         $helper->setCache('page', $cache);
         $this->assertEquals('verified', $helper->removePage('/foo'));
     }
 
     public function testRemovePageCallsPageCacheRemoveRecursiveMethodCorrectly()
     {
-        $helper = new Zend_Controller_Action_Helper_Cache;
-        $cache = new Mock_Zend_Cache_Page_1;
+        $helper  = new Zend_Controller_Action_Helper_Cache;
+        $cache   = new Mock_Zend_Cache_Page_1;
         $backend = new Mock_Zend_Cache_Page_2;
         $cache->setBackend($backend);
         $helper->setCache('page', $cache);
@@ -93,7 +92,7 @@ class Zend_Controller_Action_Helper_CacheTest extends PHPUnit\Framework\TestCase
     public function testRemovePagesTaggedCallsPageCacheCleanMethodCorrectly()
     {
         $helper = new Zend_Controller_Action_Helper_Cache;
-        $cache = new Mock_Zend_Cache_Page_3;
+        $cache  = new Mock_Zend_Cache_Page_3;
         $helper->setCache('page', $cache);
         $this->assertEquals('verified', $helper->removePagesTagged(array('tag1')));
     }
@@ -101,7 +100,7 @@ class Zend_Controller_Action_Helper_CacheTest extends PHPUnit\Framework\TestCase
     public function testPreDispatchCallsCachesStartMethod()
     {
         $helper = new Zend_Controller_Action_Helper_Cache;
-        $cache = new Mock_Zend_Cache_Page_4;
+        $cache  = new Mock_Zend_Cache_Page_4;
         $helper->setCache('page', $cache);
         $helper->direct(array('baz'));
         $helper->preDispatch();
@@ -111,7 +110,7 @@ class Zend_Controller_Action_Helper_CacheTest extends PHPUnit\Framework\TestCase
     public function testPreDispatchCallsCachesStartMethodWithTags()
     {
         $helper = new Zend_Controller_Action_Helper_Cache;
-        $cache = new Mock_Zend_Cache_Page_6;
+        $cache  = new Mock_Zend_Cache_Page_6;
         $helper->setCache('page', $cache);
         $helper->direct(array('baz'), array('tag1','tag2'));
         $helper->preDispatch();
@@ -121,7 +120,7 @@ class Zend_Controller_Action_Helper_CacheTest extends PHPUnit\Framework\TestCase
     public function testPreDispatchDoesNotCallCachesStartMethodWithBadAction()
     {
         $helper = new Zend_Controller_Action_Helper_Cache;
-        $cache = new Mock_Zend_Cache_Page_4;
+        $cache  = new Mock_Zend_Cache_Page_4;
         $helper->setCache('page', $cache);
         $helper->preDispatch();
         $this->assertNotEquals('verified', $cache->res);
@@ -134,7 +133,7 @@ class Zend_Controller_Action_Helper_CacheTest extends PHPUnit\Framework\TestCase
     public function testEncodedCacheIdsAreUsedConsistently($recursive)
     {
         $helper = new Zend_Controller_Action_Helper_Cache();
-        $cache = new Mock_Zend_Cache_Page_TestingEncodedCacheId();
+        $cache  = new Mock_Zend_Cache_Page_TestingEncodedCacheId();
         $helper->setCache('page', $cache);
         $helper->direct(array('baz'));
         $helper->preDispatch();
@@ -155,7 +154,7 @@ class Zend_Controller_Action_Helper_CacheTest extends PHPUnit\Framework\TestCase
     public function testRemovePageAcceptsPreEncodedCacheIds($recursive)
     {
         $helper = new Zend_Controller_Action_Helper_Cache();
-        $cache = new Mock_Zend_Cache_Page_TestingEncodedCacheId();
+        $cache  = new Mock_Zend_Cache_Page_TestingEncodedCacheId();
         $helper->setCache('page', $cache);
         $helper->direct(array('baz'));
         $helper->preDispatch();
@@ -197,29 +196,33 @@ class Zend_Controller_Action_Helper_CacheTest extends PHPUnit\Framework\TestCase
         $helper->postDispatch();
         $this->assertNotEquals('verified', $cache->res);
     }**/
-
 }
 
 class Mock_Zend_Cache_Page_1 extends Zend_Cache_Core
 {
     public function remove($id)
     {
-        if ($id == bin2hex('/foo')) {return 'verified';}
+        if ($id == bin2hex('/foo')) {
+            return 'verified';
+        }
     }
 }
 class Mock_Zend_Cache_Page_2 extends Zend_Cache_Backend
 {
     public function removeRecursively($id)
     {
-        if ($id == bin2hex('/foo')) {return 'verified';}
+        if ($id == bin2hex('/foo')) {
+            return 'verified';
+        }
     }
 }
 class Mock_Zend_Cache_Page_3 extends Zend_Cache_Core
 {
     public function clean($mode = 'all', $tags = array())
     {
-        if ($mode == 'matchingAnyTag' && $tags == array('tag1'))
-        {return 'verified';}
+        if ($mode == 'matchingAnyTag' && $tags == array('tag1')) {
+            return 'verified';
+        }
     }
 }
 class Mock_Zend_Cache_Page_4 extends Zend_Cache_Core

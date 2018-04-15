@@ -199,10 +199,9 @@ class Zend_Controller_Dispatcher_Standard extends Zend_Controller_Dispatcher_Abs
             return false;
         }
 
-        $finalClass  = $className;
+        $finalClass = $className;
         if (($this->_defaultModule != $this->_curModule)
-            || $this->getParam('prefixDefaultModule'))
-        {
+            || $this->getParam('prefixDefaultModule')) {
             $finalClass = $this->formatClassName($this->_curModule, $className);
         }
         if (class_exists($finalClass, false)) {
@@ -256,8 +255,7 @@ class Zend_Controller_Dispatcher_Standard extends Zend_Controller_Dispatcher_Abs
          */
         $moduleClassName = $className;
         if (($this->_defaultModule != $this->_curModule)
-            || $this->getParam('prefixDefaultModule'))
-        {
+            || $this->getParam('prefixDefaultModule')) {
             $moduleClassName = $this->formatClassName($this->_curModule, $className);
         }
 
@@ -331,10 +329,9 @@ class Zend_Controller_Dispatcher_Standard extends Zend_Controller_Dispatcher_Abs
      */
     public function loadClass($className)
     {
-        $finalClass  = $className;
+        $finalClass = $className;
         if (($this->_defaultModule != $this->_curModule)
-            || $this->getParam('prefixDefaultModule'))
-        {
+            || $this->getParam('prefixDefaultModule')) {
             $finalClass = $this->formatClassName($this->_curModule, $className);
         }
         if (class_exists($finalClass, false)) {
@@ -379,8 +376,8 @@ class Zend_Controller_Dispatcher_Standard extends Zend_Controller_Dispatcher_Abs
 
         $className = $this->formatControllerName($controllerName);
 
-        $controllerDirs      = $this->getControllerDirectory();
-        $module = $request->getModuleName();
+        $controllerDirs = $this->getControllerDirectory();
+        $module         = $request->getModuleName();
         if ($this->isValidModule($module)) {
             $this->_curModule    = $module;
             $this->_curDirectory = $controllerDirs[$module];
@@ -450,13 +447,13 @@ class Zend_Controller_Dispatcher_Standard extends Zend_Controller_Dispatcher_Abs
                 $moduleDir = $controllerDirs[$module];
                 $fileSpec  = $moduleDir . DIRECTORY_SEPARATOR . $this->classToFilename($default);
                 if (Zend_Loader::isReadable($fileSpec)) {
-                    $found = true;
+                    $found               = true;
                     $this->_curDirectory = $moduleDir;
                 }
             }
             if ($found) {
                 $request->setModuleName($module);
-                $this->_curModule    = $this->formatModuleName($module);
+                $this->_curModule = $this->formatModuleName($module);
             }
         } else {
             $request->setModuleName($this->_defaultModule);

@@ -75,11 +75,11 @@ class Zend_Controller_Action_Helper_FlashMessengerTest extends PHPUnit\Framework
         }
         Zend_Session::start();
 
-        $this->front      = Zend_Controller_Front::getInstance();
+        $this->front = Zend_Controller_Front::getInstance();
         $this->front->resetInstance();
         $this->front->setControllerDirectory(dirname(dirname(dirname(__FILE__))) . DIRECTORY_SEPARATOR . '_files');
         $this->front->returnResponse(true);
-        $this->request    = new Zend_Controller_Request_Http();
+        $this->request = new Zend_Controller_Request_Http();
         $this->request->setControllerName('helper-flash-messenger');
         $this->response   = new Zend_Controller_Response_Cli();
         $this->controller = new HelperFlashMessengerController($this->request, $this->response, array());
@@ -201,12 +201,15 @@ class Zend_Controller_Action_Helper_FlashMessengerTest extends PHPUnit\Framework
  */
 class FlashMessengerControllerActionHelper extends Zend_Controller_Action_Helper_FlashMessenger
 {
-    public function getName() { return 'FlashMessenger'; }
+    public function getName()
+    {
+        return 'FlashMessenger';
+    }
 
     public function reset()
     {
-        self::$_messages = array();
-        self::$_session = NULL;
+        self::$_messages     = array();
+        self::$_session      = null;
         self::$_messageAdded = false;
     }
 }

@@ -34,16 +34,18 @@ class Zend_Controller_Router_RewriteTest extends PHPUnit\Framework\TestCase
 {
     protected $_router;
 
-    public function setUp() {
+    public function setUp()
+    {
         $this->_router = new Zend_Controller_Router_Rewrite();
-        $front = Zend_Controller_Front::getInstance();
+        $front         = Zend_Controller_Front::getInstance();
         $front->resetInstance();
         $front->setDispatcher(new Zend_Controller_Router_RewriteTest_Dispatcher());
         $front->setRequest(new Zend_Controller_Router_RewriteTest_Request());
         $this->_router->setFrontController($front);
     }
 
-    public function tearDown() {
+    public function tearDown()
+    {
         unset($this->_router);
     }
 
@@ -65,7 +67,7 @@ class Zend_Controller_Router_RewriteTest extends PHPUnit\Framework\TestCase
     public function testAddRoutes()
     {
         $routes = array(
-            'archive' => new Zend_Controller_Router_Route('archive/:year', array('year' => '2006', 'controller' => 'archive', 'action' => 'show'), array('year' => '\d+')),
+            'archive'  => new Zend_Controller_Router_Route('archive/:year', array('year' => '2006', 'controller' => 'archive', 'action' => 'show'), array('year' => '\d+')),
             'register' => new Zend_Controller_Router_Route('register/:action', array('controller' => 'profile', 'action' => 'register'))
         );
         $this->_router->addRoutes($routes);
@@ -281,7 +283,7 @@ class Zend_Controller_Router_RewriteTest extends PHPUnit\Framework\TestCase
 
         try {
             $route = $this->_router->getCurrentRoute();
-            $name = $this->_router->getCurrentRouteName();
+            $name  = $this->_router->getCurrentRouteName();
         } catch (Exception $e) {
             $this->fail('Current route is not set');
         }
@@ -292,36 +294,32 @@ class Zend_Controller_Router_RewriteTest extends PHPUnit\Framework\TestCase
 
     public function testAddConfig()
     {
-        $file = dirname(__FILE__) . DIRECTORY_SEPARATOR . '..' . DIRECTORY_SEPARATOR . '_files' . DIRECTORY_SEPARATOR . 'routes.ini';
+        $file   = dirname(__FILE__) . DIRECTORY_SEPARATOR . '..' . DIRECTORY_SEPARATOR . '_files' . DIRECTORY_SEPARATOR . 'routes.ini';
         $config = new Zend_Config_Ini($file, 'testing');
 
         $this->_router->addConfig($config, 'routes');
 
-        $this->assertTrue($this->_router->getRoute('news') instanceof Zend_Controller_Router_Route_Static);
-        $this->assertTrue($this->_router->getRoute('archive') instanceof Zend_Controller_Router_Route);
+        $this->assertInstanceOf(Zend_Controller_Router_Route_Static::class, $this->_router->getRoute('news'));
+        $this->assertInstanceOf(Zend_Controller_Router_Route::class, $this->_router->getRoute('archive'));
 
-        try {
-            $this->_router->addConfig($config, 'database');
-        } catch (Exception $e) {
-            $this->assertTrue($e instanceof Zend_Controller_Router_Exception);
-            return true;
-        }
+        $this->expectException(Zend_Controller_Router_Exception::class);
+        $this->_router->addConfig($config, 'database');
     }
 
     public function testAddConfigWithoutSection()
     {
-        $file = dirname(__FILE__) . DIRECTORY_SEPARATOR . '..' . DIRECTORY_SEPARATOR . '_files' . DIRECTORY_SEPARATOR . 'routes.ini';
+        $file   = dirname(__FILE__) . DIRECTORY_SEPARATOR . '..' . DIRECTORY_SEPARATOR . '_files' . DIRECTORY_SEPARATOR . 'routes.ini';
         $config = new Zend_Config_Ini($file, 'testing');
 
         $this->_router->addConfig($config->routes);
 
-        $this->assertTrue($this->_router->getRoute('news') instanceof Zend_Controller_Router_Route_Static);
-        $this->assertTrue($this->_router->getRoute('archive') instanceof Zend_Controller_Router_Route);
+        $this->assertInstanceOf(Zend_Controller_Router_Route_Static::class, $this->_router->getRoute('news'));
+        $this->assertInstanceOf(Zend_Controller_Router_Route::class, $this->_router->getRoute('archive'));
     }
 
     public function testAddConfigWithRootNode()
     {
-        $file = dirname(__FILE__) . DIRECTORY_SEPARATOR . '..' . DIRECTORY_SEPARATOR . '_files' . DIRECTORY_SEPARATOR . 'routes-root.ini';
+        $file   = dirname(__FILE__) . DIRECTORY_SEPARATOR . '..' . DIRECTORY_SEPARATOR . '_files' . DIRECTORY_SEPARATOR . 'routes-root.ini';
         $config = new Zend_Config_Ini($file, 'routes');
 
         $this->_router->addConfig($config);
@@ -353,11 +351,11 @@ class Zend_Controller_Router_RewriteTest extends PHPUnit\Framework\TestCase
             'mod'     => dirname(__FILE__) . DIRECTORY_SEPARATOR . '..' . DIRECTORY_SEPARATOR . '_files' . DIRECTORY_SEPARATOR . 'Admin',
         ));
         $request = new Zend_Controller_Router_RewriteTest_Request('http://localhost/mod/ctrl/act');
-        $token = $this->_router->route($request);
+        $token   = $this->_router->route($request);
 
-        $this->assertEquals('mod',  $token->getModuleName());
+        $this->assertEquals('mod', $token->getModuleName());
         $this->assertEquals('ctrl', $token->getControllerName());
-        $this->assertEquals('act',  $token->getActionName());
+        $this->assertEquals('act', $token->getActionName());
     }
 
     public function testRouteCompatDefaults()
@@ -405,7 +403,7 @@ class Zend_Controller_Router_RewriteTest extends PHPUnit\Framework\TestCase
         $this->_router->addRoute('bar', new Zend_Controller_Router_Route(':lang/bar', array('lang' => 'nl', 'controller' => 'index', 'action' => 'index')));
 
         $request = new Zend_Controller_Router_RewriteTest_Request('http://localhost/nl/bar');
-        $token = $this->_router->route($request);
+        $token   = $this->_router->route($request);
 
         $this->assertEquals('nl/foo', $this->_router->getRoute('foo')->assemble());
         $this->assertEquals('nl/bar', $this->_router->getRoute('bar')->assemble());
@@ -417,7 +415,7 @@ class Zend_Controller_Router_RewriteTest extends PHPUnit\Framework\TestCase
         $this->_router->addRoute('bar', new Zend_Controller_Router_Route(':lang/bar', array('lang' => 'nl', 'controller' => 'index', 'action' => 'index')));
 
         $request = new Zend_Controller_Router_RewriteTest_Request('http://localhost/en/foo');
-        $token = $this->_router->route($request);
+        $token   = $this->_router->route($request);
 
         $this->assertEquals('en/foo', $this->_router->getRoute('foo')->assemble());
         $this->assertEquals('nl/bar', $this->_router->getRoute('bar')->assemble());
@@ -429,7 +427,7 @@ class Zend_Controller_Router_RewriteTest extends PHPUnit\Framework\TestCase
         $this->_router->addRoute('bar', new Zend_Controller_Router_Route(':lang/bar', array('lang' => 'nl', 'controller' => 'index', 'action' => 'index')));
 
         $request = new Zend_Controller_Router_RewriteTest_Request('http://localhost/en/bar');
-        $token = $this->_router->route($request);
+        $token   = $this->_router->route($request);
 
         $this->assertEquals('nl/foo', $this->_router->getRoute('foo')->assemble());
         $this->assertEquals('en/bar', $this->_router->getRoute('bar')->assemble());
@@ -438,7 +436,7 @@ class Zend_Controller_Router_RewriteTest extends PHPUnit\Framework\TestCase
     public function testRouteRequestInterface()
     {
         $request = new Zend_Controller_Router_RewriteTest_Request('http://localhost/en/foo');
-        $front = $this->_router->getFrontController()->setRequest($request);
+        $front   = $this->_router->getFrontController()->setRequest($request);
 
         $this->_router->addRoute('req', new Zend_Controller_Router_Route_Interface_Mockup());
         $routeRequest = $this->_router->getRoute('req')->getRequest();
@@ -496,7 +494,7 @@ class Zend_Controller_Router_RewriteTest extends PHPUnit\Framework\TestCase
         $chainNoMatch = new Zend_Controller_Router_Route_Chain();
         $chainNoMatch->chain($foo)->chain($bla);
 
-        $this->_router->addRoute('match',    $chainMatch);
+        $this->_router->addRoute('match', $chainMatch);
         $this->_router->addRoute('no-match', $chainNoMatch);
 
         $token = $this->_router->route($request);
@@ -518,7 +516,7 @@ class Zend_Controller_Router_RewriteTest extends PHPUnit\Framework\TestCase
 
     public function testAssemblingWithHostnameHttps()
     {
-        $backupServer = $_SERVER;
+        $backupServer     = $_SERVER;
         $_SERVER['HTTPS'] = 'on';
 
         $route = new Zend_Controller_Router_Route_Hostname('www.zend.com');
@@ -631,11 +629,12 @@ class Zend_Controller_Router_RewriteTest extends PHPUnit\Framework\TestCase
         $this->assertEquals('/en/articles/1', $url);
     }
 
-    public function testChainNameSeparatorIsSetCorrectly() {
+    public function testChainNameSeparatorIsSetCorrectly()
+    {
         $separators = array('_','unitTestSeparator','-');
-        $results = array();
+        $results    = array();
 
-        foreach($separators as $separator) {
+        foreach ($separators as $separator) {
             $this->_router->setChainNameSeparator($separator);
             $results[] = $this->_router->getChainNameSeparator();
         }
@@ -643,21 +642,22 @@ class Zend_Controller_Router_RewriteTest extends PHPUnit\Framework\TestCase
         $this->assertEquals($separators, $results);
     }
 
-    public function testChainNameSeparatorisUsedCorrectly() {
+    public function testChainNameSeparatorisUsedCorrectly()
+    {
         $config = new Zend_Config(array('chains' => array(
-            'type'=>'Zend_Controller_Router_Route_Static',
-            'route'=>'foo',
-            'chains'=> array('bar'=>
-                array('type'=>'Zend_Controller_Router_Route_Static',
-                    'route'=>'bar',
-                    'defaults'=>array(
-                    'module'=>'module',
-                    'controller'=>'controller',
-                    'action'=>'action'))))));
+            'type'   => 'Zend_Controller_Router_Route_Static',
+            'route'  => 'foo',
+            'chains' => array('bar' =>
+                array('type'   => 'Zend_Controller_Router_Route_Static',
+                    'route'    => 'bar',
+                    'defaults' => array(
+                    'module'     => 'module',
+                    'controller' => 'controller',
+                    'action'     => 'action'))))));
         $this->_router->setChainNameSeparator('_separator_')
                       ->addConfig($config);
-        $url = $this->_router->assemble(array(),'chains_separator_bar');
-        $this->assertEquals('/foo/bar',$url);
+        $url = $this->_router->assemble(array(), 'chains_separator_bar');
+        $this->assertEquals('/foo/bar', $url);
     }
 
     public function testRequestParamsUsedAsGlobalParam()
@@ -700,7 +700,7 @@ class Zend_Controller_Router_RewriteTest extends PHPUnit\Framework\TestCase
             )
        );
 
-       $params = array(
+        $params = array(
             'controller' => 'index',
             'action'     => 'index',
             '2'          => 'foo',
@@ -741,16 +741,19 @@ class Zend_Controller_Router_RewriteTest_Request extends Zend_Controller_Request
             $uri = 'http://localhost/foo/bar/baz/2';
         }
 
-        $uri = Zend_Uri_Http::fromString($uri);
+        $uri         = Zend_Uri_Http::fromString($uri);
         $this->_host = $uri->getHost();
         $this->_port = $uri->getPort();
 
         parent::__construct($uri);
     }
 
-    public function getHttpHost() {
+    public function getHttpHost()
+    {
         $return = $this->_host;
-        if ($this->_port)  $return .= ':' . $this->_port;
+        if ($this->_port) {
+            $return .= ':' . $this->_port;
+        }
         return $return;
     }
 }
@@ -787,12 +790,17 @@ class Zend_Controller_Router_RewriteTest_Request_Incorrect extends Zend_Controll
  */
 class Zend_Controller_RouterTest_RouteV2_Stub extends Zend_Controller_Router_Route_Abstract
 {
-    public function match($request) {
+    public function match($request)
+    {
         return array('path', $request->getParam('path'));
     }
 
-    public static function getInstance(Zend_Config $config) {}
-    public function assemble($data = array(), $reset = false, $encode = false) {}
+    public static function getInstance(Zend_Config $config)
+    {
+    }
+    public function assemble($data = array(), $reset = false, $encode = false)
+    {
+    }
 }
 
 class Zend_Controller_Router_Route_Mockup implements Zend_Controller_Router_Route_Interface
@@ -800,27 +808,39 @@ class Zend_Controller_Router_Route_Mockup implements Zend_Controller_Router_Rout
     public function match($path, $partial = null)
     {
         return array(
-            "controller" => "index",
-            "action" => "index",
-            0 => "first_parameter_value"
+            'controller' => 'index',
+            'action'     => 'index',
+            0            => 'first_parameter_value'
         );
     }
-    public static function getInstance(Zend_Config $config) {}
-    public function assemble($data = array(), $reset = false, $encode = false) {}
+    public static function getInstance(Zend_Config $config)
+    {
+    }
+    public function assemble($data = array(), $reset = false, $encode = false)
+    {
+    }
 }
 
 class Zend_Controller_Router_Route_Interface_Mockup implements Zend_Controller_Router_Route_Interface
 {
     protected $_request;
 
-    public function match($path, $partial = null) {}
-    public static function getInstance(Zend_Config $config) {}
-    public function assemble($data = array(), $reset = false, $encode = false) {}
+    public function match($path, $partial = null)
+    {
+    }
+    public static function getInstance(Zend_Config $config)
+    {
+    }
+    public function assemble($data = array(), $reset = false, $encode = false)
+    {
+    }
 
-    public function setRequest($request) {
+    public function setRequest($request)
+    {
         $this->_request = $request;
     }
-    public function getRequest() {
+    public function getRequest()
+    {
         return $this->_request;
     }
 }

@@ -276,9 +276,9 @@ class Zend_Controller_Front
      */
     public function addModuleDirectory($path)
     {
-        try{
+        try {
             $dir = new DirectoryIterator($path);
-        } catch(Exception $e) {
+        } catch (Exception $e) {
             throw new Zend_Controller_Exception("Directory $path not readable", 0, $e);
         }
         foreach ($dir as $file) {
@@ -286,7 +286,7 @@ class Zend_Controller_Front
                 continue;
             }
 
-            $module    = $file->getFilename();
+            $module = $file->getFilename();
 
             // Don't use SCCS directories as modules
             if (preg_match('/^[^a-z]/i', $module) || ('CVS' == $module)) {
@@ -633,7 +633,7 @@ class Zend_Controller_Front
      */
     public function setParam($name, $value)
     {
-        $name = (string) $name;
+        $name                       = (string) $name;
         $this->_invokeParams[$name] = $value;
         return $this;
     }
@@ -658,7 +658,7 @@ class Zend_Controller_Front
      */
     public function getParam($name)
     {
-        if(isset($this->_invokeParams[$name])) {
+        if (isset($this->_invokeParams[$name])) {
             return $this->_invokeParams[$name];
         }
 
@@ -886,7 +886,7 @@ class Zend_Controller_Front
 
             try {
                 $router->route($this->_request);
-            }  catch (Exception $e) {
+            } catch (Exception $e) {
                 if ($this->throwExceptions()) {
                     throw $e;
                 }

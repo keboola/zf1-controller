@@ -50,4 +50,3 @@ class Admin_IncludedAdminController extends Zend_Controller_Action
     {
     }
 }
-

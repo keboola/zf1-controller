@@ -168,7 +168,7 @@ class Zend_Controller_Router_Rewrite extends Zend_Controller_Router_Abstract
 
             if ($route instanceof Zend_Controller_Router_Route_Chain) {
                 if (!isset($info->chain)) {
-                    throw new Zend_Controller_Router_Exception("No chain defined");
+                    throw new Zend_Controller_Router_Exception('No chain defined');
                 }
 
                 if ($info->chain instanceof Zend_Config) {
@@ -210,7 +210,8 @@ class Zend_Controller_Router_Rewrite extends Zend_Controller_Router_Abstract
             array(
                 $class,
                 'getInstance'
-            ), $info
+            ),
+            $info
         );
 
         if (isset($info->abstract) && $info->abstract && method_exists($route, 'isAbstract')) {
@@ -232,8 +233,7 @@ class Zend_Controller_Router_Rewrite extends Zend_Controller_Router_Abstract
         $name,
         Zend_Controller_Router_Route_Interface $route,
         Zend_Config $childRoutesInfo
-    )
-    {
+    ) {
         foreach ($childRoutesInfo as $childRouteName => $childRouteInfo) {
             if (is_string($childRouteInfo)) {
                 $childRouteName = $childRouteInfo;
@@ -325,7 +325,7 @@ class Zend_Controller_Router_Rewrite extends Zend_Controller_Router_Abstract
     public function getCurrentRoute()
     {
         if (!isset($this->_currentRoute)) {
-            throw new Zend_Controller_Router_Exception("Current route is not defined");
+            throw new Zend_Controller_Router_Exception('Current route is not defined');
         }
 
         return $this->getRoute($this->_currentRoute);
@@ -340,7 +340,7 @@ class Zend_Controller_Router_Rewrite extends Zend_Controller_Router_Abstract
     public function getCurrentRouteName()
     {
         if (!isset($this->_currentRoute)) {
-            throw new Zend_Controller_Router_Exception("Current route is not defined");
+            throw new Zend_Controller_Router_Exception('Current route is not defined');
         }
 
         return $this->_currentRoute;
@@ -425,7 +425,6 @@ class Zend_Controller_Router_Rewrite extends Zend_Controller_Router_Abstract
     protected function _setRequestParams($request, $params)
     {
         foreach ($params as $param => $value) {
-
             $request->setParam($param, $value);
 
             if ($param === $request->getModuleKey()) {

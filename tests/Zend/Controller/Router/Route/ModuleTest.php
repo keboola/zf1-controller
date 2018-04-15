@@ -32,7 +32,6 @@
  */
 class Zend_Controller_Router_Route_ModuleTest extends PHPUnit\Framework\TestCase
 {
-
     protected $_request;
     protected $_dispatcher;
     protected $route;
@@ -209,9 +208,9 @@ class Zend_Controller_Router_Route_ModuleTest extends PHPUnit\Framework\TestCase
     public function testAssembleNoController()
     {
         $params = array(
-            'foo'        => 'bar',
-            'action'     => 'act',
-            'module'     => 'mod'
+            'foo'    => 'bar',
+            'action' => 'act',
+            'module' => 'mod'
         );
         $url = $this->route->assemble($params);
         $this->assertEquals('mod/defctrl/act/foo/bar', $url);
@@ -230,7 +229,7 @@ class Zend_Controller_Router_Route_ModuleTest extends PHPUnit\Framework\TestCase
     public function testAssembleNoActionWithParams()
     {
         $params = array(
-            'foo'         => 'bar',
+            'foo'        => 'bar',
             'module'     => 'mod',
             'controller' => 'ctrl'
         );
@@ -269,9 +268,9 @@ class Zend_Controller_Router_Route_ModuleTest extends PHPUnit\Framework\TestCase
         $this->route->match('mod/ctrl');
 
         $params = array(
-            'foo'        => 'bar',
-            'action'     => 'act',
-            'module'     => 'm'
+            'foo'    => 'bar',
+            'action' => 'act',
+            'module' => 'm'
         );
         $url = $this->route->assemble($params);
         $this->assertEquals('m/ctrl/act/foo/bar', $url);
@@ -282,9 +281,9 @@ class Zend_Controller_Router_Route_ModuleTest extends PHPUnit\Framework\TestCase
         $this->route->match('mod');
 
         $params = array(
-            'foo'        => 'bar',
-            'action'     => 'act',
-            'module'     => 'mod'
+            'foo'    => 'bar',
+            'action' => 'act',
+            'module' => 'mod'
         );
         $url = $this->route->assemble($params);
         $this->assertEquals('mod/defctrl/act/foo/bar', $url);
@@ -377,11 +376,11 @@ class Zend_Controller_Router_Route_ModuleTest extends PHPUnit\Framework\TestCase
     public function testAssembleDefaultModuleZF1415_2()
     {
         $values = $this->route->match('default/defctrl/defact');
-        $url = $this->route->assemble();
+        $url    = $this->route->assemble();
         $this->assertSame('', $url);
 
         $values = $this->route->match('mod/defctrl/defact');
-        $url = $this->route->assemble();
+        $url    = $this->route->assemble();
         $this->assertSame('mod', $url);
     }
 
@@ -394,7 +393,7 @@ class Zend_Controller_Router_Route_ModuleTest extends PHPUnit\Framework\TestCase
         );
 
         $config = new Zend_Config($routeConf);
-        $route = Zend_Controller_Router_Route_Module::getInstance($config);
+        $route  = Zend_Controller_Router_Route_Module::getInstance($config);
 
         $this->assertTrue($route instanceof Zend_Controller_Router_Route_Module);
     }
@@ -414,7 +413,6 @@ class Zend_Controller_Router_Route_ModuleTest extends PHPUnit\Framework\TestCase
 
         $url = $this->route->assemble(array('id' => 'My Other Value'), false, true);
         $this->assertEquals('en/foo/id/My+Other+Value', $url);
-
     }
 
     public function testArrayValues()
@@ -449,10 +447,10 @@ class Zend_Controller_Router_Route_ModuleTest extends PHPUnit\Framework\TestCase
     public function testAssembleShouldUrlEncodeAllParameterNames()
     {
         $params = array(
-            'controller' => 'foo',
-            'action' => 'bar',
+            'controller'              => 'foo',
+            'action'                  => 'bar',
             '"><script>alert(11639)<' => 'script>',
-            'module' => 'default',
+            'module'                  => 'default',
         );
         $url = $this->route->assemble($params);
         $this->assertNotContains('"><script>alert(11639)<', $url);

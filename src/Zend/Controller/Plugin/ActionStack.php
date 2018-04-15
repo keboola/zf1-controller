@@ -169,7 +169,7 @@ class Zend_Controller_Plugin_ActionStack extends Zend_Controller_Plugin_Abstract
      */
     protected function _saveStack(array $stack)
     {
-        $registry = $this->getRegistry();
+        $registry                          = $this->getRegistry();
         $registry[$this->getRegistryKey()] = $stack;
         return $this;
     }

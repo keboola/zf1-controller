@@ -84,7 +84,7 @@ class Zend_Controller_Action_Helper_ViewRendererTest extends PHPUnit\Framework\T
                     ->setRequest($this->request)
                     ->setResponse($this->response);
 
-        $this->helper   = new Zend_Controller_Action_Helper_ViewRenderer();
+        $this->helper = new Zend_Controller_Action_Helper_ViewRenderer();
         Zend_Controller_Action_HelperBroker::addHelper($this->helper);
     }
 
@@ -163,7 +163,7 @@ class Zend_Controller_Action_Helper_ViewRendererTest extends PHPUnit\Framework\T
 
         $filterPaths = $this->helper->view->getFilterPaths();
         $test        = ucfirst($module) . '_View_Filter_';
-        $found = false;
+        $found       = false;
         foreach ($filterPaths as $prefix => $paths) {
             if ($test == $prefix) {
                 $found = true;
@@ -520,7 +520,7 @@ class Zend_Controller_Action_Helper_ViewRendererTest extends PHPUnit\Framework\T
                       ->setActionName('test');
         $controller = new Bar_IndexController($this->request, $this->response, array());
         $this->helper->setNoController();
-        $expected   = 'test.phtml';
+        $expected = 'test.phtml';
         $this->assertEquals($expected, $this->helper->getViewScript());
     }
 
@@ -888,12 +888,15 @@ class Zend_Controller_Action_Helper_ViewRendererTest extends PHPUnit\Framework\T
 
         $this->helper->setActionController(
             new Bar_IndexController(
-                $this->request, $this->response, array()
+                $this->request,
+                $this->response,
+                array()
             )
         );
 
         $this->assertEquals(
-            'index/index.phtml', $this->helper->getViewScript()
+            'index/index.phtml',
+            $this->helper->getViewScript()
         );
     }
 
@@ -916,17 +919,20 @@ class Zend_Controller_Action_Helper_ViewRendererTest extends PHPUnit\Framework\T
      */
     public function testControllerNameFormattingShouldRespectWordCamelCaseToDash()
     {
-       $this->request->setControllerName('MetadataValidation')
+        $this->request->setControllerName('MetadataValidation')
                      ->setActionName('index');
 
-       $this->helper->setActionController(
+        $this->helper->setActionController(
            new Bar_IndexController(
-               $this->request, $this->response, array()
+               $this->request,
+               $this->response,
+               array()
            )
        );
 
-       $this->assertEquals(
-           'metadata-validation/index.phtml', $this->helper->getViewScript()
+        $this->assertEquals(
+           'metadata-validation/index.phtml',
+           $this->helper->getViewScript()
        );
     }
 

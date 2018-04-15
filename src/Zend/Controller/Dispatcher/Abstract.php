@@ -172,7 +172,7 @@ abstract class Zend_Controller_Dispatcher_Abstract implements Zend_Controller_Di
      */
     public function setWordDelimiter($spec)
     {
-        $spec = $this->_verifyDelimiter($spec);
+        $spec                 = $this->_verifyDelimiter($spec);
         $this->_wordDelimiter = $spec;
 
         return $this;
@@ -274,7 +274,7 @@ abstract class Zend_Controller_Dispatcher_Abstract implements Zend_Controller_Di
      */
     public function setParam($name, $value)
     {
-        $name = (string) $name;
+        $name                       = (string) $name;
         $this->_invokeParams[$name] = $value;
         return $this;
     }
@@ -299,7 +299,7 @@ abstract class Zend_Controller_Dispatcher_Abstract implements Zend_Controller_Di
      */
     public function getParam($name)
     {
-        if(isset($this->_invokeParams[$name])) {
+        if (isset($this->_invokeParams[$name])) {
             return $this->_invokeParams[$name];
         }
 

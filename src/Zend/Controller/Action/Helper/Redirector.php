@@ -87,7 +87,7 @@ class Zend_Controller_Action_Helper_Redirector extends Zend_Controller_Action_He
     {
         $code = (int)$code;
         if ((300 > $code) || (307 < $code) || (304 == $code) || (306 == $code)) {
-            throw new Zend_Controller_Action_Exception('Invalid redirect HTTP status code (' . $code  . ')');
+            throw new Zend_Controller_Action_Exception('Invalid redirect HTTP status code (' . $code . ')');
         }
 
         return true;
@@ -205,7 +205,7 @@ class Zend_Controller_Action_Helper_Redirector extends Zend_Controller_Action_He
     {
         if ($this->getUseAbsoluteUri() && !preg_match('#^(https?|ftp)://#', $url)) {
             $host  = (isset($_SERVER['HTTP_HOST'])?$_SERVER['HTTP_HOST']:'');
-            $proto = (isset($_SERVER['HTTPS'])&&$_SERVER['HTTPS']!=="off") ? 'https' : 'http';
+            $proto = (isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] !== 'off') ? 'https' : 'http';
             $port  = (isset($_SERVER['SERVER_PORT'])?$_SERVER['SERVER_PORT']:80);
             $uri   = $proto . '://' . $host;
             if ((('http' == $proto) && (80 != $port)) || (('https' == $proto) && (443 != $port))) {
@@ -264,9 +264,9 @@ class Zend_Controller_Action_Helper_Redirector extends Zend_Controller_Action_He
      */
     public function setGotoSimple($action, $controller = null, $module = null, array $params = array())
     {
-        $dispatcher = $this->getFrontController()->getDispatcher();
-        $request    = $this->getRequest();
-        $curModule  = $request->getModuleName();
+        $dispatcher           = $this->getFrontController()->getDispatcher();
+        $request              = $this->getRequest();
+        $curModule            = $request->getModuleName();
         $useDefaultController = false;
 
         if (null === $controller && null !== $module) {

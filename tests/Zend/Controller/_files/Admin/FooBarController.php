@@ -43,5 +43,4 @@ class Admin_FooBarController extends FooController
     {
         $this->_response->appendBody("Admin_FooBar::bazBat action called\n");
     }
-
 }
