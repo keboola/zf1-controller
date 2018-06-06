@@ -91,11 +91,11 @@ class Zend_Controller_Response_HttpTest extends PHPUnit\Framework\TestCase
     {
         $this->_response->setHeader('Content-Type', 'text/xml');
         $headers = $this->_response->getHeaders();
-        $this->assertEquals(1, count($headers));
+        $this->assertCount(1, $headers);
 
         $this->_response->clearHeaders();
         $headers = $this->_response->getHeaders();
-        $this->assertEquals(0, count($headers));
+        $this->assertCount(0, $headers);
     }
 
     /**
@@ -503,7 +503,7 @@ class Zend_Controller_Response_HttpTest extends PHPUnit\Framework\TestCase
         $this->assertTrue($this->_response->clearBody());
         $body = $this->_response->getBody(true);
         $this->assertInternalType('array', $body);
-        $this->assertEquals(0, count($body));
+        $this->assertCount(0, $body);
     }
 
     public function testClearBodySegment()
@@ -516,7 +516,7 @@ class Zend_Controller_Response_HttpTest extends PHPUnit\Framework\TestCase
         $this->assertTrue($this->_response->clearBody('more'));
         $body = $this->_response->getBody(true);
         $this->assertInternalType('array', $body);
-        $this->assertEquals(2, count($body));
+        $this->assertCount(2, $body);
         $this->assertTrue(isset($body['some']));
         $this->assertTrue(isset($body['superfluous']));
     }

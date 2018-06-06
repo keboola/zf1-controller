@@ -94,7 +94,7 @@ class Zend_Controller_Response_HttpTestCaseTest extends PHPUnit\Framework\TestCa
                        ->setHeader('X-Foo-Bar', 'baz');
         $test = $this->response->sendHeaders();
         $this->assertInternalType('array', $test);
-        $this->assertEquals(3, count($test));
+        $this->assertCount(3, $test);
         $this->assertNotContains('Content-Type: text/xml', $test);
         $this->assertContains('Content-Type: text/html', $test);
         $this->assertContains('X-Foo-Bar: baz', $test);

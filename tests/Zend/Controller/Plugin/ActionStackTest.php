@@ -159,14 +159,14 @@ class Zend_Controller_Plugin_ActionStackTest extends PHPUnit\Framework\TestCase
         $plugin->pushStack($request1);
         $received = $plugin->getStack();
         $this->assertInternalType('array', $received);
-        $this->assertEquals(1, count($received));
+        $this->assertCount(1, $received);
         $this->assertSame($request1, $received[0]);
 
         $request2 = new Zend_Controller_Request_Simple();
         $plugin->pushStack($request2);
         $received = $plugin->getStack();
         $this->assertInternalType('array', $received);
-        $this->assertEquals(2, count($received));
+        $this->assertCount(2, $received);
         $this->assertSame($request2, $received[1]);
         $this->assertSame($request1, $received[0]);
     }
@@ -193,12 +193,12 @@ class Zend_Controller_Plugin_ActionStackTest extends PHPUnit\Framework\TestCase
                ->pushStack($request2)
                ->pushStack($request3);
         $stack = $plugin->getStack();
-        $this->assertEquals(3, count($stack));
+        $this->assertCount(3, $stack);
 
         $received = $plugin->popStack();
         $stack    = $plugin->getStack();
         $this->assertSame($request3, $received);
-        $this->assertEquals(2, count($stack));
+        $this->assertCount(2, $stack);
     }
 
     public function testPopEmptyStackReturnsFalse()
@@ -216,12 +216,12 @@ class Zend_Controller_Plugin_ActionStackTest extends PHPUnit\Framework\TestCase
         $plugin->pushStack($request1)
                ->pushStack($request2);
         $stack = $plugin->getStack();
-        $this->assertEquals(2, count($stack));
+        $this->assertCount(2, $stack);
 
         $received = $plugin->popStack();
         $stack    = $plugin->getStack();
         $this->assertSame($request1, $received);
-        $this->assertEquals(0, count($stack));
+        $this->assertCount(0, $stack);
     }
 
     public function testPopStackPopulatesControllerAndModuleFromRequestIfEmpty()
@@ -363,7 +363,7 @@ class Zend_Controller_Plugin_ActionStackTest extends PHPUnit\Framework\TestCase
 
         $plugin->postDispatch($request);
         $stack = $plugin->getStack();
-        $this->assertEquals(3, count($stack));
+        $this->assertCount(3, $stack);
     }
 }
 

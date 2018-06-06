@@ -69,7 +69,7 @@ class Zend_Controller_Router_Route_RegexTest extends PHPUnit\Framework\TestCase
         $route  = new Zend_Controller_Router_Route_Regex('users/all', array('controller' => 'ctrl'));
         $values = $route->match('users/all');
 
-        $this->assertSame(1, count($values));
+        $this->assertCount(1, $values);
         $this->assertSame('ctrl', $values['controller']);
     }
 
@@ -86,7 +86,7 @@ class Zend_Controller_Router_Route_RegexTest extends PHPUnit\Framework\TestCase
         $route  = new Zend_Controller_Router_Route_Regex('users/(.+)');
         $values = $route->match('users/martel');
 
-        $this->assertSame(1, count($values));
+        $this->assertCount(1, $values);
         $this->assertSame('martel', $values[1]);
     }
 
@@ -95,7 +95,7 @@ class Zend_Controller_Router_Route_RegexTest extends PHPUnit\Framework\TestCase
         $route  = new Zend_Controller_Router_Route_Regex('users/(user_(\d+).html)');
         $values = $route->match('users/user_1354.html');
 
-        $this->assertSame(2, count($values));
+        $this->assertCount(2, $values);
         $this->assertSame('user_1354.html', $values[1]);
         $this->assertSame('1354', $values[2]);
     }
@@ -110,7 +110,7 @@ class Zend_Controller_Router_Route_RegexTest extends PHPUnit\Framework\TestCase
 
         $values = $route->match('users');
 
-        $this->assertSame(3, count($values));
+        $this->assertCount(3, $values);
         $this->assertSame('index', $values['module']);
         $this->assertSame('index', $values['controller']);
         $this->assertSame('users', $values['action']);
@@ -121,7 +121,7 @@ class Zend_Controller_Router_Route_RegexTest extends PHPUnit\Framework\TestCase
         $route  = new Zend_Controller_Router_Route_Regex('users/?(.+)?', array(1 => 'martel'));
         $values = $route->match('users');
 
-        $this->assertSame(1, count($values));
+        $this->assertCount(1, $values);
         $this->assertSame('martel', $values[1]);
     }
 
@@ -130,7 +130,7 @@ class Zend_Controller_Router_Route_RegexTest extends PHPUnit\Framework\TestCase
         $route  = new Zend_Controller_Router_Route_Regex('users/?(.+)?', array(1 => 'martel'));
         $values = $route->match('users/vicki');
 
-        $this->assertSame(1, count($values));
+        $this->assertCount(1, $values);
         $this->assertSame('vicki', $values[1]);
     }
 
@@ -139,7 +139,7 @@ class Zend_Controller_Router_Route_RegexTest extends PHPUnit\Framework\TestCase
         $route  = new Zend_Controller_Router_Route_Regex('users/(?P<username>.+)');
         $values = $route->match('users/martel');
 
-        $this->assertSame(1, count($values));
+        $this->assertCount(1, $values);
         $this->assertSame('martel', $values[1]);
     }
 
@@ -148,7 +148,7 @@ class Zend_Controller_Router_Route_RegexTest extends PHPUnit\Framework\TestCase
         $route  = new Zend_Controller_Router_Route_Regex('users/(.+)', null, array(1 => 'username'));
         $values = $route->match('users/martel');
 
-        $this->assertSame(1, count($values));
+        $this->assertCount(1, $values);
         $this->assertSame('martel', $values['username']);
     }
 
@@ -157,7 +157,7 @@ class Zend_Controller_Router_Route_RegexTest extends PHPUnit\Framework\TestCase
         $route  = new Zend_Controller_Router_Route_Regex('users(?:/(.+))?', array('username' => 'martel'), array(1 => 'username'));
         $values = $route->match('users');
 
-        $this->assertSame(1, count($values));
+        $this->assertCount(1, $values);
         $this->assertSame('martel', $values['username']);
     }
 
@@ -166,7 +166,7 @@ class Zend_Controller_Router_Route_RegexTest extends PHPUnit\Framework\TestCase
         $route  = new Zend_Controller_Router_Route_Regex('users/(?P<name>.+)', null, array(1 => 'username'));
         $values = $route->match('users/martel');
 
-        $this->assertSame(1, count($values));
+        $this->assertCount(1, $values);
         $this->assertSame('martel', $values['username']);
     }
 
@@ -175,7 +175,7 @@ class Zend_Controller_Router_Route_RegexTest extends PHPUnit\Framework\TestCase
         $route  = new Zend_Controller_Router_Route_Regex('users/(\w+)/?(?:p/(\d+))?', null, array(1 => 'username', 2 => 'page'));
         $values = $route->match('users/martel/p/1');
 
-        $this->assertSame(2, count($values));
+        $this->assertCount(2, $values);
         $this->assertSame('martel', $values['username']);
         $this->assertSame('1', $values['page']);
     }
@@ -185,7 +185,7 @@ class Zend_Controller_Router_Route_RegexTest extends PHPUnit\Framework\TestCase
         $route  = new Zend_Controller_Router_Route_Regex('users/(\w+)/?(?:p/(\d+))?', null, array(1 => 'username', 2 => 'page'));
         $values = $route->match('users/martel');
 
-        $this->assertSame(1, count($values));
+        $this->assertCount(1, $values);
         $this->assertSame('martel', $values['username']);
     }
 
@@ -194,7 +194,7 @@ class Zend_Controller_Router_Route_RegexTest extends PHPUnit\Framework\TestCase
         $route  = new Zend_Controller_Router_Route_Regex('users/(\w+)/?(?:p/(\d+))?', null, array(1 => 'username'));
         $values = $route->match('users/martel/p/1');
 
-        $this->assertSame(2, count($values));
+        $this->assertCount(2, $values);
         $this->assertSame('martel', $values['username']);
         $this->assertSame('1', $values[2]);
     }
@@ -204,7 +204,7 @@ class Zend_Controller_Router_Route_RegexTest extends PHPUnit\Framework\TestCase
         $route  = new Zend_Controller_Router_Route_Regex('users/?(.+)?', array(1 => 'martel'), array(1 => 'username'));
         $values = $route->match('users');
 
-        $this->assertSame(1, count($values));
+        $this->assertCount(1, $values);
         $this->assertSame('martel', $values['username']);
     }
 
@@ -213,7 +213,7 @@ class Zend_Controller_Router_Route_RegexTest extends PHPUnit\Framework\TestCase
         $route  = new Zend_Controller_Router_Route_Regex('users/(\w+)/?(?:p/(\d+))?', array(2 => '1'), array(1 => 'username'));
         $values = $route->match('users/martel/p/10');
 
-        $this->assertSame(2, count($values));
+        $this->assertCount(2, $values);
         $this->assertSame('martel', $values['username']);
         $this->assertSame('10', $values[2]);
     }
@@ -223,7 +223,7 @@ class Zend_Controller_Router_Route_RegexTest extends PHPUnit\Framework\TestCase
         $route  = new Zend_Controller_Router_Route_Regex('users/?(\w+)?/?(?:p/(\d+))?', array(2 => '1', 'username' => 'martel'), array(1 => 'username'));
         $values = $route->match('users');
 
-        $this->assertSame(2, count($values));
+        $this->assertCount(2, $values);
         $this->assertSame('martel', $values['username']);
         $this->assertSame('1', $values[2]);
     }
@@ -233,7 +233,7 @@ class Zend_Controller_Router_Route_RegexTest extends PHPUnit\Framework\TestCase
         $route  = new Zend_Controller_Router_Route_Regex('users/(\w+)/?(?:p/(\d+))?', array('page' => '1', 'username' => 'martel'), array(1 => 'username', 2 => 'page'));
         $values = $route->match('users/martel');
 
-        $this->assertSame(2, count($values));
+        $this->assertCount(2, $values);
         $this->assertSame('martel', $values['username']);
         $this->assertSame('1', $values['page']);
     }
@@ -243,7 +243,7 @@ class Zend_Controller_Router_Route_RegexTest extends PHPUnit\Framework\TestCase
         $route  = new Zend_Controller_Router_Route_Regex('users/(\w+)/?(?:p/(\d+))?', array(2 => '1'), array(2 => 'page'));
         $values = $route->match('users/martel');
 
-        $this->assertSame(2, count($values));
+        $this->assertCount(2, $values);
         $this->assertSame('martel', $values[1]);
         $this->assertSame('1', $values['page']);
     }
@@ -255,7 +255,7 @@ class Zend_Controller_Router_Route_RegexTest extends PHPUnit\Framework\TestCase
 
         // Matches both defaults but the one defined last is used
 
-        $this->assertSame(1, count($values));
+        $this->assertCount(1, $values);
         $this->assertSame('vicki', $values['username']);
     }
 

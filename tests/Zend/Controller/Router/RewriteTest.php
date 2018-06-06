@@ -54,13 +54,13 @@ class Zend_Controller_Router_RewriteTest extends PHPUnit\Framework\TestCase
         $this->_router->addRoute('archive', new Zend_Controller_Router_Route('archive/:year', array('year' => '2006', 'controller' => 'archive', 'action' => 'show'), array('year' => '\d+')));
         $routes = $this->_router->getRoutes();
 
-        $this->assertEquals(1, count($routes));
+        $this->assertCount(1, $routes);
         $this->assertTrue($routes['archive'] instanceof Zend_Controller_Router_Route);
 
         $this->_router->addRoute('register', new Zend_Controller_Router_Route('register/:action', array('controller' => 'profile', 'action' => 'register')));
         $routes = $this->_router->getRoutes();
 
-        $this->assertEquals(2, count($routes));
+        $this->assertCount(2, $routes);
         $this->assertTrue($routes['register'] instanceof Zend_Controller_Router_Route);
     }
 
@@ -74,7 +74,7 @@ class Zend_Controller_Router_RewriteTest extends PHPUnit\Framework\TestCase
 
         $values = $this->_router->getRoutes();
 
-        $this->assertEquals(2, count($values));
+        $this->assertCount(2, $values);
         $this->assertTrue($values['archive'] instanceof Zend_Controller_Router_Route);
         $this->assertTrue($values['register'] instanceof Zend_Controller_Router_Route);
     }
@@ -107,7 +107,7 @@ class Zend_Controller_Router_RewriteTest extends PHPUnit\Framework\TestCase
         $this->_router->removeRoute('archive');
 
         $routes = $this->_router->getRoutes();
-        $this->assertEquals(0, count($routes));
+        $this->assertCount(0, $routes);
 
         try {
             $route = $this->_router->removeRoute('archive');
@@ -341,7 +341,7 @@ class Zend_Controller_Router_RewriteTest extends PHPUnit\Framework\TestCase
         }
 
         $routes = $this->_router->getRoutes();
-        $this->assertEquals(0, count($routes));
+        $this->assertCount(0, $routes);
     }
 
     public function testDefaultRouteMatchedWithModules()

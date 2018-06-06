@@ -99,11 +99,11 @@ class Zend_Controller_Action_Helper_FlashMessengerTest extends PHPUnit\Framework
         $this->helper->addMessage('foo');
         $this->helper->addMessage('bar');
         $this->assertTrue($this->helper->hasMessages());
-        $this->assertEquals(2, count($this->helper));
+        $this->assertCount(2, $this->helper);
 
         $this->helper->clearMessages();
         $this->assertFalse($this->helper->hasMessages());
-        $this->assertEquals(0, count($this->helper));
+        $this->assertCount(0, $this->helper);
     }
 
     public function testDirectProxiesToAddMessage()
@@ -111,7 +111,7 @@ class Zend_Controller_Action_Helper_FlashMessengerTest extends PHPUnit\Framework
         $this->markTestSkipped();
         $this->helper->direct('foo');
         $this->assertTrue($this->helper->hasMessages());
-        $this->assertEquals(1, count($this->helper));
+        $this->assertCount(1, $this->helper);
     }
 
     /**
@@ -162,7 +162,7 @@ class Zend_Controller_Action_Helper_FlashMessengerTest extends PHPUnit\Framework
 
         // Ensure it didnt' clear the default namespace
         $defaultMessages = $this->helper->getCurrentMessages();
-        $this->assertEquals(1, count($defaultMessages));
+        $this->assertCount(1, $defaultMessages);
         $this->assertEquals('defaultmessage', array_pop($defaultMessages));
     }
 
@@ -186,11 +186,11 @@ class Zend_Controller_Action_Helper_FlashMessengerTest extends PHPUnit\Framework
         $this->assertTrue($helper->hasMessages());
 
         $defaultMessages = $helper->getMessages();
-        $this->assertEquals(1, count($defaultMessages));
+        $this->assertCount(1, $defaultMessages);
         $this->assertEquals('defaultmessage', array_pop($defaultMessages));
 
         $foobarMessages = $helper->getMessages('foobar');
-        $this->assertEquals(1, count($foobarMessages));
+        $this->assertCount(1, $foobarMessages);
         $this->assertEquals('testmessage', array_pop($foobarMessages));
     }
 }

@@ -202,7 +202,7 @@ class Zend_Controller_Action_HelperBrokerTest extends PHPUnit\Framework\TestCase
 
         $helpers = Zend_Controller_Action_HelperBroker::getExistingHelpers();
         $this->assertInternalType('array', $helpers);
-        $this->assertEquals(2, count($helpers));
+        $this->assertCount(2, $helpers);
         $this->assertContains('ViewRenderer', array_keys($helpers));
         $this->assertContains('Redirector', array_keys($helpers));
     }
@@ -214,7 +214,7 @@ class Zend_Controller_Action_HelperBrokerTest extends PHPUnit\Framework\TestCase
 
         $helpers = Zend_Controller_Action_HelperBroker::getExistingHelpers();
         $this->assertInternalType('array', $helpers);
-        $this->assertEquals(1, count($helpers));
+        $this->assertCount(1, $helpers);
     }
 
     public function testHelperPullsResponseFromRegisteredActionController()

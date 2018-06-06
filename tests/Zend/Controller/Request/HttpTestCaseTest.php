@@ -92,7 +92,7 @@ class Zend_Controller_Request_HttpTestCaseTest extends PHPUnit\Framework\TestCas
         $this->request->setQuery('bat', 'bogus');
         $this->assertEquals('bogus', $this->request->getQuery('bat'));
         $test = $this->request->getQuery();
-        $this->assertEquals(4, count($test));
+        $this->assertCount(4, $test);
         foreach ($expected as $key => $value) {
             $this->assertEquals($value, $test[$key]);
         }
@@ -142,7 +142,7 @@ class Zend_Controller_Request_HttpTestCaseTest extends PHPUnit\Framework\TestCas
         $this->request->setPost('bat', 'bogus');
         $this->assertEquals('bogus', $this->request->getPost('bat'));
         $test = $this->request->getPost();
-        $this->assertEquals(4, count($test));
+        $this->assertCount(4, $test);
         foreach ($expected as $key => $value) {
             $this->assertEquals($value, $test[$key]);
         }
@@ -203,14 +203,14 @@ class Zend_Controller_Request_HttpTestCaseTest extends PHPUnit\Framework\TestCas
         $this->request->setHeaders($headers);
         $test = $this->request->getHeaders();
         $this->assertInternalType('array', $test);
-        $this->assertEquals(2, count($test));
+        $this->assertCount(2, $test);
         foreach ($headers as $key => $value) {
             $this->assertEquals($value, $this->request->getHeader($key));
         }
         $this->request->setHeader('X-Requested-With', 'XMLHttpRequest');
         $test = $this->request->getHeaders();
         $this->assertInternalType('array', $test);
-        $this->assertEquals(3, count($test));
+        $this->assertCount(3, $test);
         $this->assertEquals('XMLHttpRequest', $this->request->getHeader('X-Requested-With'));
     }
 

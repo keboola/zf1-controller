@@ -75,10 +75,10 @@ class Zend_Controller_Plugin_BrokerTest extends PHPUnit\Framework\TestCase
         $plugin = new Zend_Controller_Plugin_BrokerTest_TestPlugin();
         $broker->registerPlugin($plugin);
         $plugins = $broker->getPlugins();
-        $this->assertEquals(1, count($plugins));
+        $this->assertCount(1, $plugins);
         $broker->unregisterPlugin($plugin);
         $plugins = $broker->getPlugins();
-        $this->assertEquals(0, count($plugins));
+        $this->assertCount(0, $plugins);
     }
 
     public function testUnregisterPluginByClassName()
@@ -87,10 +87,10 @@ class Zend_Controller_Plugin_BrokerTest extends PHPUnit\Framework\TestCase
         $plugin = new Zend_Controller_Plugin_BrokerTest_TestPlugin();
         $broker->registerPlugin($plugin);
         $plugins = $broker->getPlugins();
-        $this->assertEquals(1, count($plugins));
+        $this->assertCount(1, $plugins);
         $broker->unregisterPlugin('Zend_Controller_Plugin_BrokerTest_TestPlugin');
         $plugins = $broker->getPlugins();
-        $this->assertEquals(0, count($plugins));
+        $this->assertCount(0, $plugins);
     }
 
     public function testGetPlugins()
@@ -99,7 +99,7 @@ class Zend_Controller_Plugin_BrokerTest extends PHPUnit\Framework\TestCase
         $plugin = new Zend_Controller_Plugin_BrokerTest_TestPlugin();
         $broker->registerPlugin($plugin);
         $plugins = $broker->getPlugins();
-        $this->assertEquals(1, count($plugins));
+        $this->assertCount(1, $plugins);
         $this->assertSame($plugin, $plugins[0]);
     }
 
@@ -133,7 +133,7 @@ class Zend_Controller_Plugin_BrokerTest extends PHPUnit\Framework\TestCase
 
         $retrieved = $broker->getPlugin('Zend_Controller_Plugin_BrokerTest_TestPlugin');
         $this->assertInternalType('array', $retrieved);
-        $this->assertEquals(2, count($retrieved));
+        $this->assertCount(2, $retrieved);
         $this->assertSame($plugin, $retrieved[0]);
         $this->assertSame($plugin2, $retrieved[1]);
     }
