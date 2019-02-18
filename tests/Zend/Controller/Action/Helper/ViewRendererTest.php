@@ -923,16 +923,16 @@ class Zend_Controller_Action_Helper_ViewRendererTest extends PHPUnit\Framework\T
                      ->setActionName('index');
 
         $this->helper->setActionController(
-           new Bar_IndexController(
-               $this->request,
-               $this->response,
-               array()
+            new Bar_IndexController(
+                $this->request,
+                $this->response,
+                array()
            )
        );
 
         $this->assertEquals(
-           'metadata-validation/index.phtml',
-           $this->helper->getViewScript()
+            'metadata-validation/index.phtml',
+            $this->helper->getViewScript()
        );
     }
 

@@ -195,19 +195,6 @@ class Zend_Controller_Request_HttpTest extends PHPUnit\Framework\TestCase
         $this->assertSame($params, array_intersect_assoc($params, $received));
     }
 
-    public function testGetParamsWithNoGetOrPost()
-    {
-        unset($_GET, $_POST);
-        $params = array(
-            'foo' => 'bar',
-            'boo' => 'bah',
-            'fee' => 'fi'
-        );
-        $this->_request->setParams($params);
-        $received = $this->_request->getParams();
-        $this->assertSame($params, array_intersect_assoc($params, $received));
-    }
-
     public function testGetParamsWithGetAndPost()
     {
         $_GET = array(

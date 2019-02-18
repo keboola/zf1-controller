@@ -52,7 +52,7 @@ class Zend_Controller_Router_Route_StaticTest extends PHPUnit\Framework\TestCase
     {
         $route = new Zend_Controller_Router_Route_Static(
             'users/all',
-                    array('controller' => 'ctrl', 'action' => 'act')
+            array('controller' => 'ctrl', 'action' => 'act')
         );
         $values = $route->match('users/all');
 
@@ -89,7 +89,7 @@ class Zend_Controller_Router_Route_StaticTest extends PHPUnit\Framework\TestCase
     {
         $route = new Zend_Controller_Router_Route_Static(
             'users/all',
-                    array('controller' => 'ctrl', 'action' => 'act')
+            array('controller' => 'ctrl', 'action' => 'act')
         );
 
         $values = $route->getDefaults();
@@ -103,7 +103,7 @@ class Zend_Controller_Router_Route_StaticTest extends PHPUnit\Framework\TestCase
     {
         $route = new Zend_Controller_Router_Route_Static(
             'users/all',
-                    array('controller' => 'ctrl', 'action' => 'act')
+            array('controller' => 'ctrl', 'action' => 'act')
         );
 
         $this->assertSame('ctrl', $route->getDefault('controller'));

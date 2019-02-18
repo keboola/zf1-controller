@@ -304,7 +304,7 @@ class Zend_Controller_Action_Helper_RedirectorTest extends PHPUnit\Framework\Tes
     public function testGotoAndExit()
     {
         $this->markTestSkipped(
-          'Testing Zend_Controller_Action_Helper_Redirector::gotoAndExit() would break the test suite'
+            'Testing Zend_Controller_Action_Helper_Redirector::gotoAndExit() would break the test suite'
         );
     }
 
@@ -332,7 +332,7 @@ class Zend_Controller_Action_Helper_RedirectorTest extends PHPUnit\Framework\Tes
     public function testGotoRouteAndExit()
     {
         $this->markTestSkipped(
-          'Testing Zend_Controller_Action_Helper_Redirector::gotoRouteAndExit() would break the test suite'
+            'Testing Zend_Controller_Action_Helper_Redirector::gotoRouteAndExit() would break the test suite'
         );
     }
 
@@ -348,14 +348,14 @@ class Zend_Controller_Action_Helper_RedirectorTest extends PHPUnit\Framework\Tes
     public function testGotoUrlAndExit()
     {
         $this->markTestSkipped(
-          'Testing Zend_Controller_Action_Helper_Redirector::gotoUrlAndExit() would break the test suite'
+            'Testing Zend_Controller_Action_Helper_Redirector::gotoUrlAndExit() would break the test suite'
         );
     }
 
     public function testRedirectAndExit()
     {
         $this->markTestSkipped(
-          'Testing Zend_Controller_Action_Helper_Redirector::redirectAndExit() would break the test suite'
+            'Testing Zend_Controller_Action_Helper_Redirector::redirectAndExit() would break the test suite'
         );
     }
 

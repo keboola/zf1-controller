@@ -448,7 +448,7 @@ class Zend_Controller_Router_RouteTest extends PHPUnit\Framework\TestCase
     {
         $route = new Zend_Controller_Router_Route(
             'users/all',
-                    array('controller' => 'ctrl', 'action' => 'act')
+            array('controller' => 'ctrl', 'action' => 'act')
         );
 
         $values = $route->getDefaults();
@@ -462,7 +462,7 @@ class Zend_Controller_Router_RouteTest extends PHPUnit\Framework\TestCase
     {
         $route = new Zend_Controller_Router_Route(
             'users/all',
-                    array('controller' => 'ctrl', 'action' => 'act')
+            array('controller' => 'ctrl', 'action' => 'act')
         );
 
         $this->assertEquals('ctrl', $route->getDefault('controller'));

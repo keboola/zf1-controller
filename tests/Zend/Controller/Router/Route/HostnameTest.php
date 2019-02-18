@@ -186,7 +186,7 @@ class Zend_Controller_Router_Route_HostnameTest extends PHPUnit\Framework\TestCa
     {
         $route = new Zend_Controller_Router_Route_Hostname(
             'www.zend.com',
-                                                            array('controller' => 'ctrl',
+            array('controller'                                                 => 'ctrl',
                                                                   'action'     => 'act')
         );
 
@@ -197,9 +197,9 @@ class Zend_Controller_Router_Route_HostnameTest extends PHPUnit\Framework\TestCa
     {
         $route = new Zend_Controller_Router_Route_Hostname(
             ':subdomain.zend.com',
-                                                            array('controller' => 'ctrl',
+            array('controller'                                                 => 'ctrl',
                                                                   'action'     => 'act'),
-                                                            array('subdomain' => '(foo|bar)')
+            array('subdomain' => '(foo|bar)')
         );
 
         return $route;
@@ -209,10 +209,10 @@ class Zend_Controller_Router_Route_HostnameTest extends PHPUnit\Framework\TestCa
     {
         $route = new Zend_Controller_Router_Route_Hostname(
             ':subdomain.zend.com',
-                                                            array('controller' => 'ctrl',
+            array('controller'                                                 => 'ctrl',
                                                                   'action'     => 'act',
                                                                   'subdomain'  => 'bar'),
-                                                            array('subdomain' => '(foo|bar)')
+            array('subdomain' => '(foo|bar)')
         );
 
         return $route;

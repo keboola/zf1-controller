@@ -1,4 +1,7 @@
 parameters:
+    level: 1
+    paths:
+        - ./
     excludes_analyse:
         - %rootDir%/../../../tests/*
         - %rootDir%/../../../vendor/*
@@ -13,3 +16,7 @@ parameters:
         - '#Variable \$translateMessages might not be defined\.#'
         - '#Variable \$translator might not be defined\.#'
         - '#Variable \$locale might not be defined\.#'
+        # Session is NOT always set, see: https://github.com/phpstan/phpstan/issues/1299
+        -
+            message: '#Variable \$_SESSION in isset\(\) always exists and is not nullable\.#'
+            path: %currentWorkingDirectory%/src/Zend/Controller/Action/Helper/Redirector.php

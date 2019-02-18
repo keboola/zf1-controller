@@ -104,8 +104,8 @@ class Zend_Controller_Router_Route_RegexTest extends PHPUnit\Framework\TestCase
     {
         $route = new Zend_Controller_Router_Route_Regex(
             '((?!admin|moderator).+)',
-           array('module' => 'index', 'controller' => 'index'),
-           array(1        => 'action')
+            array('module' => 'index', 'controller' => 'index'),
+            array(1        => 'action')
         );
 
         $values = $route->match('users');
