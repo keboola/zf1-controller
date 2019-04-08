@@ -65,7 +65,7 @@ abstract class Zend_Controller_Action implements Zend_Controller_Action_Interfac
 
     /**
      * View script suffix; defaults to 'phtml'
-     * @see {render()}
+     * @see Zend_Controller_Action::render()
      * @var string
      */
     public $viewSuffix = 'phtml';

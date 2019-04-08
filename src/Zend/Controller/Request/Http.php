@@ -50,7 +50,7 @@ class Zend_Controller_Request_Http extends Zend_Controller_Request_Abstract
 
     /**
      * REQUEST_URI
-     * @var string;
+     * @var string
      */
     protected $_requestUri;
 
