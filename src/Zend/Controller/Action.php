@@ -292,7 +292,7 @@ abstract class Zend_Controller_Action implements Zend_Controller_Action_Interfac
      * Set the Request object
      *
      * @param Zend_Controller_Request_Abstract $request
-     * @return Zend_Controller_Action
+     * @return self
      */
     public function setRequest(Zend_Controller_Request_Abstract $request)
     {
@@ -314,7 +314,7 @@ abstract class Zend_Controller_Action implements Zend_Controller_Action_Interfac
      * Set the Response object
      *
      * @param Zend_Controller_Response_Abstract $response
-     * @return Zend_Controller_Action
+     * @return self
      */
     public function setResponse(Zend_Controller_Response_Abstract $response)
     {
@@ -326,7 +326,7 @@ abstract class Zend_Controller_Action implements Zend_Controller_Action_Interfac
      * Set invocation arguments
      *
      * @param array $args
-     * @return Zend_Controller_Action
+     * @return self
      */
     protected function _setInvokeArgs(array $args = array())
     {
@@ -559,6 +559,7 @@ abstract class Zend_Controller_Action implements Zend_Controller_Action_Interfac
      * @param string $paramName
      * @param mixed $default
      * @return mixed
+     * @deprecated Deprecated. Use getParam() instead.
      */
     protected function _getParam($paramName, $default = null)
     {
@@ -591,7 +592,7 @@ abstract class Zend_Controller_Action implements Zend_Controller_Action_Interfac
      *
      * @param string $paramName
      * @param mixed $value
-     * @return Zend_Controller_Action
+     * @return self
      * @deprecated Deprecated as of Zend Framework 1.7. Use
      *             setParam() instead.
      */
@@ -605,7 +606,7 @@ abstract class Zend_Controller_Action implements Zend_Controller_Action_Interfac
      *
      * @param string $paramName
      * @param mixed $value
-     * @return Zend_Controller_Action
+     * @return self
      */
     public function setParam($paramName, $value)
     {

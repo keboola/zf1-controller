@@ -489,14 +489,14 @@ class Zend_Controller_ActionTest_TestController extends Zend_Controller_Action
 
     public function preDispatch()
     {
-        if (false !== ($param = $this->_getParam('prerun', false))) {
+        if (false !== ($param = $this->getParam('prerun', false))) {
             $this->getResponse()->appendBody("Prerun ran\n");
         }
     }
 
     public function postDispatch()
     {
-        if (false !== ($param = $this->_getParam('postrun', false))) {
+        if (false !== ($param = $this->getParam('postrun', false))) {
             $this->getResponse()->appendBody("Postrun ran\n");
         }
     }
