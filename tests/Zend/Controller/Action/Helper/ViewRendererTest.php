@@ -255,7 +255,7 @@ class Zend_Controller_Action_Helper_ViewRendererTest extends PHPUnit\Framework\T
         $this->assertContains(
             $this->_normalizePath($viewDir),
             $this->_normalizePath($scriptPath)
-            );
+        );
 
         $helperPaths = $this->helper->view->getHelperPaths();
         $found       = false;
@@ -764,7 +764,7 @@ class Zend_Controller_Action_Helper_ViewRendererTest extends PHPUnit\Framework\T
         $this->assertRegExp(
             $expectedPathRegex,
             $this->_normalizePath($viewScriptPaths['script'][0])
-            );
+        );
         $this->assertEquals($this->helper->getViewScript(), 'index/admin.phtml');
     }
 
@@ -784,7 +784,7 @@ class Zend_Controller_Action_Helper_ViewRendererTest extends PHPUnit\Framework\T
         $this->assertRegExp(
             $expectedPathRegex,
             $this->_normalizePath($viewScriptPaths['script'][0])
-            );
+        );
         $this->assertEquals('car-bar/baz.phtml', $this->helper->getViewScript());
     }
 
@@ -927,13 +927,13 @@ class Zend_Controller_Action_Helper_ViewRendererTest extends PHPUnit\Framework\T
                 $this->request,
                 $this->response,
                 array()
-           )
-       );
+            )
+        );
 
         $this->assertEquals(
             'metadata-validation/index.phtml',
             $this->helper->getViewScript()
-       );
+        );
     }
 
     protected function _normalizePath($path)

@@ -361,7 +361,7 @@ class Zend_Controller_Router_Route_RegexTest extends PHPUnit\Framework\TestCase
             array('module' => 'default', 'controller' => 'content.item', 'action' => 'forward'),
             array(1        => 'name', 2 => 'id', 3 => 'class'),
             '%s.%s-%s.html'
-         );
+        );
 
         $route->match('uml-explained-composition.72-3.html');
 

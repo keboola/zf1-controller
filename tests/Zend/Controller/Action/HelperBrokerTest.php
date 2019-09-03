@@ -188,7 +188,7 @@ class Zend_Controller_Action_HelperBrokerTest extends PHPUnit\Framework\TestCase
         Zend_Controller_Action_HelperBroker::addPath(
             dirname(dirname(__FILE__)) . DIRECTORY_SEPARATOR . '_files' . DIRECTORY_SEPARATOR . 'Helpers',
             'MyApp'
-            );
+        );
 
         $response = $this->front->dispatch($request);
         $this->assertEquals('MyApp_TestHelper', $response->getBody());
@@ -278,7 +278,7 @@ class Zend_Controller_Action_HelperBrokerTest extends PHPUnit\Framework\TestCase
         Zend_Controller_Action_HelperBroker::addPath(
             dirname(dirname(__FILE__)) . DIRECTORY_SEPARATOR . '_files' . DIRECTORY_SEPARATOR . 'Helpers',
             'MyApp'
-            );
+        );
 
         $urlHelper = Zend_Controller_Action_HelperBroker::getStaticHelper('url');
         $this->assertTrue($urlHelper instanceof MyApp_Url);

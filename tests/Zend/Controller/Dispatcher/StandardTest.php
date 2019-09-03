@@ -420,7 +420,7 @@ class Zend_Controller_Dispatcher_StandardTest extends PHPUnit\Framework\TestCase
             ->addControllerDirectory(
                 dirname(__FILE__) . DIRECTORY_SEPARATOR . '..' . DIRECTORY_SEPARATOR . '_files' . DIRECTORY_SEPARATOR . 'modules' . DIRECTORY_SEPARATOR . 'foo' . DIRECTORY_SEPARATOR . 'controllers',
                 'foo'
-        );
+            );
 
         $request = new Zend_Controller_Request_Http();
         $request->setModuleName('foo');

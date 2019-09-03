@@ -698,7 +698,7 @@ class Zend_Controller_Router_RewriteTest extends PHPUnit\Framework\TestCase
                 ':controller/:action/*',
                 array('controller' => 'index', 'action' => 'index')
             )
-       );
+        );
 
         $params = array(
             'controller' => 'index',
