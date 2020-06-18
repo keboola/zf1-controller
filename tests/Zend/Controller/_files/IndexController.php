@@ -94,4 +94,15 @@ class IndexController extends Zend_Controller_Action
     {
         $this->_response->appendBody('Reset action called');
     }
+
+    public function typeErrorAction()
+    {
+        $this->_response->appendBody('Type error action called');
+        $this->produceTypeError();
+    }
+
+    private function produceTypeError(): self
+    {
+        return new stdClass();
+    }
 }
