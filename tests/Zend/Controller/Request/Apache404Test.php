@@ -41,12 +41,12 @@ class Zend_Controller_Request_Apache404Test extends PHPUnit\Framework\TestCase
      */
     protected $_server;
 
-    public function setUp()
+    public function setUp(): void
     {
         $this->_server = $_SERVER;
     }
 
-    public function tearDown()
+    public function tearDown(): void
     {
         $_SERVER = $this->_server;
     }

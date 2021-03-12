@@ -8,7 +8,7 @@ class Zend_Controller_Action_Helper_CacheTest extends PHPUnit\Framework\TestCase
 {
     protected $_requestUriOld;
 
-    public function setUp()
+    public function setUp(): void
     {
         $this->_requestUriOld =
             isset($_SERVER['REQUEST_URI']) ? $_SERVER['REQUEST_URI'] : null;
@@ -22,7 +22,7 @@ class Zend_Controller_Action_Helper_CacheTest extends PHPUnit\Framework\TestCase
         $this->front->setRequest($this->request);
     }
 
-    public function tearDown()
+    public function tearDown(): void
     {
         $_SERVER['REQUEST_URI'] = $this->_requestUriOld;
     }

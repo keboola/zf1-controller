@@ -63,7 +63,7 @@ class Zend_Controller_Action_Helper_RedirectorTest extends PHPUnit\Framework\Tes
      *
      * Also resets the front controller instance.
      */
-    public function setUp()
+    public function setUp(): void
     {
         $front = Zend_Controller_Front::getInstance();
         $front->resetInstance();
@@ -93,7 +93,7 @@ class Zend_Controller_Action_Helper_RedirectorTest extends PHPUnit\Framework\Tes
     /**
      * Unset all properties
      */
-    public function tearDown()
+    public function tearDown(): void
     {
         unset($this->redirector);
         unset($this->controller);
@@ -472,7 +472,7 @@ class Zend_Controller_Action_Helper_RedirectorTest extends PHPUnit\Framework\Tes
         $this->redirector->gotoUrl('/bar/baz');
         $test = $this->redirector->getRedirectUrl();
 
-        $this->assertNotContains('https://', $test);
+        $this->assertStringNotContainsString('https://', $test);
         $this->assertEquals('http://localhost/bar/baz', $test);
     }
 

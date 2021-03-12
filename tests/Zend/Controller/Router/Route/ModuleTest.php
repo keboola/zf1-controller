@@ -36,7 +36,7 @@ class Zend_Controller_Router_Route_ModuleTest extends PHPUnit\Framework\TestCase
     protected $_dispatcher;
     protected $route;
 
-    public function setUp()
+    public function setUp(): void
     {
         $front = Zend_Controller_Front::getInstance();
         $front->resetInstance();
@@ -66,7 +66,7 @@ class Zend_Controller_Router_Route_ModuleTest extends PHPUnit\Framework\TestCase
     {
         $values = $this->route->match('mod');
 
-        $this->assertInternalType('array', $values);
+        $this->assertIsArray($values);
         $this->assertTrue(isset($values['module']));
         $this->assertEquals('mod', $values['module']);
     }
@@ -74,7 +74,7 @@ class Zend_Controller_Router_Route_ModuleTest extends PHPUnit\Framework\TestCase
     public function testModuleAndControllerMatch()
     {
         $values = $this->route->match('mod/con');
-        $this->assertInternalType('array', $values);
+        $this->assertIsArray($values);
         $this->assertTrue(isset($values['module']));
         $this->assertEquals('mod', $values['module']);
         $this->assertTrue(isset($values['controller']));
@@ -84,7 +84,7 @@ class Zend_Controller_Router_Route_ModuleTest extends PHPUnit\Framework\TestCase
     public function testModuleControllerAndActionMatch()
     {
         $values = $this->route->match('mod/con/act');
-        $this->assertInternalType('array', $values);
+        $this->assertIsArray($values);
         $this->assertTrue(isset($values['module']));
         $this->assertEquals('mod', $values['module']);
         $this->assertTrue(isset($values['controller']));
@@ -96,7 +96,7 @@ class Zend_Controller_Router_Route_ModuleTest extends PHPUnit\Framework\TestCase
     public function testModuleControllerActionAndParamsMatch()
     {
         $values = $this->route->match('mod/con/act/var/val/foo');
-        $this->assertInternalType('array', $values);
+        $this->assertIsArray($values);
         $this->assertTrue(isset($values['module']));
         $this->assertEquals('mod', $values['module']);
         $this->assertTrue(isset($values['controller']));
@@ -112,7 +112,7 @@ class Zend_Controller_Router_Route_ModuleTest extends PHPUnit\Framework\TestCase
     public function testControllerOnlyMatch()
     {
         $values = $this->route->match('con');
-        $this->assertInternalType('array', $values);
+        $this->assertIsArray($values);
         $this->assertTrue(isset($values['controller']));
         $this->assertEquals('con', $values['controller']);
     }
@@ -120,7 +120,7 @@ class Zend_Controller_Router_Route_ModuleTest extends PHPUnit\Framework\TestCase
     public function testControllerOnlyAndActionMatch()
     {
         $values = $this->route->match('con/act');
-        $this->assertInternalType('array', $values);
+        $this->assertIsArray($values);
         $this->assertTrue(isset($values['controller']));
         $this->assertEquals('con', $values['controller']);
         $this->assertTrue(isset($values['action']));
@@ -130,7 +130,7 @@ class Zend_Controller_Router_Route_ModuleTest extends PHPUnit\Framework\TestCase
     public function testControllerOnlyActionAndParamsMatch()
     {
         $values = $this->route->match('con/act/var/val/foo');
-        $this->assertInternalType('array', $values);
+        $this->assertIsArray($values);
         $this->assertTrue(isset($values['controller']));
         $this->assertEquals('con', $values['controller']);
         $this->assertTrue(isset($values['action']));
@@ -151,7 +151,7 @@ class Zend_Controller_Router_Route_ModuleTest extends PHPUnit\Framework\TestCase
 
         $values = $this->route->match('mod/ctrl');
 
-        $this->assertInternalType('array', $values);
+        $this->assertIsArray($values);
         $this->assertSame('mod', $values['m']);
         $this->assertSame('ctrl', $values['c']);
         $this->assertSame('index', $values['a']);
@@ -165,7 +165,7 @@ class Zend_Controller_Router_Route_ModuleTest extends PHPUnit\Framework\TestCase
 
         $values = $this->route->match('mod/ctrl');
 
-        $this->assertInternalType('array', $values);
+        $this->assertIsArray($values);
         $this->assertSame('mod', $values['m'], var_export(array_keys($values), 1));
         $this->assertSame('ctrl', $values['c'], var_export(array_keys($values), 1));
         $this->assertSame('index', $values['a'], var_export(array_keys($values), 1));
@@ -435,7 +435,7 @@ class Zend_Controller_Router_Route_ModuleTest extends PHPUnit\Framework\TestCase
 
         $values = $this->route->match('mod/ctrl');
 
-        $this->assertInternalType('array', $values);
+        $this->assertIsArray($values);
         $this->assertSame('mod', $values['m'], var_export(array_keys($values), 1));
         $this->assertSame('ctrl', $values['c'], var_export(array_keys($values), 1));
         $this->assertSame('index', $values['a'], var_export(array_keys($values), 1));
@@ -453,6 +453,6 @@ class Zend_Controller_Router_Route_ModuleTest extends PHPUnit\Framework\TestCase
             'module'                  => 'default',
         );
         $url = $this->route->assemble($params);
-        $this->assertNotContains('"><script>alert(11639)<', $url);
+        $this->assertStringNotContainsString('"><script>alert(11639)<', $url);
     }
 }

@@ -38,7 +38,7 @@ class Zend_Controller_Action_HelperBrokerTest extends PHPUnit\Framework\TestCase
      */
     protected $front;
 
-    public function setUp()
+    public function setUp(): void
     {
         $this->front = Zend_Controller_Front::getInstance();
         $this->front->resetInstance();
@@ -159,7 +159,7 @@ class Zend_Controller_Action_HelperBrokerTest extends PHPUnit\Framework\TestCase
 
         $this->front->returnResponse(true);
         $response = $this->front->dispatch($request);
-        $this->assertContains('not found', $response->getBody());
+        $this->assertStringContainsString('not found', $response->getBody());
     }
 
     public function testCustomHelperRegistered()
@@ -201,7 +201,7 @@ class Zend_Controller_Action_HelperBrokerTest extends PHPUnit\Framework\TestCase
         Zend_Controller_Action_HelperBroker::addHelper(new Zend_Controller_Action_Helper_ViewRenderer()); // @todo in future this should throw an exception
 
         $helpers = Zend_Controller_Action_HelperBroker::getExistingHelpers();
-        $this->assertInternalType('array', $helpers);
+        $this->assertIsArray($helpers);
         $this->assertCount(2, $helpers);
         $this->assertContains('ViewRenderer', array_keys($helpers));
         $this->assertContains('Redirector', array_keys($helpers));
@@ -213,7 +213,7 @@ class Zend_Controller_Action_HelperBrokerTest extends PHPUnit\Framework\TestCase
         $this->assertTrue($helper instanceof Zend_Controller_Action_Helper_ViewRenderer);
 
         $helpers = Zend_Controller_Action_HelperBroker::getExistingHelpers();
-        $this->assertInternalType('array', $helpers);
+        $this->assertIsArray($helpers);
         $this->assertCount(1, $helpers);
     }
 

@@ -43,7 +43,7 @@ class Zend_Controller_Plugin_ActionStackTest extends PHPUnit\Framework\TestCase
      *
      * @return void
      */
-    public function setUp()
+    public function setUp(): void
     {
         $this->removeRegistryEntry();
         $this->registry = Zend_Registry::getInstance();
@@ -55,7 +55,7 @@ class Zend_Controller_Plugin_ActionStackTest extends PHPUnit\Framework\TestCase
      *
      * @return void
      */
-    protected function tearDown()
+    protected function tearDown(): void
     {
         $this->removeRegistryEntry();
     }
@@ -144,7 +144,7 @@ class Zend_Controller_Plugin_ActionStackTest extends PHPUnit\Framework\TestCase
     {
         $plugin = new Zend_Controller_Plugin_ActionStack();
         $stack  = $plugin->getStack();
-        $this->assertInternalType('array', $stack);
+        $this->assertIsArray($stack);
         $this->assertEmpty($stack);
     }
 
@@ -158,14 +158,14 @@ class Zend_Controller_Plugin_ActionStackTest extends PHPUnit\Framework\TestCase
         $request1 = new Zend_Controller_Request_Simple();
         $plugin->pushStack($request1);
         $received = $plugin->getStack();
-        $this->assertInternalType('array', $received);
+        $this->assertIsArray($received);
         $this->assertCount(1, $received);
         $this->assertSame($request1, $received[0]);
 
         $request2 = new Zend_Controller_Request_Simple();
         $plugin->pushStack($request2);
         $received = $plugin->getStack();
-        $this->assertInternalType('array', $received);
+        $this->assertIsArray($received);
         $this->assertCount(2, $received);
         $this->assertSame($request2, $received[1]);
         $this->assertSame($request1, $received[0]);

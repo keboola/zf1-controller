@@ -318,6 +318,7 @@ class Zend_Controller_Router_Route_RegexTest extends PHPUnit\Framework\TestCase
         $route = new Zend_Controller_Router_Route_Regex('users/(.+)', null, null, 'users/%s');
 
         $this->expectException(Zend_Controller_Router_Exception::class);
+        $this->expectExceptionMessage('Cannot assemble. Too few arguments?');
         $url = $route->assemble();
     }
 

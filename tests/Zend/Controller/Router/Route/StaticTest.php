@@ -37,7 +37,7 @@ class Zend_Controller_Router_Route_StaticTest extends PHPUnit\Framework\TestCase
         $route  = new Zend_Controller_Router_Route_Static('users/all');
         $values = $route->match('users/all');
 
-        $this->assertInternalType('array', $values);
+        $this->assertIsArray($values);
     }
 
     public function testStaticMatchFailure()
@@ -56,7 +56,7 @@ class Zend_Controller_Router_Route_StaticTest extends PHPUnit\Framework\TestCase
         );
         $values = $route->match('users/all');
 
-        $this->assertInternalType('array', $values);
+        $this->assertIsArray($values);
         $this->assertSame('ctrl', $values['controller']);
         $this->assertSame('act', $values['action']);
     }
@@ -66,7 +66,7 @@ class Zend_Controller_Router_Route_StaticTest extends PHPUnit\Framework\TestCase
         $route  = new Zend_Controller_Router_Route_Static('żółć');
         $values = $route->match('żółć');
 
-        $this->assertInternalType('array', $values);
+        $this->assertIsArray($values);
     }
 
     public function testRootRoute()
@@ -94,7 +94,7 @@ class Zend_Controller_Router_Route_StaticTest extends PHPUnit\Framework\TestCase
 
         $values = $route->getDefaults();
 
-        $this->assertInternalType('array', $values);
+        $this->assertIsArray($values);
         $this->assertSame('ctrl', $values['controller']);
         $this->assertSame('act', $values['action']);
     }
