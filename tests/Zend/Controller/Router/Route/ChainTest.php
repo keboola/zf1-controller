@@ -257,7 +257,7 @@ class Zend_Controller_Router_Route_ChainTest extends PHPUnit\Framework\TestCase
         $res     = $chain->match($request);
 
         $this->assertIsArray($res);
-        $this->assertRegExp('#[^a-z0-9]?foobar\.zend\.com/bar/foo/bar#i', $chain->assemble(array('account' => 'foobar', 'foo' => 'bar')));
+        $this->assertMatchesRegularExpression('#[^a-z0-9]?foobar\.zend\.com/bar/foo/bar#i', $chain->assemble(array('account' => 'foobar', 'foo' => 'bar')));
     }
 
     public function testChainingAssembleWithStatic()
@@ -273,7 +273,7 @@ class Zend_Controller_Router_Route_ChainTest extends PHPUnit\Framework\TestCase
         $res     = $chain->match($request);
 
         $this->assertIsArray($res);
-        $this->assertRegExp('#[^a-z0-9]?www\.zend\.com/bar$#i', $chain->assemble());
+        $this->assertMatchesRegularExpression('#[^a-z0-9]?www\.zend\.com/bar$#i', $chain->assemble());
     }
 
     public function testChainingAssembleWithRegex()
@@ -289,7 +289,7 @@ class Zend_Controller_Router_Route_ChainTest extends PHPUnit\Framework\TestCase
         $res     = $chain->match($request);
 
         $this->assertIsArray($res);
-        $this->assertRegExp('#[^a-z0-9]?www\.zend\.com/bar$#i', $chain->assemble());
+        $this->assertMatchesRegularExpression('#[^a-z0-9]?www\.zend\.com/bar$#i', $chain->assemble());
     }
 
     public function testChainingReuse()

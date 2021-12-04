@@ -757,7 +757,7 @@ class Zend_Controller_Action_Helper_ViewRendererTest extends PHPUnit\Framework\T
         $viewScriptPaths = $this->helper->view->getAllPaths();
 
         $expectedPathRegex = '#modules/bar/bar/scripts/$#';
-        $this->assertRegExp(
+        $this->assertMatchesRegularExpression(
             $expectedPathRegex,
             $this->_normalizePath($viewScriptPaths['script'][0])
         );
@@ -777,7 +777,7 @@ class Zend_Controller_Action_Helper_ViewRendererTest extends PHPUnit\Framework\T
         $viewScriptPaths = $this->helper->view->getAllPaths();
 
         $expectedPathRegex = '#modules/foo/views/scripts/$#';
-        $this->assertRegExp(
+        $this->assertMatchesRegularExpression(
             $expectedPathRegex,
             $this->_normalizePath($viewScriptPaths['script'][0])
         );

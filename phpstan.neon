@@ -2,7 +2,7 @@ parameters:
     level: 1
     paths:
         - ./
-    excludes_analyse:
+    excludePaths:
         - %rootDir%/../../../tests/*
         - %rootDir%/../../../vendor/*
     universalObjectCratesClasses:
