@@ -7,3 +7,7 @@ Zend Framework 1 - Controller
 [![License](https://poser.pugx.org/diablomedia/zendframework1-controller/license)](https://packagist.org/packages/diablomedia/zendframework1-controller)
 
 This is just the Zend_Controller component extracted from our fork of the Zend Framework 1 repo (https://github.com/diablomedia/zf1).
+
+## License
+
+MIT licensed, see [LICENSE](./LICENSE) file.
