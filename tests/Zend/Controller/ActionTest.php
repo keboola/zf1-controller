@@ -32,7 +32,7 @@
  */
 class Zend_Controller_ActionTest extends PHPUnit\Framework\TestCase
 {
-    public function setUp()
+    public function setUp(): void
     {
         Zend_Controller_Action_HelperBroker::resetHelpers();
         $front = Zend_Controller_Front::getInstance();
@@ -53,7 +53,7 @@ class Zend_Controller_ActionTest extends PHPUnit\Framework\TestCase
         $redirector->setExit(false);
     }
 
-    public function tearDown()
+    public function tearDown(): void
     {
         unset($this->_controller);
     }
@@ -67,21 +67,21 @@ class Zend_Controller_ActionTest extends PHPUnit\Framework\TestCase
     public function testPreRun()
     {
         $this->_controller->preDispatch();
-        $this->assertNotContains('Prerun ran', $this->_controller->getResponse()->getBody());
+        $this->assertStringNotContainsString('Prerun ran', $this->_controller->getResponse()->getBody());
 
         $this->_controller->getRequest()->setParam('prerun', true);
         $this->_controller->preDispatch();
-        $this->assertContains('Prerun ran', $this->_controller->getResponse()->getBody());
+        $this->assertStringContainsString('Prerun ran', $this->_controller->getResponse()->getBody());
     }
 
     public function testPostRun()
     {
         $this->_controller->postDispatch();
-        $this->assertNotContains('Postrun ran', $this->_controller->getResponse()->getBody());
+        $this->assertStringNotContainsString('Postrun ran', $this->_controller->getResponse()->getBody());
 
         $this->_controller->getRequest()->setParam('postrun', true);
         $this->_controller->postDispatch();
-        $this->assertContains('Postrun ran', $this->_controller->getResponse()->getBody());
+        $this->assertStringContainsString('Postrun ran', $this->_controller->getResponse()->getBody());
     }
 
     public function testGetRequest()
@@ -164,8 +164,8 @@ class Zend_Controller_ActionTest extends PHPUnit\Framework\TestCase
     {
         $response = $this->_controller->run();
         $body     = $response->getBody();
-        $this->assertContains('In the index action', $body, var_export($this->_controller->getRequest(), 1));
-        $this->assertNotContains('Prerun ran', $body, $body);
+        $this->assertStringContainsString('In the index action', $body, var_export($this->_controller->getRequest(), 1));
+        $this->assertStringNotContainsString('Prerun ran', $body, $body);
     }
 
     public function testRun2()
@@ -181,8 +181,8 @@ class Zend_Controller_ActionTest extends PHPUnit\Framework\TestCase
     {
         $this->_controller->getRequest()->setActionName('foo');
         $response = $this->_controller->run();
-        $this->assertContains('In the foo action', $response->getBody());
-        $this->assertNotContains('Prerun ran', $this->_controller->getResponse()->getBody());
+        $this->assertStringContainsString('In the foo action', $response->getBody());
+        $this->assertStringNotContainsString('Prerun ran', $this->_controller->getResponse()->getBody());
     }
 
     public function testHasParam()
@@ -255,7 +255,7 @@ class Zend_Controller_ActionTest extends PHPUnit\Framework\TestCase
             }
         }
         $this->assertEquals(1, $found);
-        $this->assertContains('/foo/bar', $url);
+        $this->assertStringContainsString('/foo/bar', $url);
     }
 
     public function testInitView()
@@ -269,7 +269,7 @@ class Zend_Controller_ActionTest extends PHPUnit\Framework\TestCase
         $view = $controller->initView();
         $this->assertTrue($view instanceof Zend_View);
         $scriptPath = $view->getScriptPaths();
-        $this->assertInternalType('array', $scriptPath);
+        $this->assertIsArray($scriptPath);
         $this->assertEquals(dirname(__FILE__) . DIRECTORY_SEPARATOR . 'views' . DIRECTORY_SEPARATOR . 'scripts/', $scriptPath[0]);
     }
 
@@ -284,7 +284,7 @@ class Zend_Controller_ActionTest extends PHPUnit\Framework\TestCase
         $controller = new ViewController($request, $response);
 
         $controller->indexAction();
-        $this->assertContains('In the index action view', $response->getBody());
+        $this->assertStringContainsString('In the index action view', $response->getBody());
     }
 
     public function testRenderByName()
@@ -298,7 +298,7 @@ class Zend_Controller_ActionTest extends PHPUnit\Framework\TestCase
         $controller = new ViewController($request, $response);
 
         $controller->testAction();
-        $this->assertContains('In the index action view', $response->getBody());
+        $this->assertStringContainsString('In the index action view', $response->getBody());
     }
 
     public function testRenderOutsideControllerSubdir()
@@ -312,7 +312,7 @@ class Zend_Controller_ActionTest extends PHPUnit\Framework\TestCase
         $controller = new ViewController($request, $response);
 
         $controller->siteAction();
-        $this->assertContains('In the sitewide view', $response->getBody());
+        $this->assertStringContainsString('In the sitewide view', $response->getBody());
     }
 
     public function testRenderNamedSegment()
@@ -326,7 +326,7 @@ class Zend_Controller_ActionTest extends PHPUnit\Framework\TestCase
         $controller = new ViewController($request, $response);
 
         $controller->nameAction();
-        $this->assertContains('In the name view', $response->getBody('name'));
+        $this->assertStringContainsString('In the name view', $response->getBody('name'));
     }
 
     public function testRenderNormalizesScriptName()
@@ -340,7 +340,7 @@ class Zend_Controller_ActionTest extends PHPUnit\Framework\TestCase
         $controller = new FooBarController($request, $response);
 
         $controller->bazBatAction();
-        $this->assertContains('Inside foo-bar/baz-bat.phtml', $response->getBody());
+        $this->assertStringContainsString('Inside foo-bar/baz-bat.phtml', $response->getBody());
     }
 
     public function testGetViewScript()
@@ -354,10 +354,10 @@ class Zend_Controller_ActionTest extends PHPUnit\Framework\TestCase
         $controller = new ViewController($request, $response);
 
         $script = $controller->getViewScript();
-        $this->assertContains('view' . DIRECTORY_SEPARATOR . 'test.phtml', $script);
+        $this->assertStringContainsString('view' . DIRECTORY_SEPARATOR . 'test.phtml', $script);
 
         $script = $controller->getViewScript('foo');
-        $this->assertContains('view' . DIRECTORY_SEPARATOR . 'foo.phtml', $script);
+        $this->assertStringContainsString('view' . DIRECTORY_SEPARATOR . 'foo.phtml', $script);
     }
 
     public function testGetViewScriptDoesNotOverwriteNoControllerFlagWhenNullPassed()
@@ -393,7 +393,7 @@ class Zend_Controller_ActionTest extends PHPUnit\Framework\TestCase
         $controller = new ViewController($request, $response);
 
         $controller->scriptAction();
-        $this->assertContains('Inside custom/renderScript.php', $response->getBody());
+        $this->assertStringContainsString('Inside custom/renderScript.php', $response->getBody());
     }
 
     public function testRenderScriptToNamedResponseSegment()
@@ -408,7 +408,7 @@ class Zend_Controller_ActionTest extends PHPUnit\Framework\TestCase
 
         $controller->scriptNameAction();
 
-        $this->assertContains('Inside custom/renderScript.php', $response->getBody('foo'));
+        $this->assertStringContainsString('Inside custom/renderScript.php', $response->getBody('foo'));
     }
 
     public function testGetHelper()
@@ -451,7 +451,7 @@ class Zend_Controller_ActionTest extends PHPUnit\Framework\TestCase
         $controller = new ViewController($request, $response);
 
         $controller->scriptAction();
-        $this->assertContains('Inside custom/renderScript.php', $response->getBody());
+        $this->assertStringContainsString('Inside custom/renderScript.php', $response->getBody());
     }
 
     public function testMissingActionExceptionsDifferFromMissingMethods()
@@ -460,9 +460,9 @@ class Zend_Controller_ActionTest extends PHPUnit\Framework\TestCase
             $this->_controller->bogusAction();
             $this->fail('Invalid action should throw exception');
         } catch (Zend_Controller_Exception $e) {
-            $this->assertRegExp('/^Action.*?(does not exist and was not trapped in __call\(\))$/', $e->getMessage());
-            $this->assertContains('bogus', $e->getMessage());
-            $this->assertNotContains('bogusAction', $e->getMessage());
+            $this->assertMatchesRegularExpression('/^Action.*?(does not exist and was not trapped in __call\(\))$/', $e->getMessage());
+            $this->assertStringContainsString('bogus', $e->getMessage());
+            $this->assertStringNotContainsString('bogusAction', $e->getMessage());
             $this->assertEquals(404, $e->getCode());
         }
 
@@ -470,8 +470,8 @@ class Zend_Controller_ActionTest extends PHPUnit\Framework\TestCase
             $this->_controller->bogus();
             $this->fail('Invalid method should throw exception');
         } catch (Zend_Controller_Exception $e) {
-            $this->assertRegExp('/^Method.*?(does not exist and was not trapped in __call\(\))$/', $e->getMessage());
-            $this->assertContains('bogus', $e->getMessage());
+            $this->assertMatchesRegularExpression('/^Method.*?(does not exist and was not trapped in __call\(\))$/', $e->getMessage());
+            $this->assertStringContainsString('bogus', $e->getMessage());
             $this->assertEquals(500, $e->getCode());
         }
     }

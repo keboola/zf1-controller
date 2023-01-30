@@ -59,7 +59,7 @@ class Zend_Controller_Action_Helper_FlashMessengerTest extends PHPUnit\Framework
      */
     public $response;
 
-    public function setUp()
+    public function setUp(): void
     {
         $savePath = ini_get('session.save_path');
         if (strpos($savePath, ';')) {

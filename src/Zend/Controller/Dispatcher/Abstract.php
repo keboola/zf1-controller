@@ -217,7 +217,7 @@ abstract class Zend_Controller_Dispatcher_Abstract implements Zend_Controller_Di
      * the following word Title cased. All non-alphanumeric characters are
      * removed.
      *
-     * @param string $unformatted
+     * @param string|null $unformatted
      * @param boolean $isAction Defaults to false
      * @return string
      */
@@ -225,9 +225,9 @@ abstract class Zend_Controller_Dispatcher_Abstract implements Zend_Controller_Di
     {
         // preserve directories
         if (!$isAction) {
-            $segments = explode($this->getPathDelimiter(), $unformatted);
+            $segments = explode($this->getPathDelimiter(), $unformatted ?? '');
         } else {
-            $segments = (array) $unformatted;
+            $segments = (array) ($unformatted ?? '');
         }
 
         foreach ($segments as $key => $segment) {

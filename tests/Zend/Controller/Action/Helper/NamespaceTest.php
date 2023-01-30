@@ -40,10 +40,6 @@ class Zend_Controller_Action_Helper_NamespaceTest extends PHPUnit\Framework\Test
      */
     public function testGetNameWithNamespace()
     {
-        if (version_compare(PHP_VERSION, '5.3.0') === -1) {
-            $this->markTestSkipped('Namespaces not available in PHP < 5.3.0');
-        }
-
         require_once dirname(__FILE__) . '/../../_files/Helpers/NamespacedHelper.php';
 
         $className = 'MyApp\Controller\Action\Helper\NamespacedHelper';

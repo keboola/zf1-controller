@@ -50,10 +50,8 @@ class Zend_Controller_Plugin_PutHandlerTest extends PHPUnit\Framework\TestCase
     /**
      * Sets up the fixture, for example, open a network connection.
      * This method is called before a test is executed.
-     *
-     * @access protected
      */
-    protected function setUp()
+    public function setUp(): void
     {
         Zend_Controller_Front::getInstance()->resetInstance();
         $this->request = new Zend_Controller_Request_HttpTestCase();

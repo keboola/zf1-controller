@@ -40,7 +40,7 @@ class Zend_Controller_Response_HttpTestCaseTest extends PHPUnit\Framework\TestCa
      *
      * @return void
      */
-    public function setUp()
+    public function setUp(): void
     {
         $this->response = new Zend_Controller_Response_HttpTestCase();
     }
@@ -51,7 +51,7 @@ class Zend_Controller_Response_HttpTestCaseTest extends PHPUnit\Framework\TestCa
      *
      * @return void
      */
-    public function tearDown()
+    public function tearDown(): void
     {
     }
 
@@ -70,7 +70,7 @@ class Zend_Controller_Response_HttpTestCaseTest extends PHPUnit\Framework\TestCa
         $this->response->setHeader('X-Foo-Bar', 'baz')
                        ->setBody('Body to emit');
         $test = $this->response->sendResponse();
-        $this->assertContains("X-Foo-Bar: baz\n\nBody to emit", $test);
+        $this->assertStringContainsString("X-Foo-Bar: baz\n\nBody to emit", $test);
     }
 
     public function testOutputBodyShouldReturnStringInsteadOfEchoingOutput()
@@ -83,7 +83,7 @@ class Zend_Controller_Response_HttpTestCaseTest extends PHPUnit\Framework\TestCa
         $test    = ob_get_clean();
         $this->assertEmpty($test);
         $this->assertNotEmpty($content);
-        $this->assertContains("Baz Content\nFoo Content\nBar Content\n", $content, $content);
+        $this->assertStringContainsString("Baz Content\nFoo Content\nBar Content\n", $content, $content);
     }
 
     public function testSendHeadersShouldReturnArrayOfHeadersInsteadOfSendingHeaders()
@@ -93,7 +93,7 @@ class Zend_Controller_Response_HttpTestCaseTest extends PHPUnit\Framework\TestCa
                        ->setHeader('Content-Type', 'text/html', true)
                        ->setHeader('X-Foo-Bar', 'baz');
         $test = $this->response->sendHeaders();
-        $this->assertInternalType('array', $test);
+        $this->assertIsArray($test);
         $this->assertCount(3, $test);
         $this->assertNotContains('Content-Type: text/xml', $test);
         $this->assertContains('Content-Type: text/html', $test);

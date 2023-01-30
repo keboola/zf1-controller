@@ -40,7 +40,7 @@ class Zend_Controller_Request_HttpTestCaseTest extends PHPUnit\Framework\TestCas
      *
      * @return void
      */
-    public function setUp()
+    public function setUp(): void
     {
         $this->request = new Zend_Controller_Request_HttpTestCase();
         $_GET          = array();
@@ -54,7 +54,7 @@ class Zend_Controller_Request_HttpTestCaseTest extends PHPUnit\Framework\TestCas
      *
      * @return void
      */
-    public function tearDown()
+    public function tearDown(): void
     {
     }
 
@@ -72,7 +72,7 @@ class Zend_Controller_Request_HttpTestCaseTest extends PHPUnit\Framework\TestCas
     public function testGetShouldBeEmptyByDefault()
     {
         $post = $this->request->getQuery();
-        $this->assertInternalType('array', $post);
+        $this->assertIsArray($post);
         $this->assertEmpty($post);
     }
 
@@ -115,14 +115,14 @@ class Zend_Controller_Request_HttpTestCaseTest extends PHPUnit\Framework\TestCas
         $this->testShouldPopulateGetSuperglobal();
         $this->request->clearQuery();
         $test = $this->request->getQuery();
-        $this->assertInternalType('array', $test);
+        $this->assertIsArray($test);
         $this->assertEmpty($test);
     }
 
     public function testPostShouldBeEmptyByDefault()
     {
         $post = $this->request->getPost();
-        $this->assertInternalType('array', $post);
+        $this->assertIsArray($post);
         $this->assertEmpty($post);
     }
 
@@ -165,7 +165,7 @@ class Zend_Controller_Request_HttpTestCaseTest extends PHPUnit\Framework\TestCas
         $this->testShouldPopulatePostSuperglobal();
         $this->request->clearPost();
         $test = $this->request->getPost();
-        $this->assertInternalType('array', $test);
+        $this->assertIsArray($test);
         $this->assertEmpty($test);
     }
 
@@ -190,7 +190,7 @@ class Zend_Controller_Request_HttpTestCaseTest extends PHPUnit\Framework\TestCas
     public function testHeadersShouldBeEmptyByDefault()
     {
         $headers = $this->request->getHeaders();
-        $this->assertInternalType('array', $headers);
+        $this->assertIsArray($headers);
         $this->assertEmpty($headers);
     }
 
@@ -202,14 +202,14 @@ class Zend_Controller_Request_HttpTestCaseTest extends PHPUnit\Framework\TestCas
         );
         $this->request->setHeaders($headers);
         $test = $this->request->getHeaders();
-        $this->assertInternalType('array', $test);
+        $this->assertIsArray($test);
         $this->assertCount(2, $test);
         foreach ($headers as $key => $value) {
             $this->assertEquals($value, $this->request->getHeader($key));
         }
         $this->request->setHeader('X-Requested-With', 'XMLHttpRequest');
         $test = $this->request->getHeaders();
-        $this->assertInternalType('array', $test);
+        $this->assertIsArray($test);
         $this->assertCount(3, $test);
         $this->assertEquals('XMLHttpRequest', $this->request->getHeader('X-Requested-With'));
     }
@@ -219,14 +219,14 @@ class Zend_Controller_Request_HttpTestCaseTest extends PHPUnit\Framework\TestCas
         $this->testShouldAllowSpecifyingRequestHeaders();
         $this->request->clearHeaders();
         $headers = $this->request->getHeaders();
-        $this->assertInternalType('array', $headers);
+        $this->assertIsArray($headers);
         $this->assertEmpty($headers);
     }
 
     public function testCookiesShouldBeEmptyByDefault()
     {
         $cookies = $this->request->getCookie();
-        $this->assertInternalType('array', $cookies);
+        $this->assertIsArray($cookies);
         $this->assertEmpty($cookies);
     }
 
@@ -262,7 +262,7 @@ class Zend_Controller_Request_HttpTestCaseTest extends PHPUnit\Framework\TestCas
         $this->testShouldAllowSpecifyingCookies();
         $this->request->clearCookies();
         $test = $this->request->getCookie();
-        $this->assertInternalType('array', $test);
+        $this->assertIsArray($test);
         $this->assertEmpty($test);
     }
 

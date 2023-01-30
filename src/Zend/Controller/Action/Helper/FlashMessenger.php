@@ -258,6 +258,7 @@ class Zend_Controller_Action_Helper_FlashMessenger extends Zend_Controller_Actio
      *
      * @return ArrayObject
      */
+    #[\ReturnTypeWillChange]
     public function getIterator($namespace = null)
     {
         if (!is_string($namespace) || $namespace == '') {
@@ -276,6 +277,7 @@ class Zend_Controller_Action_Helper_FlashMessenger extends Zend_Controller_Actio
      *
      * @return int
      */
+    #[\ReturnTypeWillChange]
     public function count($namespace = null)
     {
         if (!is_string($namespace) || $namespace == '') {

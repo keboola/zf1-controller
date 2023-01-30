@@ -429,7 +429,7 @@ class Zend_Controller_Request_Http extends Zend_Controller_Request_Abstract
      * Returns the REQUEST_URI taking into account
      * platform differences between Apache and IIS
      *
-     * @return string
+     * @return string|null
      */
     public function getRequestUri()
     {
@@ -495,25 +495,25 @@ class Zend_Controller_Request_Http extends Zend_Controller_Request_Abstract
             // Does the baseUrl have anything in common with the request_uri?
             $requestUri = $this->getRequestUri();
 
-            if (0 === strpos($requestUri, $baseUrl)) {
+            if (0 === strpos($requestUri ?? '', $baseUrl)) {
                 // full $baseUrl matches
                 $this->_baseUrl = $baseUrl;
                 return $this;
             }
 
-            if (0 === strpos($requestUri, dirname($baseUrl))) {
+            if (0 === strpos($requestUri ?? '', dirname($baseUrl))) {
                 // directory portion of $baseUrl matches
                 $this->_baseUrl = rtrim(dirname($baseUrl), '/');
                 return $this;
             }
 
             $truncatedRequestUri = $requestUri;
-            if (($pos = strpos($requestUri, '?')) !== false) {
-                $truncatedRequestUri = substr($requestUri, 0, $pos);
+            if (($pos = strpos($requestUri ?? '', '?')) !== false) {
+                $truncatedRequestUri = substr($requestUri ?? '', 0, $pos);
             }
 
             $basename = basename($baseUrl);
-            if (empty($basename) || !strpos($truncatedRequestUri, $basename)) {
+            if (empty($basename) || !strpos($truncatedRequestUri ?? '', $basename)) {
                 // no match whatsoever; set it blank
                 $this->_baseUrl = '';
                 return $this;
@@ -522,9 +522,9 @@ class Zend_Controller_Request_Http extends Zend_Controller_Request_Abstract
             // If using mod_rewrite or ISAPI_Rewrite strip the script filename
             // out of baseUrl. $pos !== 0 makes sure it is not matching a value
             // from PATH_INFO or QUERY_STRING
-            if ((strlen($requestUri) >= strlen($baseUrl))
-                && ((false !== ($pos = strpos($requestUri, $baseUrl))) && ($pos !== 0))) {
-                $baseUrl = substr($requestUri, 0, $pos + strlen($baseUrl));
+            if ((strlen($requestUri ?? '') >= strlen($baseUrl))
+                && ((false !== ($pos = strpos($requestUri ?? '', $baseUrl))) && ($pos !== 0))) {
+                $baseUrl = substr($requestUri ?? '', 0, $pos + strlen($baseUrl));
             }
         }
 

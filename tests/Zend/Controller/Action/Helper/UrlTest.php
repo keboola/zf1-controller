@@ -41,7 +41,7 @@ class Zend_Controller_Action_Helper_UrlTest extends PHPUnit\Framework\TestCase
      *
      * @return void
      */
-    public function setUp()
+    public function setUp(): void
     {
         $this->front = Zend_Controller_Front::getInstance();
         $this->front->resetInstance();
@@ -55,7 +55,7 @@ class Zend_Controller_Action_Helper_UrlTest extends PHPUnit\Framework\TestCase
      *
      * @return void
      */
-    public function tearDown()
+    public function tearDown(): void
     {
         unset($this->helper);
     }
@@ -64,8 +64,8 @@ class Zend_Controller_Action_Helper_UrlTest extends PHPUnit\Framework\TestCase
     {
         $url = $this->helper->simple('baz', 'bar', 'foo', array('bat' => 'foo', 'ho' => 'hum'));
         $this->assertEquals('/foo/bar/baz', substr($url, 0, 12));
-        $this->assertContains('/bat/foo', $url);
-        $this->assertContains('/ho/hum', $url);
+        $this->assertStringContainsString('/bat/foo', $url);
+        $this->assertStringContainsString('/ho/hum', $url);
     }
 
     public function testSimpleWithMissingControllerAndModuleProducesAppropriateUrl()
@@ -75,8 +75,8 @@ class Zend_Controller_Action_Helper_UrlTest extends PHPUnit\Framework\TestCase
                 ->setControllerName('bar');
         $url = $this->helper->simple('baz', null, null, array('bat' => 'foo', 'ho' => 'hum'));
         $this->assertEquals('/foo/bar/baz', substr($url, 0, 12));
-        $this->assertContains('/bat/foo', $url);
-        $this->assertContains('/ho/hum', $url);
+        $this->assertStringContainsString('/bat/foo', $url);
+        $this->assertStringContainsString('/ho/hum', $url);
     }
 
     public function testSimpleWithDefaultModuleProducesUrlWithoutModuleSegment()
@@ -131,16 +131,16 @@ class Zend_Controller_Action_Helper_UrlTest extends PHPUnit\Framework\TestCase
             'ho'         => 'hum'
         ));
         $this->assertEquals('/foo/bar/baz', substr($url, 0, 12));
-        $this->assertContains('/bat/foo', $url);
-        $this->assertContains('/ho/hum', $url);
+        $this->assertStringContainsString('/bat/foo', $url);
+        $this->assertStringContainsString('/ho/hum', $url);
     }
 
     public function testDirectProxiesToSimple()
     {
         $url = $this->helper->direct('baz', 'bar', 'foo', array('bat' => 'foo', 'ho' => 'hum'));
         $this->assertEquals('/foo/bar/baz', substr($url, 0, 12));
-        $this->assertContains('/bat/foo', $url);
-        $this->assertContains('/ho/hum', $url);
+        $this->assertStringContainsString('/bat/foo', $url);
+        $this->assertStringContainsString('/ho/hum', $url);
     }
 
     /**

@@ -39,7 +39,7 @@ class Zend_Controller_Action_HelperBroker_PriorityStackTest extends PHPUnit\Fram
      */
     public $stack = null;
 
-    public function setUp()
+    public function setUp(): void
     {
         $this->stack = new Zend_Controller_Action_HelperBroker_PriorityStack();
     }
