@@ -32,6 +32,8 @@
  */
 class Zend_Controller_ActionTest extends PHPUnit\Framework\TestCase
 {
+    protected $_controller;
+
     public function setUp(): void
     {
         Zend_Controller_Action_HelperBroker::resetHelpers();
@@ -267,7 +269,7 @@ class Zend_Controller_ActionTest extends PHPUnit\Framework\TestCase
             new Zend_Controller_Response_Cli()
         );
         $view = $controller->initView();
-        $this->assertTrue($view instanceof Zend_View);
+        $this->assertInstanceOf(Zend_View::class, $view);
         $scriptPath = $view->getScriptPaths();
         $this->assertIsArray($scriptPath);
         $this->assertEquals(dirname(__FILE__) . DIRECTORY_SEPARATOR . 'views' . DIRECTORY_SEPARATOR . 'scripts/', $scriptPath[0]);
@@ -414,8 +416,8 @@ class Zend_Controller_ActionTest extends PHPUnit\Framework\TestCase
     public function testGetHelper()
     {
         $redirector = $this->_controller->getHelper('redirector');
-        $this->assertTrue($redirector instanceof Zend_Controller_Action_Helper_Abstract);
-        $this->assertTrue($redirector instanceof Zend_Controller_Action_Helper_Redirector);
+        $this->assertInstanceOf(Zend_Controller_Action_Helper_Abstract::class, $redirector);
+        $this->assertInstanceOf(Zend_Controller_Action_Helper_Redirector::class, $redirector);
     }
 
     public function testGetHelperCopy()
@@ -423,7 +425,7 @@ class Zend_Controller_ActionTest extends PHPUnit\Framework\TestCase
         $redirector = $this->_controller->getHelper('redirector');
         $copy       = $this->_controller->getHelperCopy('redirector');
         $this->assertNotSame($redirector, $copy);
-        $this->assertTrue($copy instanceof Zend_Controller_Action_Helper_Redirector);
+        $this->assertInstanceOf(Zend_Controller_Action_Helper_Redirector::class, $copy);
     }
 
     public function testViewInjectionUsingViewRenderer()

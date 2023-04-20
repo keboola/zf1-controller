@@ -34,6 +34,8 @@ class Zend_Controller_Dispatcher_StandardTest extends PHPUnit\Framework\TestCase
 {
     protected $_dispatcher;
 
+    protected $error;
+
     public function setUp(): void
     {
         if (isset($this->error)) {

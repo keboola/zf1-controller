@@ -481,7 +481,7 @@ class Zend_Controller_Router_RouteTest extends PHPUnit\Framework\TestCase
         $config = new Zend_Config($routeConf);
         $route  = Zend_Controller_Router_Route::getInstance($config);
 
-        $this->assertTrue($route instanceof Zend_Controller_Router_Route);
+        $this->assertInstanceOf(Zend_Controller_Router_Route::class, $route);
 
         $values = $route->match('users/all');
 

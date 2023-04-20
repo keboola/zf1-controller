@@ -235,7 +235,7 @@ class Zend_Controller_Plugin_ActionStackTest extends PHPUnit\Framework\TestCase
         $plugin->pushStack($request1);
 
         $next = $plugin->popStack();
-        $this->assertTrue($next instanceof Zend_Controller_Request_Simple);
+        $this->assertInstanceOf(Zend_Controller_Request_Simple::class, $next);
         $this->assertEquals($request1->getActionName(), $next->getActionName());
         $this->assertEquals($request->getControllerName(), $next->getControllerName());
         $this->assertEquals($request->getModuleName(), $next->getModuleName());

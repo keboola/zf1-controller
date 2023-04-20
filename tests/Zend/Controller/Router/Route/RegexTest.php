@@ -393,7 +393,7 @@ class Zend_Controller_Router_Route_RegexTest extends PHPUnit\Framework\TestCase
         $config = new Zend_Config($routeConf);
         $route  = Zend_Controller_Router_Route_Regex::getInstance($config);
 
-        $this->assertTrue($route instanceof Zend_Controller_Router_Route_Regex);
+        $this->assertInstanceOf(Zend_Controller_Router_Route_Regex::class, $route);
 
         $values = $route->match('forum/1');
 

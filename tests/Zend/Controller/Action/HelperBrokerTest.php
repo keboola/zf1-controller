@@ -210,7 +210,7 @@ class Zend_Controller_Action_HelperBrokerTest extends PHPUnit\Framework\TestCase
     public function testGetHelperStatically()
     {
         $helper = Zend_Controller_Action_HelperBroker::getStaticHelper('viewRenderer');
-        $this->assertTrue($helper instanceof Zend_Controller_Action_Helper_ViewRenderer);
+        $this->assertInstanceOf(Zend_Controller_Action_Helper_ViewRenderer::class, $helper);
 
         $helpers = Zend_Controller_Action_HelperBroker::getExistingHelpers();
         $this->assertIsArray($helpers);
@@ -281,7 +281,7 @@ class Zend_Controller_Action_HelperBrokerTest extends PHPUnit\Framework\TestCase
         );
 
         $urlHelper = Zend_Controller_Action_HelperBroker::getStaticHelper('url');
-        $this->assertTrue($urlHelper instanceof MyApp_Url);
+        $this->assertInstanceOf(MyApp_Url::class, $urlHelper);
     }
 
     /**

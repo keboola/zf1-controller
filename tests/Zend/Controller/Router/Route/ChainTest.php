@@ -41,7 +41,7 @@ class Zend_Controller_Router_Route_ChainTest extends PHPUnit\Framework\TestCase
 
         $chain = $foo->chain($bar);
 
-        $this->assertTrue($chain instanceof Zend_Controller_Router_Route_Chain);
+        $this->assertInstanceOf(Zend_Controller_Router_Route_Chain::class, $chain);
     }
 
     public function testChainingMatch()

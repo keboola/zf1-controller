@@ -144,7 +144,7 @@ class Zend_Controller_Action_Helper_ViewRendererTest extends PHPUnit\Framework\T
         $this->assertNull($this->helper->getScriptAction());
 
         $scriptPaths = $this->helper->view->getScriptPaths();
-        $this->assertEquals($count, count($scriptPaths), var_export($scriptPaths, 1));
+        $this->assertCount($count, $scriptPaths, var_export($scriptPaths, 1));
         $this->assertStringContainsString($module, $scriptPaths[0]);
 
         $helperPaths = $this->helper->view->getHelperPaths();
@@ -668,7 +668,7 @@ class Zend_Controller_Action_Helper_ViewRendererTest extends PHPUnit\Framework\T
     public function testGetInflectorGetsDefaultInflectorWhenNoneProvided()
     {
         $inflector = $this->helper->getInflector();
-        $this->assertTrue($inflector instanceof Zend_Filter_Inflector);
+        $this->assertInstanceOf(Zend_Filter_Inflector::class, $inflector);
         $rules = $inflector->getRules();
         $this->assertTrue(isset($rules['module']));
         $this->assertTrue(isset($rules['moduleDir']));
@@ -680,7 +680,7 @@ class Zend_Controller_Action_Helper_ViewRendererTest extends PHPUnit\Framework\T
     public function testInflectorAccessorsAllowSwappingInflectors()
     {
         $inflector = $this->helper->getInflector();
-        $this->assertTrue($inflector instanceof Zend_Filter_Inflector);
+        $this->assertInstanceOf(Zend_Filter_Inflector::class, $inflector);
         $newInflector = new Zend_Filter_Inflector();
         $this->helper->setInflector($newInflector);
         $receivedInflector = $this->helper->getInflector();

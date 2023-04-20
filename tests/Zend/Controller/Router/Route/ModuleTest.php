@@ -395,7 +395,7 @@ class Zend_Controller_Router_Route_ModuleTest extends PHPUnit\Framework\TestCase
         $config = new Zend_Config($routeConf);
         $route  = Zend_Controller_Router_Route_Module::getInstance($config);
 
-        $this->assertTrue($route instanceof Zend_Controller_Router_Route_Module);
+        $this->assertInstanceOf(Zend_Controller_Router_Route_Module::class, $route);
     }
 
     public function testEncode()

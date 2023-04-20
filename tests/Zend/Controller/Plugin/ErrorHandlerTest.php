@@ -117,7 +117,7 @@ class Zend_Controller_Plugin_ErrorHandlerTest extends PHPUnit\Framework\TestCase
 
         $this->assertNotNull($this->request->getParam('error_handler'));
         $errorHandler = $this->request->getParam('error_handler');
-        $this->assertTrue($errorHandler instanceof ArrayObject);
+        $this->assertInstanceOf(ArrayObject::class, $errorHandler);
         $this->assertEquals(Zend_Controller_Plugin_ErrorHandler::EXCEPTION_NO_CONTROLLER, $errorHandler->type);
 
         $this->assertEquals('error', $this->request->getActionName());
@@ -135,7 +135,7 @@ class Zend_Controller_Plugin_ErrorHandlerTest extends PHPUnit\Framework\TestCase
 
         $this->assertNotNull($this->request->getParam('error_handler'));
         $errorHandler = $this->request->getParam('error_handler');
-        $this->assertTrue($errorHandler instanceof ArrayObject);
+        $this->assertInstanceOf(ArrayObject::class, $errorHandler);
         $this->assertEquals(Zend_Controller_Plugin_ErrorHandler::EXCEPTION_NO_ACTION, $errorHandler->type);
 
         $this->assertEquals('error', $this->request->getActionName());
@@ -153,7 +153,7 @@ class Zend_Controller_Plugin_ErrorHandlerTest extends PHPUnit\Framework\TestCase
 
         $this->assertNotNull($this->request->getParam('error_handler'));
         $errorHandler = $this->request->getParam('error_handler');
-        $this->assertTrue($errorHandler instanceof ArrayObject);
+        $this->assertInstanceOf(ArrayObject::class, $errorHandler);
         $this->assertEquals(Zend_Controller_Plugin_ErrorHandler::EXCEPTION_OTHER, $errorHandler->type);
 
         $this->assertEquals('error', $this->request->getActionName());
@@ -217,7 +217,7 @@ class Zend_Controller_Plugin_ErrorHandlerTest extends PHPUnit\Framework\TestCase
 
         $this->assertNotNull($this->request->getParam('error_handler'));
         $errorHandler = $this->request->getParam('error_handler');
-        $this->assertTrue($errorHandler instanceof ArrayObject);
+        $this->assertInstanceOf(ArrayObject::class, $errorHandler);
         $this->assertTrue($errorHandler->request instanceof Zend_Controller_Request_Http);
         $this->assertNotSame($this->request, $errorHandler->request);
     }

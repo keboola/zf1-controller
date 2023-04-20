@@ -55,6 +55,9 @@ class Zend_Controller_Action_Helper_RedirectorTest extends PHPUnit\Framework\Tes
      */
     public $controller;
 
+    protected $router;
+    protected $_server;
+
     /**
      * Set up redirector
      *

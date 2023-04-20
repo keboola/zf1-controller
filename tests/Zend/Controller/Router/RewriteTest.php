@@ -94,7 +94,7 @@ class Zend_Controller_Router_RewriteTest extends PHPUnit\Framework\TestCase
 
         $route = $this->_router->getRoute('archive');
 
-        $this->assertTrue($route instanceof Zend_Controller_Router_Route);
+        $this->assertInstanceOf(Zend_Controller_Router_Route::class, $route);
         $this->assertSame($route, $archive);
     }
 
@@ -112,7 +112,7 @@ class Zend_Controller_Router_RewriteTest extends PHPUnit\Framework\TestCase
         try {
             $route = $this->_router->removeRoute('archive');
         } catch (Zend_Controller_Router_Exception $e) {
-            $this->assertTrue($e instanceof Zend_Controller_Router_Exception);
+            $this->assertInstanceOf(Zend_Controller_Router_Exception::class, $e);
             return true;
         }
 
@@ -124,7 +124,7 @@ class Zend_Controller_Router_RewriteTest extends PHPUnit\Framework\TestCase
         try {
             $route = $this->_router->getRoute('bogus');
         } catch (Zend_Controller_Router_Exception $e) {
-            $this->assertTrue($e instanceof Zend_Controller_Router_Exception);
+            $this->assertInstanceOf(Zend_Controller_Router_Exception::class, $e);
             return true;
         }
 
@@ -137,7 +137,7 @@ class Zend_Controller_Router_RewriteTest extends PHPUnit\Framework\TestCase
 
         $token = $this->_router->route($request);
 
-        $this->assertTrue($token instanceof Zend_Controller_Request_Http);
+        $this->assertInstanceOf(Zend_Controller_Request_Http::class, $token);
     }
 
     public function testRouteWithIncorrectRequest()
@@ -148,7 +148,7 @@ class Zend_Controller_Router_RewriteTest extends PHPUnit\Framework\TestCase
             $token = $this->_router->route($request);
             $this->fail('Should throw an Exception');
         } catch (Exception $e) {
-            $this->assertTrue($e instanceof Zend_Controller_Router_Exception);
+            $this->assertInstanceOf(Zend_Controller_Router_Exception::class, $e);
         }
     }
 
@@ -269,14 +269,14 @@ class Zend_Controller_Router_RewriteTest extends PHPUnit\Framework\TestCase
             $route = $this->_router->getCurrentRoute();
             $this->fail();
         } catch (Exception $e) {
-            $this->assertTrue($e instanceof Zend_Controller_Router_Exception);
+            $this->assertInstanceOf(Zend_Controller_Router_Exception::class, $e);
         }
 
         try {
             $route = $this->_router->getCurrentRouteName();
             $this->fail();
         } catch (Exception $e) {
-            $this->assertTrue($e instanceof Zend_Controller_Router_Exception);
+            $this->assertInstanceOf(Zend_Controller_Router_Exception::class, $e);
         }
 
         $token = $this->_router->route($request);
@@ -289,7 +289,7 @@ class Zend_Controller_Router_RewriteTest extends PHPUnit\Framework\TestCase
         }
 
         $this->assertEquals('default', $name);
-        $this->assertTrue($route instanceof Zend_Controller_Router_Route_Module);
+        $this->assertInstanceOf(Zend_Controller_Router_Route_Module::class, $route);
     }
 
     public function testAddConfig()
@@ -441,8 +441,8 @@ class Zend_Controller_Router_RewriteTest extends PHPUnit\Framework\TestCase
         $this->_router->addRoute('req', new Zend_Controller_Router_Route_Interface_Mockup());
         $routeRequest = $this->_router->getRoute('req')->getRequest();
 
-        $this->assertTrue($request instanceof Zend_Controller_Request_Abstract);
-        $this->assertTrue($routeRequest instanceof Zend_Controller_Request_Abstract);
+        $this->assertInstanceOf(Zend_Controller_Request_Abstract::class, $request);
+        $this->assertInstanceOf(Zend_Controller_Request_Abstract::class, $routeRequest);
         $this->assertSame($request, $routeRequest);
     }
 
