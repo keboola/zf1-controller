@@ -171,7 +171,7 @@ class Zend_Controller_Action_Helper_CacheTest extends PHPUnit\Framework\TestCase
      * Data provider for testEncodedCacheIdsAreUsedConsistently
      * @see ZF-11885
      */
-    public function dataprovider_testEncodedCacheIdsAreUsedConsistently()
+    public static function dataprovider_testEncodedCacheIdsAreUsedConsistently()
     {
         return array(array(true),array(false));
     }
