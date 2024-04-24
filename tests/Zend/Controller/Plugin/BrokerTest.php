@@ -109,7 +109,7 @@ class Zend_Controller_Plugin_BrokerTest extends PHPUnit\Framework\TestCase
         $plugin = new Zend_Controller_Plugin_BrokerTest_TestPlugin();
         $broker->registerPlugin($plugin);
         $retrieved = $broker->getPlugin('Zend_Controller_Plugin_BrokerTest_TestPlugin');
-        $this->assertTrue($retrieved instanceof Zend_Controller_Plugin_BrokerTest_TestPlugin);
+        $this->assertInstanceOf(Zend_Controller_Plugin_BrokerTest_TestPlugin::class, $retrieved);
         $this->assertSame($plugin, $retrieved);
     }
 

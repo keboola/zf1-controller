@@ -88,7 +88,7 @@ class Zend_Controller_FrontTest extends PHPUnit\Framework\TestCase
         $this->_controller->resetInstance();
         $this->_controller->setRequest('Zend_Controller_Request_Http');
         $request = $this->_controller->getRequest();
-        $this->assertTrue($request instanceof Zend_Controller_Request_Http);
+        $this->assertInstanceOf(Zend_Controller_Request_Http::class, $request);
     }
 
     public function testSetRequestThrowsExceptionWithBadRequest()
@@ -106,7 +106,7 @@ class Zend_Controller_FrontTest extends PHPUnit\Framework\TestCase
         $this->_controller->resetInstance();
         $this->_controller->setResponse('Zend_Controller_Response_Cli');
         $response = $this->_controller->getResponse();
-        $this->assertTrue($response instanceof Zend_Controller_Response_Cli);
+        $this->assertInstanceOf(Zend_Controller_Response_Cli::class, $response);
     }
 
     public function testSetResponseThrowsExceptionWithBadResponse()
@@ -124,7 +124,7 @@ class Zend_Controller_FrontTest extends PHPUnit\Framework\TestCase
         $this->_controller->resetInstance();
         $this->_controller->setRouter('Zend_Controller_Router_Rewrite');
         $router = $this->_controller->getRouter();
-        $this->assertTrue($router instanceof Zend_Controller_Router_Rewrite);
+        $this->assertInstanceOf(Zend_Controller_Router_Rewrite::class, $router);
     }
 
     public function testSetRouterThrowsExceptionWithBadRouter()
@@ -560,7 +560,7 @@ class Zend_Controller_FrontTest extends PHPUnit\Framework\TestCase
             $this->_controller->addModuleDirectory($moduleDir);
             $this->fail('Exception expected but not thrown');
         } catch (Exception $e) {
-            $this->assertTrue($e instanceof Zend_Exception);
+            $this->assertInstanceOf(Zend_Exception::class, $e);
             $this->assertMatchesRegularExpression(
                 '/Directory \w+ not readable/',
                 $e->getMessage()
@@ -676,8 +676,8 @@ class Zend_Controller_FrontTest extends PHPUnit\Framework\TestCase
         $response = new Zend_Controller_Response_Cli();
         $this->_controller->throwExceptions(true);
 
-        $this->expectDeprecationMessageMatches('#(IndexController::produceTypeError\(\): Return value must be of type IndexController, stdClass returned)|(Return value of IndexController::produceTypeError\(\) must be an instance of IndexController, instance of stdClass returned)#');
         $this->expectException(TypeError::class);
+        $this->expectExceptionMessageMatches('#(IndexController::produceTypeError\(\): Return value must be of type IndexController, stdClass returned)|(Return value of IndexController::produceTypeError\(\) must be an instance of IndexController, instance of stdClass returned)#');
         $this->_controller->dispatch($request, $response);
     }
 }

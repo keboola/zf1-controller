@@ -51,6 +51,8 @@ abstract class Zend_Controller_Router_Route_Abstract implements Zend_Controller_
      */
     protected $_matchedPath = null;
 
+    protected $_request;
+
     /**
      * Get the version of the route
      *

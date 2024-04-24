@@ -37,7 +37,7 @@ class Zend_Controller_Request_SimpleTest extends PHPUnit\Framework\TestCase
     public function testSimpleRequestIsOfAbstractRequestType()
     {
         $request = new Zend_Controller_Request_Simple();
-        $this->assertTrue($request instanceof Zend_Controller_Request_Abstract);
+        $this->assertInstanceOf(Zend_Controller_Request_Abstract::class, $request);
     }
 
     public function testSimpleReqestRetainsValuesPassedFromConstructor()

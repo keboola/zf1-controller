@@ -34,6 +34,8 @@
  */
 class Zend_Controller_Response_HttpTestCaseTest extends PHPUnit\Framework\TestCase
 {
+    protected $response;
+
     /**
      * Sets up the fixture, for example, open a network connection.
      * This method is called before a test is executed.

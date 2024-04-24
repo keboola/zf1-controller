@@ -101,7 +101,7 @@ class Zend_Controller_Action_Helper_ActionStackTest extends PHPUnit\Framework\Te
         $helper->pushStack($request);
 
         $next = $plugin->popStack();
-        $this->assertTrue($next instanceof Zend_Controller_Request_Abstract);
+        $this->assertInstanceOf(Zend_Controller_Request_Abstract::class, $next);
         $this->assertEquals($request->getModuleName(), $next->getModuleName());
         $this->assertEquals($request->getControllerName(), $next->getControllerName());
         $this->assertEquals($request->getActionName(), $next->getActionName());
@@ -115,7 +115,7 @@ class Zend_Controller_Action_Helper_ActionStackTest extends PHPUnit\Framework\Te
 
         $helper->actionToStack('baz', 'bar', 'foo');
         $next = $plugin->popStack();
-        $this->assertTrue($next instanceof Zend_Controller_Request_Abstract);
+        $this->assertInstanceOf(Zend_Controller_Request_Abstract::class, $next);
         $this->assertEquals('foo', $next->getModuleName());
         $this->assertEquals('bar', $next->getControllerName());
         $this->assertEquals('baz', $next->getActionName());
@@ -135,7 +135,7 @@ class Zend_Controller_Action_Helper_ActionStackTest extends PHPUnit\Framework\Te
         $helper->actionToStack($request);
 
         $next = $plugin->popStack();
-        $this->assertTrue($next instanceof Zend_Controller_Request_Abstract);
+        $this->assertInstanceOf(Zend_Controller_Request_Abstract::class, $next);
         $this->assertEquals($request->getModuleName(), $next->getModuleName());
         $this->assertEquals($request->getControllerName(), $next->getControllerName());
         $this->assertEquals($request->getActionName(), $next->getActionName());
@@ -151,8 +151,9 @@ class Zend_Controller_Action_Helper_ActionStackTest extends PHPUnit\Framework\Te
             $helper->direct('baz', 'bar', 'foo');
             $this->fail('Zend_Controller_Action_Exception should be thrown');
         } catch (Zend_Exception $e) {
-            $this->assertTrue(
-                $e instanceof Zend_Controller_Action_Exception,
+            $this->assertInstanceOf(
+                Zend_Controller_Action_Exception::class,
+                $e,
                 'Zend_Controller_Action_Exception expected, ' . get_class($e)
                     . ' caught'
             );
@@ -166,7 +167,7 @@ class Zend_Controller_Action_Helper_ActionStackTest extends PHPUnit\Framework\Te
 
         $helper->direct('baz', 'bar', 'foo');
         $next = $plugin->popStack();
-        $this->assertTrue($next instanceof Zend_Controller_Request_Abstract);
+        $this->assertInstanceOf(Zend_Controller_Request_Abstract::class, $next);
         $this->assertEquals('foo', $next->getModuleName());
         $this->assertEquals('bar', $next->getControllerName());
         $this->assertEquals('baz', $next->getActionName());
